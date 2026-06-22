@@ -1,0 +1,21 @@
+{
+  "name": "TECNO ACRE Orçamento PRO",
+  "short_name": "Orçamento PRO",
+  "description": "Aplicativo profissional para orçamento e proposta comercial com PDF, assinatura digital e WhatsApp.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#080c14",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
