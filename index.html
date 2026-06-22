@@ -1,1820 +1,1585 @@
-<!doctype html>
-<html lang="pt-BR" data-theme="dark">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>TECNO ACRE Propostas 360</title>
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" href="./favicon-96.png">
-<meta name="theme-color" content="#080c14">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<style>
-:root {
-  --bg: #080c14;
-  --surface: #0f172a;
-  --card: #101827;
-  --card2: #0d1424;
-  --text: #e2e8f0;
-  --strong: #ffffff;
-  --muted: #94a3b8;
-  --line: #1e293b;
-  --input: #0b1322;
-  --orange: #ff8a00;
-  --blue: #00e676;
-  --green: #22c55e;
-  --red: #ef4444;
-  --shadow: 0 18px 45px rgba(0, 0, 0, .28);
-  --neon: rgba(0, 230, 118, .14);
-  --badge-bg: rgba(0, 230, 118, .12);
-  --badge-border: rgba(0, 230, 118, .30);
-  --nav-hover: rgba(0, 230, 118, .10);
-  --nav-border: rgba(0, 230, 118, .26);
-  color-scheme: dark;
-}
-
-:root[data-theme="light"] {
-  --bg: #f1f5f9;
-  --surface: #ffffff;
-  --card: #ffffff;
-  --card2: #f8fafc;
-  --text: #1e293b;
-  --strong: #0f172a;
-  --muted: #64748b;
-  --line: #cbd5e1;
-  --input: #ffffff;
-  --shadow: 0 12px 36px rgba(0, 0, 0, .08);
-  --neon: rgba(0, 143, 90, .09);
-  --badge-bg: rgba(0, 143, 90, .10);
-  --badge-border: rgba(0, 143, 90, .28);
-  --nav-hover: rgba(0, 143, 90, .08);
-  --nav-border: rgba(0, 143, 90, .22);
-  color-scheme: light;
-}
-
-*, *::before, *::after { box-sizing: border-box; }
-
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Inter, Roboto, Arial, sans-serif;
-  background:
-    radial-gradient(circle at 20% 0%, rgba(0, 230, 118, .12), transparent 34%),
-    radial-gradient(circle at 82% 12%, rgba(255, 138, 0, .10), transparent 30%),
-    linear-gradient(180deg, var(--bg), var(--surface));
-  color: var(--text);
-  transition: background .35s ease, color .35s ease;
-  min-height: 100dvh;
-}
-
-.wrap {
-  max-width: 1260px;
-  margin: auto;
-  padding: 18px;
-}
-
-/* ─── HEADER ─── */
-.top {
-  display: grid;
-  grid-template-columns: 136px 1fr auto;
-  gap: 20px;
-  align-items: center;
-  background:
-    linear-gradient(180deg, var(--surface), var(--card2)) padding-box,
-    linear-gradient(135deg, rgba(0,230,118,.58), rgba(34,197,94,.22), rgba(255,138,0,.42)) border-box;
-  border: 1px solid transparent;
-  border-radius: 22px;
-  box-shadow: var(--shadow), 0 0 26px var(--neon);
-  padding: 18px;
-  margin-bottom: 16px;
-  transition: background .35s ease;
-}
-
-.logo {
-  width: 124px;
-  height: 94px;
-  object-fit: contain;
-  border-radius: 18px;
-  background: #fff;
-  padding: 8px;
-}
-
-.top h1 {
-  margin: 0 0 8px;
-  font-size: clamp(1.35rem, 2.7vw, 2rem);
-  line-height: 1.18;
-  color: var(--strong);
-}
-
-.top p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-.theme {
-  border: 1px solid var(--line);
-  background: var(--card);
-  color: var(--text);
-  border-radius: 999px;
-  padding: 11px 18px;
-  font-weight: 800;
-  cursor: pointer;
-  font-size: .9rem;
-  transition: all .25s ease;
-  min-height: 44px;
-  white-space: nowrap;
-}
-
-.theme:hover {
-  border-color: var(--orange);
-  box-shadow: 0 0 14px rgba(255, 138, 0, .25);
-}
-
-.progress {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: .84rem;
-}
-
-.bar {
-  height: 8px;
-  background: rgba(150, 160, 180, .18);
-  border-radius: 999px;
-  overflow: hidden;
-  margin-top: 4px;
-}
-
-.fill {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, var(--blue), var(--orange));
-  border-radius: 999px;
-  transition: width .4s ease;
-}
-
-/* ─── LAYOUT PRINCIPAL ─── */
-.shell {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  gap: 16px;
-  align-items: start;
-}
-
-/* ─── NAVEGAÇÃO ─── */
-.nav {
-  position: sticky;
-  top: 12px;
-  display: grid;
-  gap: 8px;
-  padding: 12px;
-  background: color-mix(in srgb, var(--surface) 86%, transparent);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, .16);
-  max-height: calc(100vh - 24px);
-  overflow: auto;
-  transition: background .35s ease;
-}
-
-/* ─── BOTÕES ─── */
-button {
-  appearance: none;
-  border: 0;
-  cursor: pointer;
-  color: #fff;
-  background: linear-gradient(135deg, var(--orange), #ff6a00);
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-weight: 800;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, .16);
-  font-size: .95rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 44px;
-  touch-action: manipulation;
-  transition: filter .2s ease, transform .15s ease, box-shadow .2s ease;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
-
-button:active {
-  transform: scale(.97);
-}
-
-button:hover {
-  filter: brightness(1.06);
-}
-
-.secondary {
-  background: linear-gradient(135deg, #008f5a, var(--blue));
-}
-
-.success {
-  background: linear-gradient(135deg, #16a34a, var(--green));
-}
-
-.danger {
-  background: linear-gradient(135deg, #dc2626, var(--red));
-}
-
-.ghost {
-  background: var(--card);
-  border: 1px solid var(--line);
-  color: var(--text);
-  box-shadow: none;
-}
-
-.ghost:hover {
-  border-color: color-mix(in srgb, var(--blue) 40%, var(--line));
-}
-
-.nav button {
-  justify-content: flex-start;
-  box-shadow: none;
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--text);
-  font-size: .92rem;
-  padding: 11px 14px;
-  min-height: 44px;
-}
-
-.nav button.active,
-.nav button:hover {
-  background: var(--nav-hover);
-  border-color: var(--nav-border);
-}
-
-/* ─── TOOLBAR ─── */
-.toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 16px;
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, .16);
-  transition: background .35s ease;
-}
-
-/* ─── MÉTRICAS ─── */
-.rolling {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding: 2px 2px 14px;
-  margin-bottom: 4px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--blue) 28%, var(--line)) transparent;
-}
-
-.rolling::-webkit-scrollbar { height: 8px; }
-.rolling::-webkit-scrollbar-track { background: transparent; }
-.rolling::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--blue) 28%, var(--line));
-  border-radius: 999px;
-}
-
-.metric {
-  flex: 0 0 235px;
-  scroll-snap-align: start;
-  padding: 16px;
-  border-radius: 16px;
-  background:
-    linear-gradient(180deg, var(--card), var(--card2)) padding-box,
-    linear-gradient(135deg, rgba(0,230,118,.48), rgba(34,197,94,.18), rgba(255,138,0,.34)) border-box;
-  border: 1px solid transparent;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, .16), 0 0 18px var(--neon);
-  transition: background .35s ease;
-}
-
-.metric strong {
-  display: block;
-  color: var(--blue);
-  font-size: .84rem;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: .03em;
-}
-
-.metric span {
-  display: block;
-  font-size: 1.35rem;
-  font-weight: 950;
-  color: var(--strong);
-}
-
-.metric em {
-  display: block;
-  font-style: normal;
-  color: var(--muted);
-  font-size: .8rem;
-  margin-top: 4px;
-}
-
-/* ─── PAINÉIS ─── */
-.panel { display: none; }
-.panel.active { display: block; }
-
-/* ─── GRIDS ─── */
-.grid {
-  display: grid;
-  gap: 16px;
-}
-
-.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-/* ─── CARDS ─── */
-.card {
-  background:
-    linear-gradient(180deg, var(--card), var(--card2)) padding-box,
-    linear-gradient(135deg, rgba(0,230,118,.48), rgba(34,197,94,.18), rgba(255,138,0,.34)) border-box;
-  border: 1px solid transparent;
-  border-radius: 16px;
-  padding: 18px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, .16), 0 0 18px var(--neon);
-  transition: background .35s ease;
-}
-
-.grid > .card {
-  margin-bottom: 0;
-}
-
-.card + .card {
-  margin-top: 16px;
-}
-
-.title {
-  margin: 0 0 14px;
-  font-size: 1.12rem;
-  color: var(--strong);
-  grid-column: 1 / -1;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.title span {
-  color: var(--blue);
-  background: color-mix(in srgb, var(--blue) 13%, transparent);
-  border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
-  min-width: 30px;
-  height: 30px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: .88rem;
-}
-
-/* ─── CAMPOS ─── */
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.field label {
-  font-weight: 800;
-  font-size: .9rem;
-  color: var(--strong);
-}
-
-.req label::after {
-  content: " *";
-  color: var(--orange);
-}
-
-input, textarea, select {
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid var(--line);
-  background: var(--input);
-  color: var(--text);
-  font-size: .98rem;
-  font-family: inherit;
-  transition: border-color .2s ease, box-shadow .2s ease, background .35s ease, color .35s ease;
-  min-height: 44px;
-}
-
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(0, 230, 118, .15);
-}
-
-textarea {
-  min-height: 96px;
-  resize: vertical;
-}
-
-.bad input, .bad textarea, .bad select {
-  border-color: var(--red);
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, .15);
-}
-
-.err {
-  display: none;
-  color: var(--red);
-  font-size: .8rem;
-}
-
-.bad .err { display: block; }
-
-.hint {
-  color: var(--muted);
-  font-size: .86rem;
-}
-
-/* ─── TABELA ─── */
-.table {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 780px;
-}
-
-th, td {
-  padding: 10px;
-  border-bottom: 1px solid var(--line);
-  text-align: left;
-  vertical-align: top;
-}
-
-th {
-  color: var(--blue);
-  background: color-mix(in srgb, var(--blue) 8%, transparent);
-  font-size: .85rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .03em;
-}
-
-td textarea {
-  min-height: 60px;
-}
-
-.mini {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.mini button {
-  padding: 8px 12px;
-  min-height: 38px;
-  font-size: .82rem;
-  box-shadow: none;
-}
-
-/* ─── TOTAIS ─── */
-.totals {
-  margin-top: 14px;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.total {
-  background: color-mix(in srgb, var(--surface) 70%, transparent);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 14px;
-  transition: background .35s ease;
-}
-
-.total strong {
-  display: block;
-  color: var(--blue);
-  font-size: .85rem;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: .03em;
-}
-
-.total span {
-  font-size: 1.15rem;
-  font-weight: 900;
-  color: var(--strong);
-}
-
-/* ─── LISTAS ─── */
-.list {
-  display: grid;
-  gap: 10px;
-}
-
-.item {
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 14px;
-  background: color-mix(in srgb, var(--surface) 68%, transparent);
-  display: grid;
-  gap: 10px;
-  transition: background .35s ease;
-}
-
-.item header {
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.item h3 {
-  margin: 0;
-  color: var(--strong);
-  font-size: 1rem;
-}
-
-.item p {
-  margin: 0;
-  color: var(--muted);
-  font-size: .88rem;
-}
-
-/* ─── BADGES ─── */
-.badge {
-  padding: 5px 10px;
-  border-radius: 999px;
-  font-size: .76rem;
-  font-weight: 800;
-  background: var(--badge-bg);
-  color: var(--blue);
-  border: 1px solid var(--badge-border);
-  white-space: nowrap;
-}
-
-.ok {
-  color: var(--green);
-  border-color: color-mix(in srgb, var(--green) 35%, transparent);
-  background: color-mix(in srgb, var(--green) 15%, transparent);
-}
-
-.warn {
-  color: #f59e0b;
-  border-color: rgba(245, 158, 11, .35);
-  background: rgba(245, 158, 11, .15);
-}
-
-/* ─── ASSINATURAS ─── */
-.sign {
-  width: 100%;
-  height: clamp(140px, 28vw, 190px);
-  background: #fff;
-  border: 2px dashed var(--line);
-  border-radius: 16px;
-  touch-action: none;
-}
-
-/* ─── FOTOS ─── */
-.photos {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.photo {
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 10px;
-  background: color-mix(in srgb, var(--surface) 62%, transparent);
-}
-
-.photo img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-/* ─── TOAST ─── */
-.toastbox {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 200;
-  display: grid;
-  gap: 10px;
-  max-width: calc(100vw - 32px);
-}
-
-.toast {
-  padding: 14px 16px;
-  border-radius: 14px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow);
-  font-size: .9rem;
-  animation: toastIn .3s ease;
-}
-
-@keyframes toastIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ─── DIALOG ─── */
-dialog {
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: var(--shadow);
-  max-width: 440px;
-  width: calc(100% - 28px);
-  padding: 24px;
-}
-
-dialog::backdrop {
-  background: rgba(0, 0, 0, .58);
-  backdrop-filter: blur(3px);
-}
-
-.dlg {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-  margin-top: 18px;
-}
-
-/* ══════════════════════════════════════
-   RESPONSIVO: TABLET (≤1100px)
-   ══════════════════════════════════════ */
-@media (max-width: 1100px) {
-  .shell {
-    grid-template-columns: 1fr;
-  }
-
-  .nav {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-    display: flex;
-    overflow-x: auto;
-    max-height: none;
-    padding: 8px;
-    gap: 6px;
-    scrollbar-width: none;
-  }
-
-  .nav::-webkit-scrollbar { display: none; }
-
-  .nav button {
-    flex: 0 0 auto;
-    white-space: nowrap;
-    min-height: 40px;
-    padding: 10px 14px;
-    font-size: .88rem;
-  }
-
-  .top {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .logo {
-    margin: auto;
-    width: min(260px, 82%);
-    height: auto;
-  }
-
-  .g2, .g3, .g4 {
-    grid-template-columns: 1fr;
-  }
-
-  .totals {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .photos {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-/* ══════════════════════════════════════
-   RESPONSIVO: SMARTPHONE (≤680px)
-   ══════════════════════════════════════ */
-@media (max-width: 680px) {
-  .wrap {
-    padding: 10px;
-  }
-
-  .top {
-    padding: 14px;
-    gap: 12px;
-  }
-
-  .toolbar {
-    position: static;
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 10px;
-    gap: 8px;
-  }
-
-  .toolbar button {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .rolling {
-    margin-left: -2px;
-    margin-right: -2px;
-  }
-
-  .metric {
-    flex: 0 0 clamp(220px, 78vw, 280px);
-  }
-
-  .card {
-    padding: 14px;
-  }
-
-  .card + .card {
-    margin-top: 12px;
-  }
-
-  input, textarea, select {
-    font-size: 16px;
-    min-height: 46px;
-  }
-
-  .totals {
-    grid-template-columns: 1fr;
-  }
-
-  .photos {
-    grid-template-columns: 1fr;
-  }
-
-  /* Tabela → cards empilhados */
-  .table {
-    overflow: visible;
-  }
-
-  table, thead, tbody, tr, th, td {
-    display: block;
-    width: 100%;
-    min-width: 0;
-  }
-
-  thead { display: none; }
-
-  tbody tr {
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 14px;
-    margin-bottom: 12px;
-    background: color-mix(in srgb, var(--surface) 62%, transparent);
-  }
-
-  td {
-    border: 0;
-    padding: 8px 0;
-  }
-
-  td::before {
-    display: block;
-    color: var(--muted);
-    font-size: .78rem;
-    font-weight: 800;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    letter-spacing: .03em;
-  }
-
-  #itemsTable td:nth-child(1)::before { content: "Tipo"; }
-  #itemsTable td:nth-child(2)::before { content: "Descrição"; }
-  #itemsTable td:nth-child(3)::before { content: "Unidade"; }
-  #itemsTable td:nth-child(4)::before { content: "Quantidade"; }
-  #itemsTable td:nth-child(5)::before { content: "Valor unitário"; }
-  #itemsTable td:nth-child(6)::before { content: "Total"; }
-  #itemsTable td:nth-child(7)::before { content: "Ação"; }
-
-  .mini {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .mini button {
-    width: 100%;
-  }
-
-  .sign {
-    height: clamp(120px, 42vw, 160px);
-  }
-
-  .toastbox {
-    right: 8px;
-    bottom: 8px;
-    left: 8px;
-    max-width: none;
-  }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECNO ACRE 360 — Proposta para Subestação</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --panel: #1a1d27;
+            --card: #21252e;
+            --border: #2a2f3b;
+            --text: #e1e4e8;
+            --text2: #9ba3b0;
+            --accent: #f0b90b;
+            --green: #00c853;
+            --red: #ff5252;
+            --blue: #448aff;
+            --purple: #b388ff;
+            --orange: #ff9100;
+            --radius: 8px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .4);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--panel);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -.5px;
+        }
+        .header .logo span {
+            color: var(--text2);
+            font-weight: 400;
+        }
+        .header .badge {
+            background: #f0b90b20;
+            color: var(--accent);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: .75rem;
+            font-weight: 600;
+            letter-spacing: .5px;
+        }
+        .header .client-info {
+            margin-left: auto;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: .85rem;
+            color: var(--text2);
+        }
+        .header .client-info strong {
+            color: var(--text);
+        }
+
+        /* MAIN LAYOUT */
+        .main {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 16px;
+            padding: 16px 24px;
+            max-width: 1600px;
+            margin: 0 auto;
+            height: calc(100vh - 110px);
+        }
+
+        /* PANELS */
+        .panel {
+            background: var(--panel);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .panel-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            font-size: .85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--card);
+        }
+        .panel-header .icon {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .panel-body {
+            padding: 12px 16px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        /* BAY SELECTOR */
+        .bay-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .bay-card {
+            background: var(--card);
+            border: 2px solid transparent;
+            border-radius: var(--radius);
+            padding: 12px;
+            cursor: pointer;
+            transition: all .15s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            user-select: none;
+        }
+        .bay-card:hover {
+            border-color: #f0b90b40;
+            background: #1e2330;
+        }
+        .bay-card.selected {
+            border-color: var(--accent);
+            background: #f0b90b0d;
+            box-shadow: 0 0 20px #f0b90b15;
+        }
+        .bay-card .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all .15s;
+            font-size: .7rem;
+        }
+        .bay-card.selected .checkbox {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #000;
+        }
+        .bay-card .bay-kv {
+            font-size: .7rem;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .bay-card .bay-name {
+            font-weight: 600;
+            font-size: .85rem;
+        }
+        .bay-card .bay-count {
+            margin-left: auto;
+            font-size: .7rem;
+            color: var(--text2);
+            white-space: nowrap;
+        }
+
+        /* BUTTONS */
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            cursor: pointer;
+            font-size: .8rem;
+            font-weight: 500;
+            transition: all .15s;
+            white-space: nowrap;
+        }
+        .btn:hover {
+            border-color: var(--text2);
+            background: #2a3040;
+        }
+        .btn.accent {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            font-weight: 700;
+        }
+        .btn.accent:hover {
+            background: #f5c400;
+        }
+        .btn.danger {
+            border-color: #ff525240;
+            color: var(--red);
+        }
+        .btn.danger:hover {
+            background: #ff525210;
+            border-color: var(--red);
+        }
+        .btn.sm {
+            padding: 4px 10px;
+            font-size: .7rem;
+        }
+
+        /* TABLE */
+        .table-wrap {
+            overflow-x: auto;
+            flex: 1;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .8rem;
+        }
+        thead th {
+            background: var(--card);
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: .7rem;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            color: var(--text2);
+            border-bottom: 2px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+        tbody td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #2a2f3b20;
+        }
+        tbody tr:hover td {
+            background: #ffffff04;
+        }
+        tbody tr.bay-header td {
+            background: #f0b90b08;
+            font-weight: 700;
+            font-size: .75rem;
+            color: var(--accent);
+            padding: 6px 10px;
+            border-bottom: 1px solid #f0b90b30;
+        }
+        .qty-input {
+            width: 55px;
+            background: #1a1d27;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 4px 6px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: .8rem;
+        }
+        .price-input {
+            width: 100px;
+            background: #1a1d27;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 4px 6px;
+            border-radius: 4px;
+            text-align: right;
+            font-size: .8rem;
+        }
+        .delete-btn {
+            background: none;
+            border: none;
+            color: var(--red);
+            cursor: pointer;
+            font-size: .9rem;
+            opacity: 0;
+            transition: opacity .15s;
+        }
+        tbody tr:hover .delete-btn {
+            opacity: 1;
+        }
+        .col-total {
+            font-weight: 600;
+            color: var(--green);
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* UNIFILAR SVG */
+        .unifilar-container {
+            height: 200px;
+            background: var(--card);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .unifilar-container svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* GANTT */
+        .gantt-container {
+            height: 160px;
+            position: relative;
+            background: var(--card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            padding: 8px 0;
+        }
+        .gantt-row {
+            display: flex;
+            align-items: center;
+            height: 28px;
+            padding: 0 8px;
+            gap: 8px;
+        }
+        .gantt-label {
+            width: 120px;
+            font-size: .65rem;
+            color: var(--text2);
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .gantt-track {
+            flex: 1;
+            height: 14px;
+            background: #2a2f3b;
+            border-radius: 7px;
+            position: relative;
+            overflow: hidden;
+        }
+        .gantt-bar {
+            height: 100%;
+            border-radius: 7px;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 6px;
+            font-size: .6rem;
+            font-weight: 600;
+            color: #000;
+            min-width: 20px;
+            transition: width .3s;
+        }
+
+        /* SUMMARY CARDS */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .summary-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            text-align: center;
+        }
+        .summary-card .label {
+            font-size: .65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text2);
+        }
+        .summary-card .value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+        .summary-card .value.green {
+            color: var(--green);
+        }
+        .summary-card .value.accent {
+            color: var(--accent);
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .tab {
+            padding: 10px 18px;
+            font-size: .8rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all .15s;
+            color: var(--text2);
+            font-weight: 500;
+        }
+        .tab:hover {
+            color: var(--text);
+        }
+        .tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .main {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--green);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: .85rem;
+            z-index: 999;
+            animation: slideIn .3s ease, fadeOut .3s ease 1.7s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+            .header,
+            .bay-grid,
+            .quick-actions,
+            .tabs,
+            .summary-grid,
+            .gantt-container,
+            .unifilar-container,
+            #quickAdd,
+            .delete-btn,
+            .toast {
+                display: none !important;
+            }
+            .main {
+                display: block;
+                height: auto;
+                padding: 0;
+            }
+            .panel {
+                border: 1px solid #ccc;
+                box-shadow: none;
+                break-inside: avoid;
+                background: #fff;
+            }
+            table {
+                font-size: 9pt;
+                color: #000;
+            }
+            thead th {
+                background: #eee;
+                color: #000;
+                border-bottom: 1px solid #000;
+            }
+            tbody tr.bay-header td {
+                background: #f5f5f5;
+                color: #000;
+            }
+            .col-total {
+                color: #000;
+            }
+            .panel-header {
+                background: #eee;
+                color: #000;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="wrap">
-<header class="top">
-<img class="logo" src="./brand-logo.webp" onerror="this.onerror=null;this.src='./brand-logo.png'" alt="TECNO ACRE">
-<div>
-<h1>TECNO ACRE Propostas 360</h1>
-<p>Soluções em Tecnologia Sustentável</p>
-</div>
-<div>
-<button class="theme" id="themeBtn">Tema escuro</button>
-<div class="progress">
-<span id="progText">Preenchimento: 0%</span>
-<div class="bar"><div class="fill" id="progFill"></div></div>
-</div>
-</div>
-</header>
 
-<div class="shell">
-<nav class="nav">
-<button class="active" data-tab="dash">Visão Geral</button>
-<button data-tab="clientes">Clientes</button>
-<button data-tab="biblioteca">Biblioteca</button>
-<button data-tab="templates">Templates</button>
-<button data-tab="proposta">Proposta</button>
-<button data-tab="historico">Histórico</button>
-</nav>
-<main>
-<div class="toolbar">
-<button class="success" id="pdfBtn">Gerar PDF</button>
-<button class="secondary" id="zapBtn">Enviar WhatsApp</button>
-<button class="ghost" id="addItemBtn">Adicionar Item</button>
-<button class="ghost" id="savePropBtn">Salvar Proposta</button>
-<button class="ghost" onclick="window.print()">Imprimir</button>
-<button class="danger" id="clearBtn">Limpar</button>
-<button class="secondary" id="installBtn" hidden>Instalar App</button>
-</div>
+    <!-- ========== HEADER ========== -->
+    <div class="header">
+        <div class="logo">⚡ TECNO <span>ACRE 360</span></div>
+        <div class="badge">SUBESTAÇÃO</div>
+        <div class="client-info">
+            Proposta: <strong id="propostaNum">#SUB-2026-0042</strong> &nbsp;|&nbsp;
+            Cliente: <input type="text" id="clienteNome" value="Construtora Norte Energia"
+        style="background:transparent;border:1px solid var(--border);color:var(--text);padding:2px 8px;border-radius:4px;font-size:.8rem;width:200px">
+            &nbsp;|&nbsp;
+            Data: <strong>22/06/2026</strong>
+        </div>
+    </div>
 
-<section id="dash" class="panel active">
-<div class="rolling">
-<div class="metric"><strong>Total atual</strong><span id="mTotal">R$ 0,00</span><em>valor em edição</em></div>
-<div class="metric"><strong>Itens</strong><span id="mItems">0</span><em>materiais e serviços</em></div>
-<div class="metric"><strong>Clientes</strong><span id="mClients">0</span><em>cadastro local</em></div>
-<div class="metric"><strong>Propostas</strong><span id="mProps">0</span><em>histórico local</em></div>
-<div class="metric"><strong>Status</strong><span id="mStatus">Rascunho</span><em>situação comercial</em></div>
-</div>
-<div class="card">
-<h2 class="title"><span>1</span>Fluxo da Fase 1</h2>
-<p class="hint">Use a navegação lateral e os cards rolantes para acompanhar o andamento do orçamento. Tudo fica salvo no navegador do dispositivo via localStorage.</p>
-</div>
-</section>
+    <!-- ========== MAIN LAYOUT ========== -->
+    <div class="main">
 
-<section id="clientes" class="panel">
-<div class="card grid g3">
-<h2 class="title"><span>2</span>Cadastro de Clientes</h2>
-<div class="field req"><label>Cliente / Empresa</label><input id="cadNome" autocomplete="organization"><small class="err">Informe o nome.</small></div>
-<div class="field"><label>CPF / CNPJ</label><input id="cadDoc" autocomplete="off"></div>
-<div class="field"><label>Responsável</label><input id="cadResp" autocomplete="name"></div>
-<div class="field"><label>WhatsApp</label><input id="cadTel" inputmode="tel" autocomplete="tel"></div>
-<div class="field"><label>E-mail</label><input id="cadEmail" type="email" autocomplete="email"></div>
-<div class="field"><label>Endereço / Local padrão</label><input id="cadEnd" autocomplete="street-address"></div>
-<div style="grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap">
-<button class="success" id="saveClient">Salvar Cliente</button>
-<button class="secondary" id="useClient">Usar na Proposta</button>
-</div>
-</div>
-<div class="card">
-<h2 class="title"><span>3</span>Clientes Salvos</h2>
-<div class="list" id="clientsList"><p class="hint">Nenhum cliente salvo ainda.</p></div>
-</div>
-</section>
+        <!-- ===== LEFT SIDEBAR ===== -->
+        <div style="display:flex;flex-direction:column;gap:12px;overflow-y:auto;">
 
-<section id="biblioteca" class="panel">
-<div class="card grid g4">
-<h2 class="title"><span>4</span>Biblioteca de Itens</h2>
-<div class="field"><label>Tipo</label><select id="libTipo"><option>Serviço</option><option>Material</option><option>Deslocamento</option><option>Equipamento</option></select></div>
-<div class="field"><label>Descrição</label><input id="libDesc"></div>
-<div class="field"><label>Unidade</label><select id="libUn"><option>serviço</option><option>un</option><option>m</option><option>m²</option><option>h</option><option>dia</option><option>ponto</option><option>vb</option></select></div>
-<div class="field"><label>Valor unitário</label><input id="libVal" inputmode="decimal"></div>
-<div style="grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap">
-<button class="success" id="saveLib">Salvar Item</button>
-<button class="secondary" id="addLib">Adicionar à Proposta</button>
-</div>
-</div>
-<div class="card">
-<h2 class="title"><span>5</span>Itens Frequentes</h2>
-<div class="list" id="libList"></div>
-</div>
-</section>
+            <!-- BAY SELECTOR -->
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="icon" style="background:var(--accent)"></span>
+                    ⚡ Configurador de Bays
+                    <span style="margin-left:auto;font-size:.7rem;color:var(--text2)" id="bayCount">0 selecionados</span>
+                </div>
+                <div class="panel-body bay-grid" id="baySelector">
+                    <!-- Populado dinamicamente -->
+                </div>
+                <div style="padding:8px 16px 12px" class="quick-actions">
+                    <button class="btn accent" onclick="selecionarTodos()">✅ Todos os Bays</button>
+                    <button class="btn danger" onclick="limparTudo()">🗑 Limpar Tudo</button>
+                </div>
+            </div>
 
-<section id="templates" class="panel">
-<div class="card">
-<h2 class="title"><span>6</span>Templates por Serviço</h2>
-<div class="list" id="tplList"></div>
-</div>
-</section>
+            <!-- RESUMO RÁPIDO -->
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="icon" style="background:var(--green)"></span>
+                    💰 Resumo Financeiro
+                </div>
+                <div class="panel-body">
+                    <div style="display:flex;flex-direction:column;gap:6px;font-size:.8rem;">
+                        <div style="display:flex;justify-content:space-between"><span>Equipamentos:</span> <strong id="sumEquip">R$ 0,00</strong></div>
+                        <div style="display:flex;justify-content:space-between"><span>Serviços:</span> <strong id="sumServ">R$ 0,00</strong></div>
+                        <hr style="border-color:var(--border);margin:4px 0">
+                        <div style="display:flex;justify-content:space-between"><span>Subtotal:</span> <strong id="sumSub">R$ 0,00</strong></div>
+                        <div style="display:flex;justify-content:space-between">
+                            <span>Desconto (
+                                <input type="number" id="descPct" value="0" min="0" max="50" step="0.5"
+                                style="width:42px;background:transparent;border:1px solid var(--border);color:var(--text);padding:1px 4px;border-radius:3px;font-size:.75rem;text-align:center"
+                                onchange="updateSummary()">%):
+                            </span>
+                            <strong id="sumDesc" style="color:var(--red)">R$ 0,00</strong>
+                        </div>
+                        <div style="display:flex;justify-content:space-between"><span>Markup (15%):</span> <strong id="sumMarkup">R$ 0,00</strong></div>
+                        <div style="display:flex;justify-content:space-between"><span>ISS (5%):</span> <strong id="sumISS">R$ 0,00</strong></div>
+                        <hr style="border-color:var(--border);margin:4px 0">
+                        <div style="display:flex;justify-content:space-between;font-size:1rem;color:var(--accent)">
+                            <strong>TOTAL FINAL:</strong> <strong id="sumTotal">R$ 0,00</strong>
+                        </div>
+                    </div>
+                    <div class="quick-actions" style="margin-top:10px">
+                        <button class="btn accent sm" onclick="gerarPDF()">📄 Imprimir / PDF</button>
+                        <button class="btn sm" onclick="enviarWhatsApp()">📱 WhatsApp</button>
+                        <button class="btn sm" onclick="exportarCSV()">📊 CSV</button>
+                        <button class="btn sm" onclick="salvarProposta()">💾 Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<section id="proposta" class="panel">
-<form id="form" class="grid" novalidate>
-<div class="card grid g3">
-<h2 class="title"><span>7</span>Dados da Proposta</h2>
-<div class="field req"><label>Nº da proposta</label><input name="numero" id="numero" required><small class="err">Obrigatório.</small></div>
-<div class="field req"><label>Data</label><input name="data" id="data" type="date" required><small class="err">Obrigatório.</small></div>
-<div class="field"><label>Validade</label><select name="validade" id="validade"><option>7 dias</option><option selected>15 dias</option><option>30 dias</option><option>45 dias</option><option>60 dias</option></select></div>
-<div class="field req"><label>Responsável</label><input name="respCom" id="respCom" required><small class="err">Obrigatório.</small></div>
-<div class="field"><label>WhatsApp da empresa</label><input name="telEmp" id="telEmp" inputmode="tel"></div>
-<div class="field"><label>E-mail da empresa</label><input name="emailEmp" id="emailEmp" type="email"></div>
-<div class="field"><label>Status</label><select name="status" id="status"><option>Rascunho</option><option>Enviada</option><option>Visualizada</option><option>Aprovada</option><option>Recusada</option><option>Vencida</option></select></div>
-</div>
+        <!-- ===== RIGHT AREA ===== -->
+        <div style="display:flex;flex-direction:column;gap:12px;overflow:hidden;min-width:0;">
 
-<div class="card grid g3">
-<h2 class="title"><span>8</span>Dados do Cliente</h2>
-<div class="field req"><label>Cliente / Empresa</label><input name="cliente" id="cliente" required autocomplete="organization"><small class="err">Obrigatório.</small></div>
-<div class="field"><label>CPF / CNPJ</label><input name="doc" id="doc" autocomplete="off"></div>
-<div class="field"><label>Responsável</label><input name="contato" id="contato" autocomplete="name"></div>
-<div class="field"><label>WhatsApp do cliente</label><input name="telCliente" id="telCliente" inputmode="tel"></div>
-<div class="field"><label>E-mail</label><input name="emailCliente" id="emailCliente" type="email"></div>
-<div class="field req"><label>Local do serviço</label><input name="endereco" id="endereco" required autocomplete="street-address"><small class="err">Obrigatório.</small></div>
-</div>
+            <!-- TABS -->
+            <div class="panel" style="flex:1;display:flex;flex-direction:column;min-height:0;">
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('itens', this)">📋 Itens da Proposta</div>
+                    <div class="tab" onclick="switchTab('unifilar', this)">⚡ Diagrama Unifilar</div>
+                    <div class="tab" onclick="switchTab('cronograma', this)">📅 Cronograma</div>
+                </div>
 
-<div class="card grid g3">
-<h2 class="title"><span>9</span>Dados do Serviço</h2>
-<div class="field req"><label>Tipo de serviço</label><select name="tipoServico" id="tipoServico" required><option value="">Selecione</option><option>Instalação elétrica</option><option>Manutenção preventiva</option><option>Manutenção corretiva</option><option>Manutenção em gerador</option><option>Sistema fotovoltaico</option><option>Automação / IoT</option><option>Laudo / Relatório técnico</option><option>Outro</option></select><small class="err">Obrigatório.</small></div>
-<div class="field req"><label>Título da proposta</label><input name="titulo" id="titulo" required><small class="err">Obrigatório.</small></div>
-<div class="field"><label>Prioridade</label><select name="prioridade" id="prioridade"><option>Normal</option><option>Urgente</option><option>Programado</option><option>Emergencial</option></select></div>
-<div class="field req" style="grid-column:1/-1"><label>Descrição geral</label><textarea name="descricao" id="descricao" required></textarea><small class="err">Obrigatório.</small></div>
-</div>
-
-<div class="card">
-<h2 class="title"><span>10</span>Itens de Material e Serviços</h2>
-<div class="table"><table id="itemsTable"><thead><tr><th>Tipo</th><th>Descrição</th><th>Unid.</th><th>Qtd.</th><th>Valor unit.</th><th>Total</th><th>Ação</th></tr></thead><tbody id="items"></tbody></table></div>
-<div class="totals"><div class="total"><strong>Subtotal</strong><span id="subV">R$ 0,00</span></div><div class="total"><strong>Desconto</strong><span id="descV">R$ 0,00</span></div><div class="total"><strong>Acréscimo</strong><span id="acreV">R$ 0,00</span></div><div class="total"><strong>Total Geral</strong><span id="totalV">R$ 0,00</span></div></div>
-<div class="grid g3" style="margin-top:14px">
-<div class="field"><label>Desconto</label><input name="desconto" id="desconto" inputmode="decimal"></div>
-<div class="field"><label>Acréscimo / deslocamento</label><input name="acrescimo" id="acrescimo" inputmode="decimal"></div>
-<div class="field"><label>Forma de pagamento</label><select name="pagamento" id="pagamento"><option>À vista</option><option>50% entrada + 50% na entrega</option><option>Parcelado</option><option>Pix</option><option>Cartão</option><option>Boleto</option><option>A combinar</option></select></div>
+                <!-- TAB: ITENS -->
+                <div class="tab-content active" id="tab-itens" style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+                    <div class="panel-header" style="border-bottom:1px solid var(--border)">
+                        Itens orçados
+                        <span style="margin-left:auto;font-size:.7rem;color:var(--text2)" id="itemCount">0 itens</span>
+                    </div>
+                    <div class="table-wrap" style="flex:1;overflow:auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width:30px"></th>
+                                    <th>Item / Equipamento</th>
+                                    <th style="width:80px">Unid.</th>
+                                    <th style="width:70px">Qtd.</th>
+                                    <th style="width:120px">Valor Unit.</th>
+                                    <th style="width:120px">Total</th>
+                                    <th style="width:40px"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="itemsBody">
+                                <tr>
+                                    <td colspan="7" style="text-align:center;padding:40px;color:var(--text2)">
+                                        ⚡ Selecione os bays ao lado para começar a montar a proposta
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- QUICK ADD BAR -->
+                    <div style="padding:8px 16px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:center;flex-wrap:wrap;" id="quickAdd">
+                        <input type="text" id="quickItem" placeholder="+ Adicionar item rápido..."
+                    style="flex:1;min-width:200px;background:#1a1d27;border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:6px;font-size:.8rem"
+                    onkeydown="if(event.key==='Enter')addQuickItem()">
+                    <input type="number" id="quickQty" value="1" min="1"
+                style="width:60px;background:#1a1d27;border:1px solid var(--border);color:var(--text);padding:6px;border-radius:6px;font-size:.8rem;text-align:center">
+                <input type="number" id="quickPrice" placeholder="R$"
+            style="width:100px;background:#1a1d27;border:1px solid var(--border);color:var(--text);padding:6px;border-radius:6px;font-size:.8rem;text-align:right"
+            onkeydown="if(event.key==='Enter')addQuickItem()">
+            <select id="quickBay"
+        style="background:#1a1d27;border:1px solid var(--border);color:var(--text);padding:6px;border-radius:6px;font-size:.8rem">
+        <option value="">Geral</option>
+    </select>
+    <button class="btn sm accent" onclick="addQuickItem()">+ Adicionar</button>
 </div>
 </div>
 
-<div class="card grid g2">
-<h2 class="title"><span>11</span>Etapas dos Serviços</h2>
-<div class="field" style="grid-column:1/-1"><label>Etapas</label><textarea name="etapas" id="etapas">1. Levantamento e mobilização técnica
-2. Execução dos serviços contratados
-3. Testes, validações e ajustes
-4. Entrega técnica e orientações ao cliente</textarea></div>
+<!-- TAB: UNIFILAR -->
+<div class="tab-content" id="tab-unifilar" style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+    <div class="unifilar-container" style="flex:1;min-height:250px">
+        <svg id="unifilarSVG" viewBox="0 0 1000 250"></svg>
+    </div>
+    <div style="padding:8px 16px;font-size:.7rem;color:var(--text2);text-align:center">
+        Diagrama unifilar automático — montado conforme os bays selecionados
+    </div>
 </div>
 
-<div class="card">
-<h2 class="title"><span>12</span>Fotos e Evidências</h2>
-<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
-<label class="secondary" style="padding:12px 16px;border-radius:12px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#008f5a,var(--blue));color:white;min-height:44px;display:inline-flex;align-items:center" for="photoInput">📷 Anexar / Tirar Foto</label>
-<input id="photoInput" type="file" accept="image/*" capture="environment" multiple hidden>
-<button class="ghost" id="clearPhotos" type="button">Limpar Fotos</button>
+<!-- TAB: CRONOGRAMA -->
+<div class="tab-content" id="tab-cronograma" style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
+    <div class="gantt-container" style="flex:1" id="ganttChart">
+        <!-- Populado dinamicamente -->
+    </div>
+    <div style="padding:8px 16px;font-size:.7rem;color:var(--text2);text-align:center">
+        Cronograma estimado — baseado nas horas de serviço de cada bay (1 semana ≈ 40h)
+    </div>
 </div>
-<div class="photos" id="photos"><p class="hint">Nenhuma foto anexada.</p></div>
-</div>
-
-<div class="card grid g2">
-<h2 class="title"><span>13</span>Condições Comerciais</h2>
-<div class="field"><label>Prazo</label><select name="prazo" id="prazo"><option value="">Selecione</option><option>Imediato após aprovação</option><option>Até 3 dias úteis</option><option>Até 5 dias úteis</option><option>Até 7 dias úteis</option><option>Até 15 dias úteis</option><option>A combinar</option></select></div>
-<div class="field"><label>Garantia</label><select name="garantia" id="garantia"><option value="">Selecione</option><option>30 dias sobre mão de obra</option><option>60 dias sobre mão de obra</option><option>90 dias sobre mão de obra</option><option>Conforme garantia do fabricante</option><option>A combinar</option></select></div>
-<div class="field" style="grid-column:1/-1"><label>Condições e observações</label><textarea name="condicoes" id="condicoes">Esta proposta contempla os serviços e materiais descritos neste orçamento. Serviços adicionais não previstos deverão ser avaliados e poderão gerar aditivo.</textarea></div>
 </div>
 
-<div class="card grid g2">
-<h2 class="title"><span>14</span>Assinaturas Digitais</h2>
-<div class="field"><label>Responsável pela proposta</label><input name="assEmpNome" id="assEmpNome"><canvas id="sigEmp" class="sign"></canvas><div class="mini"><button type="button" class="ghost" id="clearSigEmp">Limpar Assinatura</button></div></div>
-<div class="field"><label>Cliente / Aprovador</label><input name="assCliNome" id="assCliNome"><canvas id="sigCli" class="sign"></canvas><div class="mini"><button type="button" class="ghost" id="clearSigCli">Limpar Assinatura</button></div></div>
+<!-- BOTTOM CARDS -->
+<div class="summary-grid">
+    <div class="summary-card">
+        <div class="label">Total Equipamentos</div>
+        <div class="value green" id="cardEquip">R$ 0</div>
+    </div>
+    <div class="summary-card">
+        <div class="label">Total Serviços</div>
+        <div class="value green" id="cardServ">R$ 0</div>
+    </div>
+    <div class="summary-card">
+        <div class="label">Horas Estimadas</div>
+        <div class="value" id="cardHoras" style="color:#448aff">0h</div>
+    </div>
+    <div class="summary-card" style="border:1px solid #f0b90b30">
+        <div class="label">Valor Final</div>
+        <div class="value accent" id="cardTotal">R$ 0</div>
+    </div>
 </div>
-</form>
-</section>
-
-<section id="historico" class="panel">
-<div class="card">
-<h2 class="title"><span>15</span>Histórico de Propostas</h2>
-<div class="grid g3" style="margin-bottom:12px">
-<div class="field"><label>Buscar</label><input id="histBusca" placeholder="Nº, cliente, título..."></div>
-<div class="field"><label>Status</label><select id="histStatus"><option value="">Todos</option><option>Rascunho</option><option>Enviada</option><option>Visualizada</option><option>Aprovada</option><option>Recusada</option><option>Vencida</option></select></div>
-<div class="field"><label>&nbsp;</label><button class="ghost" id="histRefresh" style="width:100%">Atualizar</button></div>
 </div>
-<div class="list" id="histList"><p class="hint">Nenhuma proposta salva.</p></div>
-</div>
-</section>
-</main>
-</div>
-
-<p class="hint" style="text-align:center;margin-top:24px">TECNO ACRE — Soluções em Tecnologia Sustentável • Propostas 360.</p>
 </div>
 
-<div class="toastbox" id="toastbox"></div>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
-<dialog id="confirmDialog">
-<h3 style="margin:0 0 8px">Limpar proposta?</h3>
-<p style="margin:0;color:var(--muted)">Essa ação apagará apenas a proposta em edição. Os dados salvos no histórico não serão afetados.</p>
-<div class="dlg"><button class="ghost" id="cancelClear">Cancelar</button><button class="danger" id="confirmClear">Sim, limpar</button></div>
-</dialog>
-
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
-const $ = s => document.querySelector(s);
-const $$
-= s => Array.from(document.querySelectorAll(s)); const money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }); const formEl = $('#form'); let selectedClient = null, selectedLib = null, photos = []; const defaults = [ { id: id(), tipo: 'Serviço', descricao: 'Manutenção preventiva de gerador', unidade: 'serviço', valor: 'R$ 450,00' }, { id: id(), tipo: 'Serviço', descricao: 'Teste de funcionamento em carga', unidade: 'serviço', valor: 'R$ 280,00' }, { id: id(), tipo: 'Material', descricao: 'Óleo lubrificante para gerador', unidade: 'un', valor: 'R$ 120,00' }, { id: id(), tipo: 'Deslocamento', descricao: 'Deslocamento técnico urbano', unidade: 'vb', valor: 'R$ 80,00' } ]; const tpls = [ { title: 'Manutenção Preventiva de Gerador', type: 'Manutenção em gerador', desc: 'Serviço técnico de manutenção preventiva em grupo gerador, contemplando inspeção visual, verificação de níveis, análise elétrica, teste funcional e orientações ao cliente.', etapas: '1. Inspeção visual e registro das condições do equipamento\n2. Verificação de óleo, filtros, bateria e conexões elétricas\n3. Execução da manutenção preventiva conforme necessidade\n4. Teste de funcionamento e validação operacional\n5. Entrega técnica e recomendações ao cliente' }, { title: 'Instalação Elétrica', type: 'Instalação elétrica', desc: 'Execução de serviço de instalação elétrica conforme escopo aprovado, contemplando materiais, mão de obra, testes básicos e organização técnica da instalação.', etapas: '1. Levantamento e preparação do local\n2. Instalação de infraestrutura, cabos e dispositivos\n3. Identificação, acabamento e organização\n4. Testes elétricos e entrega ao cliente' }, { title: 'Sistema Fotovoltaico', type: 'Sistema fotovoltaico', desc: 'Proposta técnica/comercial para fornecimento, instalação ou manutenção de sistema fotovoltaico.', etapas: '1. Levantamento técnico e análise do local\n2. Instalação ou manutenção dos componentes\n3. Testes de funcionamento\n4. Entrega técnica e orientações de operação' } ]; function id() { return crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()); } function toast(msg) { let e = document.createElement('div'); e.className = 'toast'; e.textContent = msg; $('#toastbox').appendChild(e); setTimeout(() => e.remove(), 4000); } function n(v) { return parseFloat(String(v || '').replace(/\./g, '').replace(',', '.').replace(/[^\d.-]/g, '')) || 0; } function br(v) { return money.format(Number(v || 0)); } function phone(v) { let d = String(v).replace(/\D/g, '').slice(0, 11); return d.length <= 10 ? d.replace(/(\d{2})(\d{4})(\d{0,4})/, (_, a, b, c) => c ? `(${a}) ${b}-${c}` : `(${a}) ${b}`) : d.replace(/(\d{2})(\d{5})(\d{0,4})/, (_, a, b, c) => c ? `(${a}) ${b}-${c}` : `(${a}) ${b}`); } function docFmt(v) { let d = String(v).replace(/\D/g, '').slice(0, 14); return d.length <= 11 ? d.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2})/, (_, a, b, c, e) => e ? `${a}.${b}.${c}-${e}` : `${a}.${b}.${c}`) : d.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, (_, a, b, c, e, f) => f ? `${a}.${b}.${c}/${e}-${f}` : `${a}.${b}.${c}/${e}`); } function dateBR(d) { if (!d) return '-'; let [y, m, dd] = d.split('-'); return `${dd}/${m}/${y}`; } function loc(k, f) { try { return JSON.parse(localStorage.getItem(k)) ?? f; } catch (e) { return f; } } function set(k, v) { localStorage.setItem(k, JSON.stringify(v)); } function clients() { return loc('ta_clients', []); } function setClients(v) { set('ta_clients', v); renderClients(); dash(); } function lib() { let l = loc('ta_lib', null); if (!l) { set('ta_lib', defaults); return defaults; } return l; } function setLib(v) { set('ta_lib', v); renderLib(); dash(); } function hist() { return loc('ta_hist', []); } function setHist(v) { set('ta_hist', v); renderHist(); dash(); } function tab(t) {
-$$('.panel').forEach(p => p.classList.toggle('active', p.id === t));
-  $$
-('[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === t)); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-$$('[data-tab]').forEach(b => b.onclick = () => tab(b.dataset.tab));
+    // ============================================================
+    //  BIBLIOTECA DE BAYS DA SUBESTAÇÃO
+    // ============================================================
+    const bayLibrary = [{
+        id: 'entrada_69kv',
+        nome: 'Bay de Entrada 69 kV',
+        tensao: '69 kV',
+        cor: '#448aff',
+        equipamentos: [
+            { nome: 'Disjuntor 69 kV (Siemens 3AH4)', un: 'un', qtd: 1, valor: 85000 },
+            { nome: 'Seccionadora Tripolar 69 kV c/ CMT', un: 'un', qtd: 1, valor: 32000 },
+            { nome: 'Transformador de Corrente (TC) 69 kV', un: 'un', qtd: 3, valor: 12000 },
+            { nome: 'Transformador de Potencial (TP) 69 kV', un: 'un', qtd: 3, valor: 9500 },
+            { nome: 'Para-raios ZnO 69 kV', un: 'un', qtd: 3, valor: 4500 },
+            { nome: 'Barramento tubular Al 69 kV (m)', un: 'm', qtd: 12, valor: 850 },
+            { nome: 'Estrutura metálica galvanizada (kg)', un: 'kg', qtd: 450, valor: 28 },
+            { nome: 'Cabo XLPE 69 kV 185mm² (m)', un: 'm', qtd: 30, valor: 320 },
+        ],
+        servicos: [
+            { nome: 'Montagem eletromecânica do bay', un: 'h', qtd: 80, valor: 180 },
+            { nome: 'Comissionamento e testes', un: 'h', qtd: 24, valor: 220 },
+            { nome: 'Testes elétricos (tensão aplicada)', un: 'h', qtd: 16, valor: 250 },
+            { nome: 'Conexão de cabos de controle', un: 'h', qtd: 20, valor: 160 },
+        ],
+        gantt: { nome: 'Bay Entrada 69kV', semanas: 6, inicio: 0 },
+    }, {
+        id: 'entrada_138kv',
+        nome: 'Bay de Entrada 138 kV',
+        tensao: '138 kV',
+        cor: '#ff9100',
+        equipamentos: [
+            { nome: 'Disjuntor 138 kV (ABB LTB)', un: 'un', qtd: 1, valor: 145000 },
+            { nome: 'Seccionadora Tripolar 138 kV', un: 'un', qtd: 1, valor: 48000 },
+            { nome: 'Transformador de Corrente (TC) 138 kV', un: 'un', qtd: 3, valor: 16000 },
+            { nome: 'Transformador de Potencial (TP) 138 kV', un: 'un', qtd: 3, valor: 13500 },
+            { nome: 'Para-raios ZnO 138 kV', un: 'un', qtd: 3, valor: 6500 },
+            { nome: 'Barramento tubular Al 138 kV (m)', un: 'm', qtd: 14, valor: 1050 },
+            { nome: 'Estrutura metálica galvanizada (kg)', un: 'kg', qtd: 580, valor: 28 },
+            { nome: 'Cabo XLPE 138 kV 240mm² (m)', un: 'm', qtd: 35, valor: 420 },
+        ],
+        servicos: [
+            { nome: 'Montagem eletromecânica do bay', un: 'h', qtd: 100, valor: 190 },
+            { nome: 'Comissionamento e testes', un: 'h', qtd: 30, valor: 230 },
+            { nome: 'Testes elétricos', un: 'h', qtd: 20, valor: 260 },
+            { nome: 'Conexão de cabos de controle', un: 'h', qtd: 24, valor: 170 },
+        ],
+        gantt: { nome: 'Bay Entrada 138kV', semanas: 7, inicio: 0 },
+    }, {
+        id: 'transformador',
+        nome: 'Transformador de Potência',
+        tensao: '15/20 MVA',
+        cor: '#b388ff',
+        equipamentos: [
+            { nome: 'Transformador 15 MVA ONAN 69/13.8 kV', un: 'un', qtd: 1, valor: 480000 },
+            { nome: 'Base de concreto armado (m³)', un: 'm³', qtd: 18, valor: 1200 },
+            { nome: 'Bacia de contenção de óleo', un: 'un', qtd: 1, valor: 18000 },
+            { nome: 'Relé Buchholz + indicador de nível', un: 'cj', qtd: 1, valor: 8500 },
+            { nome: 'Válvula de alívio de pressão', un: 'un', qtd: 1, valor: 3200 },
+            { nome: 'Termômetro de óleo/enrolamento', un: 'cj', qtd: 1, valor: 4200 },
+            { nome: 'Secador de sílica gel', un: 'un', qtd: 1, valor: 1800 },
+        ],
+        servicos: [
+            { nome: 'Içamento e posicionamento do trafo', un: 'h', qtd: 40, valor: 250 },
+            { nome: 'Conexões elétricas AT/BT', un: 'h', qtd: 32, valor: 200 },
+            { nome: 'Ensaios de rotina (relação, isolação)', un: 'h', qtd: 20, valor: 280 },
+            { nome: 'Tratamento de óleo isolante', un: 'h', qtd: 24, valor: 220 },
+            { nome: 'Comissionamento completo', un: 'h', qtd: 16, valor: 300 },
+        ],
+        gantt: { nome: 'Transformador', semanas: 8, inicio: 2 },
+    }, {
+        id: 'saida_13kv',
+        nome: 'Bay de Saída 13.8 kV',
+        tensao: '13.8 kV',
+        cor: '#00c853',
+        equipamentos: [
+            { nome: 'Disjuntor extraível 13.8 kV 2000A', un: 'un', qtd: 5, valor: 28000 },
+            { nome: 'TC de proteção 13.8 kV', un: 'un', qtd: 15, valor: 3200 },
+            { nome: 'TP 13.8 kV', un: 'un', qtd: 3, valor: 2800 },
+            { nome: 'Cabo EPR 90°C 13.8 kV 240mm² (m)', un: 'm', qtd: 80, valor: 180 },
+            { nome: 'Cubículo blindado 13.8 kV', un: 'un', qtd: 5, valor: 18500 },
+            { nome: 'Barramento 13.8 kV 2000A (m)', un: 'm', qtd: 24, valor: 650 },
+        ],
+        servicos: [
+            { nome: 'Montagem de cubículos', un: 'h', qtd: 60, valor: 175 },
+            { nome: 'Lançamento e conexão de cabos', un: 'h', qtd: 48, valor: 160 },
+            { nome: 'Testes de isolação e continuidade', un: 'h', qtd: 24, valor: 200 },
+        ],
+        gantt: { nome: 'Bays Saída 13.8kV', semanas: 7, inicio: 4 },
+    }, {
+        id: 'servicos_aux',
+        nome: 'Serviços Auxiliares',
+        tensao: '380/220V',
+        cor: '#ff5252',
+        equipamentos: [
+            { nome: 'Transformador auxiliar 225 kVA', un: 'un', qtd: 1, valor: 32000 },
+            { nome: 'QGBT 380V (painel metálico)', un: 'un', qtd: 1, valor: 15000 },
+            { nome: 'Retificador/carregador 125 Vcc 100A', un: 'un', qtd: 1, valor: 22000 },
+            { nome: 'Banco de baterias 125 Vcc 200Ah', un: 'cj', qtd: 1, valor: 28000 },
+            { nome: 'No-break 10 kVA', un: 'un', qtd: 1, valor: 18500 },
+            { nome: 'Circuito de iluminação e tomadas', un: 'vb', qtd: 1, valor: 8500 },
+        ],
+        servicos: [
+            { nome: 'Montagem de painéis auxiliares', un: 'h', qtd: 40, valor: 170 },
+            { nome: 'Instalação elétrica predial', un: 'h', qtd: 48, valor: 150 },
+            { nome: 'Testes de comissionamento', un: 'h', qtd: 16, valor: 190 },
+        ],
+        gantt: { nome: 'Serviços Auxiliares', semanas: 4, inicio: 1 },
+    }, {
+        id: 'spda_malha',
+        nome: 'SPDA e Malha de Terra',
+        tensao: 'Aterramento',
+        cor: '#00bcd4',
+        equipamentos: [
+            { nome: 'Cabo cobre nu 50 mm² (malha)', un: 'm', qtd: 250, valor: 95 },
+            { nome: 'Cabo cobre nu 35 mm² (SPDA)', un: 'm', qtd: 80, valor: 68 },
+            { nome: 'Haste de aterramento 5/8" x 3m', un: 'un', qtd: 20, valor: 120 },
+            { nome: 'Caixa de inspeção de aterramento', un: 'un', qtd: 8, valor: 250 },
+            { nome: 'Solda exotérmica (cartucho)', un: 'un', qtd: 35, valor: 45 },
+            { nome: 'Terminal de compressão', un: 'un', qtd: 40, valor: 18 },
+        ],
+        servicos: [
+            { nome: 'Escavação para malha de terra', un: 'h', qtd: 80, valor: 120 },
+            { nome: 'Lançamento de cabos e soldas', un: 'h', qtd: 120, valor: 140 },
+            { nome: 'Medição de resistência de terra', un: 'h', qtd: 16, valor: 200 },
+        ],
+        gantt: { nome: 'SPDA/Malha de Terra', semanas: 5, inicio: 0 },
+    }, {
+        id: 'medicao',
+        nome: 'Medição e Faturamento',
+        tensao: 'Medição',
+        cor: '#e040fb',
+        equipamentos: [
+            { nome: 'TC de medição 69 kV 0.3P', un: 'un', qtd: 3, valor: 14000 },
+            { nome: 'TP de medição 69 kV 0.3P', un: 'un', qtd: 3, valor: 11000 },
+            { nome: 'Medidor eletrônico multigrandezas', un: 'un', qtd: 1, valor: 8500 },
+            { nome: 'Caixa de medição selável', un: 'un', qtd: 1, valor: 1800 },
+        ],
+        servicos: [
+            { nome: 'Instalação de TP/TC de medição', un: 'h', qtd: 24, valor: 200 },
+            { nome: 'Parametrização do medidor', un: 'h', qtd: 8, valor: 220 },
+            { nome: 'Testes de exatidão', un: 'h', qtd: 8, valor: 250 },
+        ],
+        gantt: { nome: 'Medição', semanas: 3, inicio: 5 },
+    }, {
+        id: 'protecao',
+        nome: 'Proteção e Controle',
+        tensao: 'Relés',
+        cor: '#76ff03',
+        equipamentos: [
+            { nome: 'Relé de proteção SEL-751A (alimentador)', un: 'un', qtd: 5, valor: 18500 },
+            { nome: 'Relé diferencial SEL-787 (transformador)', un: 'un', qtd: 1, valor: 32000 },
+            { nome: 'Relé de proteção SEL-311L (linha 69kV)', un: 'un', qtd: 1, valor: 28000 },
+            { nome: 'Painel de proteção e controle', un: 'un', qtd: 2, valor: 15000 },
+            { nome: 'Switch Ethernet industrial', un: 'un', qtd: 2, valor: 4500 },
+            { nome: 'Fibra óptica monomodo (m)', un: 'm', qtd: 150, valor: 8 },
+            { nome: 'Conversor de mídia Ethernet/FO', un: 'un', qtd: 4, valor: 1200 },
+        ],
+        servicos: [
+            { nome: 'Montagem painéis de proteção', un: 'h', qtd: 48, valor: 190 },
+            { nome: 'Parametrização de relés', un: 'h', qtd: 80, valor: 240 },
+            { nome: 'Testes de injeção secundária', un: 'h', qtd: 40, valor: 260 },
+            { nome: 'Configuração rede ethernet', un: 'h', qtd: 16, valor: 200 },
+        ],
+        gantt: { nome: 'Proteção/Controle', semanas: 6, inicio: 3 },
+    }, {
+        id: 'capacitores',
+        nome: 'Banco de Capacitores',
+        tensao: '13.8 kV',
+        cor: '#ffc107',
+        equipamentos: [
+            { nome: 'Banco de capacitores 2 MVAr 13.8 kV', un: 'un', qtd: 1, valor: 85000 },
+            { nome: 'Reator de descarga', un: 'un', qtd: 1, valor: 12000 },
+            { nome: 'Disjuntor de manobra do banco', un: 'un', qtd: 1, valor: 32000 },
+            { nome: 'Estrutura de suporte (kg)', un: 'kg', qtd: 200, valor: 30 },
+        ],
+        servicos: [
+            { nome: 'Montagem do banco de capacitores', un: 'h', qtd: 32, valor: 190 },
+            { nome: 'Conexões e testes', un: 'h', qtd: 16, valor: 220 },
+        ],
+        gantt: { nome: 'Banco Capacitores', semanas: 4, inicio: 6 },
+    }, {
+        id: 'obra_civil',
+        nome: 'Obra Civil',
+        tensao: 'Infra',
+        cor: '#795548',
+        equipamentos: [
+            { nome: 'Terraplanagem e compactação', un: 'm²', qtd: 400, valor: 35 },
+            { nome: 'Concreto usinado FCK 30MPa', un: 'm³', qtd: 35, valor: 480 },
+            { nome: 'Armadura CA-50 (kg)', un: 'kg', qtd: 2800, valor: 12 },
+            { nome: 'Brita graduada para base', un: 'm³', qtd: 25, valor: 180 },
+            { nome: 'Canaletas para cabos', un: 'm', qtd: 60, valor: 220 },
+            { nome: 'Cerca de proteção (tela + mourão)', un: 'm', qtd: 80, valor: 150 },
+            { nome: 'Portão de acesso 2 folhas', un: 'un', qtd: 1, valor: 8500 },
+        ],
+        servicos: [
+            { nome: 'Mobilização e canteiro', un: 'h', qtd: 80, valor: 110 },
+            { nome: 'Escavação e concretagem', un: 'h', qtd: 160, valor: 100 },
+            { nome: 'Acabamento e limpeza', un: 'h', qtd: 40, valor: 90 },
+        ],
+        gantt: { nome: 'Obra Civil', semanas: 5, inicio: 0 },
+    }];
 
-$('#themeBtn').onclick = () => {
-  let th = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-  document.documentElement.dataset.theme = th;
-  localStorage.setItem('ta_theme', th);
-  $('#themeBtn').textContent = th === 'light' ? 'Tema claro' : 'Tema escuro';
-  resizeSigs();
-};
+    // ============================================================
+    //  STATE
+    // ============================================================
+    let selectedBays = new Set();
+    let customItems = [];
 
-let th = localStorage.getItem('ta_theme') || (matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark');
-document.documentElement.dataset.theme = th;
-$('#themeBtn').textContent = th === 'light' ? 'Tema claro' : 'Tema escuro';
-
-function addRow(it = {}) {
-  let tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td><select class="itTipo">
-      <option ${it.tipo === 'Serviço' ? 'selected' : ''}>Serviço</option>
-      <option ${it.tipo === 'Material' ? 'selected' : ''}>Material</option>
-      <option ${it.tipo === 'Deslocamento' ? 'selected' : ''}>Deslocamento</option>
-      <option ${it.tipo === 'Equipamento' ? 'selected' : ''}>Equipamento</option>
-    </select></td>
-    <td><textarea class="itDesc" placeholder="Descrição">${it.descricao || ''}</textarea></td>
-    <td><select class="itUn">${['un','m','m²','m³','kg','h','dia','serviço','ponto','cj','vb']
-      .map(u => `<option ${it.unidade === u ? 'selected' : ''}>${u}</option>`).join('')}</select></td>
-    <td><input class="itQtd" inputmode="decimal" value="${it.qtd || ''}"></td>
-    <td><input class="itVal" inputmode="decimal" value="${it.valor || it.valorUnitario || ''}"></td>
-    <td><input class="itTotal" readonly></td>
-    <td><div class="mini"><button type="button" class="danger rem">Remover</button><button type="button" class="ghost save">Biblioteca</button></div></td>`;
-
-  tr.querySelectorAll('input, textarea, select').forEach(e => {
-    e.oninput = () => { rowTotal(tr); saveDraft(); };
-    e.onchange = () => { rowTotal(tr); saveDraft(); };
-    e.onblur = () => {
-      if (e.className === 'itVal') e.value = br(n(e.value));
-      rowTotal(tr);
-      saveDraft();
-    };
-  });
-
-  tr.querySelector('.rem').onclick = () => {
-    if ($('#items').children.length <= 1) {
-      tr.querySelectorAll('input, textarea').forEach(e => e.value = '');
-    } else {
-      tr.remove();
+    // ============================================================
+    //  RENDER BAY SELECTOR
+    // ============================================================
+    function renderBaySelector() {
+        const container = document.getElementById('baySelector');
+        container.innerHTML = bayLibrary.map(bay => `
+            <div class="bay-card ${selectedBays.has(bay.id) ? 'selected' : ''}" 
+                 onclick="toggleBay('${bay.id}')" id="bayCard_${bay.id}">
+              <div class="checkbox">${selectedBays.has(bay.id) ? '✓' : ''}</div>
+              <div style="width:3px;height:28px;background:${bay.cor};border-radius:2px;flex-shrink:0"></div>
+              <div>
+                <div class="bay-kv">${bay.tensao}</div>
+                <div class="bay-name">${bay.nome}</div>
+              </div>
+              <div class="bay-count">${bay.equipamentos.length + bay.servicos.length} itens</div>
+            </div>
+          `).join('');
+        document.getElementById('bayCount').textContent = `${selectedBays.size} selecionados`;
+        updateQuickBaySelect();
     }
-    totals();
-    saveDraft();
-  };
 
-  tr.querySelector('.save').onclick = () => {
-    let i = rowItem(tr);
-    if (!i.descricao) return toast('Informe a descrição.');
-    let l = lib();
-    l.unshift({ id: id(), tipo: i.tipo, descricao: i.descricao, unidade: i.unidade, valor: i.valorUnitario });
-    setLib(l);
-    toast('Item salvo na biblioteca.');
-  };
-
-  $('#items').appendChild(tr);
-  rowTotal(tr);
-}
-
-function rowItem(tr) {
-  let q = tr.querySelector('.itQtd').value;
-  let v = tr.querySelector('.itVal').value;
-  return {
-    tipo: tr.querySelector('.itTipo').value,
-    descricao: tr.querySelector('.itDesc').value,
-    unidade: tr.querySelector('.itUn').value,
-    qtd: q,
-    valorUnitario: v,
-    total: n(q) * n(v)
-  };
-}
-
-function items() {
-  return $$
-('#items tr').map(rowItem).filter(i => i.descricao || n(i.qtd) || n(i.valorUnitario)); } function rowTotal(tr) { tr.querySelector('.itTotal').value = br(rowItem(tr).total); totals(); dash(); } function totals() { let sub = items().reduce((a, i) => a + i.total, 0); let d = n($('#desconto').value); let a = n($('#acrescimo').value); let t = Math.max(0, sub - d + a); $('#subV').textContent = br(sub); $('#descV').textContent = br(d); $('#acreV').textContent = br(a); $('#totalV').textContent = br(t); return { sub, desconto: d, acrescimo: a, total: t }; } function data() { let o = {}; new FormData(formEl).forEach((v, k) => o[k] = v); o.items = items(); o.totals = totals(); o.photos = photos; o.sigEmp = sigs.emp.toDataURL(); o.sigCli = sigs.cli.toDataURL(); return o; } function setData(o = {}) {
-$$('#form input, #form textarea, #form select').forEach(e => {
-    if (e.name && o[e.name] !== undefined) e.value = o[e.name];
-  });
-  $('#items').innerHTML = '';
-  (o.items || []).forEach(addRow);
-  if (!$('#items').children.length) addRow({ tipo: 'Serviço', unidade: 'serviço', qtd: '1' });
-  photos.splice(0, photos.length, ...(o.photos || []));
-  renderPhotos();
-  totals();
-  validate();
-  progress();
-  dash();
-}
-
-function saveDraft() { set('ta_draft', data()); progress(); dash(); }
-
-function loadDraft() {
-  let d = loc('ta_draft', null);
-  if (d) setData(d);
-}
-
-function validate(show = false) {
-  let ok = true;
-  $$
-('#form [required]').forEach(e => { let bad = !String(e.value || '').trim(); e.closest('.field')?.classList.toggle('bad', bad); if (bad) ok = false; }); if (show && !ok) toast('Preencha os campos obrigatórios.'); return ok; } function progress() { let r =
-$$('#form [required]');
-  let f = r.filter(e => String(e.value || '').trim()).length;
-  let p = r.length ? Math.round(f / r.length * 100) : 0;
-  $('#progText').textContent = `Preenchimento: ${p}%`;
-  $('#progFill').style.width = p + '%';
-}
-
-function dash() {
-  let sub = items().reduce((a, i) => a + i.total, 0);
-  let d = n($('#desconto').value);
-  let a = n($('#acrescimo').value);
-  let t = Math.max(0, sub - d + a);
-  $('#mTotal').textContent = br(t);
-  $('#mItems').textContent = items().length;
-  $('#mClients').textContent = clients().length;
-  $('#mProps').textContent = hist().length;
-  $('#mStatus').textContent = $('#status').value || 'Rascunho';
-}
-
-$('#addItemBtn').onclick = () => { addRow(); saveDraft(); tab('proposta'); toast('Item adicionado.'); };
-
-['desconto', 'acrescimo'].forEach(i => {
-  $('#' + i).oninput = () => { totals(); saveDraft(); };
-  $('#' + i).onblur = e => { e.target.value = br(n(e.target.value)); totals(); saveDraft(); };
-});
-
-['telEmp', 'telCliente', 'cadTel'].forEach(i => {
-  $('#' + i).oninput = e => { e.target.value = phone(e.target.value); };
-});
-
-['doc', 'cadDoc'].forEach(i => {
-  $('#' + i).oninput = e => { e.target.value = docFmt(e.target.value); };
-});
-
-formEl.oninput = () => { validate(); saveDraft(); };
-formEl.onchange = () => { validate(); saveDraft(); };
-
-function renderClients() {
-  let list = $('#clientsList');
-  let c = clients();
-  list.innerHTML = c.length ? '' : '<p class="hint">Nenhum cliente salvo ainda.</p>';
-  c.forEach(x => {
-    let e = document.createElement('div');
-    e.className = 'item';
-    e.innerHTML = `
-      <header><h3>${x.nome}</h3><span class="badge">Cliente</span></header>
-      <p>${x.resp || '-'} • ${x.tel || '-'} • ${x.email || '-'}</p>
-      <p>${x.end || '-'}</p>
-      <div class="mini"><button class="secondary">Usar</button><button class="ghost">Editar</button><button class="danger">Excluir</button></div>`;
-    let [u, ed, del] = e.querySelectorAll('button');
-    u.onclick = () => useC(x);
-    ed.onclick = () => fillC(x);
-    del.onclick = () => setClients(c.filter(y => y.id !== x.id));
-    list.appendChild(e);
-  });
-}
-
-function fillC(c) {
-  selectedClient = c.id;
-  $('#cadNome').value = c.nome || '';
-  $('#cadDoc').value = c.doc || '';
-  $('#cadResp').value = c.resp || '';
-  $('#cadTel').value = c.tel || '';
-  $('#cadEmail').value = c.email || '';
-  $('#cadEnd').value = c.end || '';
-  toast('Cliente carregado.');
-}
-
-function useC(c) {
-  $('#cliente').value = c.nome || '';
-  $('#doc').value = c.doc || '';
-  $('#contato').value = c.resp || '';
-  $('#telCliente').value = c.tel || '';
-  $('#emailCliente').value = c.email || '';
-  $('#endereco').value = c.end || '';
-  saveDraft();
-  tab('proposta');
-  toast('Cliente aplicado.');
-}
-
-$('#saveClient').onclick = () => {
-  let nome = $('#cadNome').value.trim();
-  if (!nome) return toast('Informe o cliente.');
-  let c = clients();
-  let o = {
-    id: selectedClient || id(),
-    nome,
-    doc: $('#cadDoc').value,
-    resp: $('#cadResp').value,
-    tel: $('#cadTel').value,
-    email: $('#cadEmail').value,
-    end: $('#cadEnd').value
-  };
-  let ix = c.findIndex(x => x.id === o.id);
-  if (ix >= 0) c[ix] = o; else c.unshift(o);
-  selectedClient = o.id;
-  setClients(c);
-  toast('Cliente salvo.');
-};
-
-$('#useClient').onclick = () => {
-  let c = clients().find(x => x.id === selectedClient);
-  c ? useC(c) : toast('Selecione/salve um cliente.');
-};
-
-function renderLib() {
-  let list = $('#libList');
-  let l = lib();
-  list.innerHTML = '';
-  l.forEach(x => {
-    let e = document.createElement('div');
-    e.className = 'item';
-    e.innerHTML = `
-      <header><h3>${x.descricao}</h3><span class="badge">${x.tipo}</span></header>
-      <p>${x.unidade} • ${x.valor || 'R$ 0,00'}</p>
-      <div class="mini"><button class="secondary">Adicionar</button><button class="ghost">Editar</button><button class="danger">Excluir</button></div>`;
-    let [a, ed, del] = e.querySelectorAll('button');
-    a.onclick = () => addLibItem(x);
-    ed.onclick = () => fillL(x);
-    del.onclick = () => setLib(l.filter(y => y.id !== x.id));
-    list.appendChild(e);
-  });
-}
-
-function fillL(x) {
-  selectedLib = x.id;
-  $('#libTipo').value = x.tipo;
-  $('#libDesc').value = x.descricao;
-  $('#libUn').value = x.unidade;
-  $('#libVal').value = x.valor;
-  toast('Item carregado.');
-}
-
-function addLibItem(x) {
-  addRow({ tipo: x.tipo, descricao: x.descricao, unidade: x.unidade, qtd: '1', valor: x.valor });
-  saveDraft();
-  tab('proposta');
-  toast('Item adicionado.');
-}
-
-$('#saveLib').onclick = () => {
-  let d = $('#libDesc').value.trim();
-  if (!d) return toast('Informe a descrição.');
-  let l = lib();
-  let o = {
-    id: selectedLib || id(),
-    tipo: $('#libTipo').value,
-    descricao: d,
-    unidade: $('#libUn').value,
-    valor: $('#libVal').value
-  };
-  let ix = l.findIndex(x => x.id === o.id);
-  if (ix >= 0) l[ix] = o; else l.unshift(o);
-  selectedLib = o.id;
-  setLib(l);
-  toast('Item salvo.');
-};
-
-$('#addLib').onclick = () => {
-  let x = lib().find(i => i.id === selectedLib);
-  x ? addLibItem(x) : toast('Selecione/salve um item.');
-};
-
-$('#libVal').onblur = e => { e.target.value = br(n(e.target.value)); };
-
-function renderTpls() {
-  let list = $('#tplList');
-  list.innerHTML = '';
-  tpls.forEach(t => {
-    let e = document.createElement('div');
-    e.className = 'item';
-    e.innerHTML = `
-      <header><h3>${t.title}</h3><span class="badge ok">Template</span></header>
-      <p>${t.desc}</p>
-      <div class="mini"><button class="secondary">Aplicar Template</button></div>`;
-    e.querySelector('button').onclick = () => {
-      $('#tipoServico').value = t.type;
-      $('#titulo').value = t.title;
-      $('#descricao').value = t.desc;
-      $('#etapas').value = t.etapas;
-      saveDraft();
-      validate();
-      tab('proposta');
-      toast('Template aplicado.');
-    };
-    list.appendChild(e);
-  });
-}
-
-async function resizeImg(file) {
-  return new Promise((res, rej) => {
-    let r = new FileReader();
-    r.onload = () => {
-      let img = new Image();
-      img.onload = () => {
-        let s = Math.min(1, 1280 / Math.max(img.width, img.height));
-        let w = img.width * s, h = img.height * s;
-        let c = document.createElement('canvas');
-        c.width = w; c.height = h;
-        c.getContext('2d').drawImage(img, 0, 0, w, h);
-        res(c.toDataURL('image/jpeg', .82));
-      };
-      img.onerror = rej;
-      img.src = r.result;
-    };
-    r.onerror = rej;
-    r.readAsDataURL(file);
-  });
-}
-
-$('#photoInput').onchange = async e => {
-  for (let f of Array.from(e.target.files || [])) {
-    if (f.type.startsWith('image/')) {
-      photos.push({ id: id(), dataUrl: await resizeImg(f), caption: '' });
+    function toggleBay(bayId) {
+        if (selectedBays.has(bayId)) {
+            selectedBays.delete(bayId);
+        } else {
+            selectedBays.add(bayId);
+        }
+        refreshAll();
+        const bay = bayLibrary.find(b => b.id === bayId);
+        showToast(selectedBays.has(bayId) ?
+            `✅ "${bay.nome}" adicionado` :
+            `❌ "${bay.nome}" removido`);
     }
-  }
-  e.target.value = '';
-  renderPhotos();
-  saveDraft();
-  toast('Foto anexada.');
-};
 
-$('#clearPhotos').onclick = () => {
-  photos = [];
-  renderPhotos();
-  saveDraft();
-};
-
-function renderPhotos() {
-  let g = $('#photos');
-  g.innerHTML = photos.length ? '' : '<p class="hint">Nenhuma foto anexada.</p>';
-  photos.forEach((p, i) => {
-    let e = document.createElement('div');
-    e.className = 'photo';
-    e.innerHTML = `
-      <img src="${p.dataUrl}" alt="Foto ${i + 1}">
-      <textarea placeholder="Descrição da foto" style="margin-top:8px">${p.caption || ''}</textarea>
-      <button class="danger" type="button" style="margin-top:6px;width:100%">Remover</button>`;
-    e.querySelector('textarea').oninput = x => { p.caption = x.target.value; saveDraft(); };
-    e.querySelector('button').onclick = () => { photos.splice(i, 1); renderPhotos(); saveDraft(); };
-    g.appendChild(e);
-  });
-}
-
-$('#savePropBtn').onclick = () => {
-  if (!validate(true)) return;
-  let h = hist();
-  let d = data();
-  d.id = d.numero || id();
-  d.updatedAt = new Date().toISOString();
-  let ix = h.findIndex(p => p.id === d.id);
-  if (ix >= 0) h[ix] = d; else h.unshift(d);
-  setHist(h);
-  toast('Proposta salva.');
-};
-
-function renderHist() {
-  let list = $('#histList');
-  let q = ($('#histBusca').value || '').toLowerCase();
-  let st = $('#histStatus').value;
-  let h = hist();
-  if (q) h = h.filter(p => [p.numero, p.cliente, p.titulo, p.tipoServico].some(v => String(v || '').toLowerCase().includes(q)));
-  if (st) h = h.filter(p => p.status === st);
-  list.innerHTML = h.length ? '' : '<p class="hint">Nenhuma proposta salva.</p>';
-  h.forEach(p => {
-    let e = document.createElement('div');
-    e.className = 'item';
-    let cls = p.status === 'Aprovada' ? 'ok' : (p.status === 'Enviada' || p.status === 'Visualizada') ? 'warn' : '';
-    e.innerHTML = `
-      <header><h3>${p.numero || 'Sem número'} • ${p.cliente || 'Cliente não informado'}</h3><span class="badge ${cls}">${p.status || 'Rascunho'}</span></header>
-      <p>${p.titulo || p.tipoServico || '-'} • ${br(p.totals?.total || 0)}</p>
-      <p>Atualizada em: ${p.updatedAt ? new Date(p.updatedAt).toLocaleString('pt-BR') : '-'}</p>
-      <div class="mini"><button class="secondary">Abrir</button><button class="danger">Excluir</button></div>`;
-    let [open, del] = e.querySelectorAll('button');
-    open.onclick = () => { setData(p); tab('proposta'); toast('Proposta carregada.'); };
-    del.onclick = () => setHist(hist().filter(x => x.id !== p.id));
-    list.appendChild(e);
-  });
-}
-
-$('#histBusca').oninput = renderHist;
-$('#histStatus').onchange = renderHist;
-$('#histRefresh').onclick = renderHist;
-
-/* ─── Assinaturas ─── */
-function pad(canvas) {
-  let ctx = canvas.getContext('2d');
-  let draw = false, has = false, img = null;
-
-  function resize() {
-    if (has) img = canvas.toDataURL();
-    let r = canvas.getBoundingClientRect();
-    let ratio = Math.max(devicePixelRatio || 1, 1);
-    canvas.width = r.width * ratio;
-    canvas.height = r.height * ratio;
-    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-    ctx.lineWidth = 2.2;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = '#0f172a';
-    if (img) {
-      let im = new Image();
-      im.onload = () => ctx.drawImage(im, 0, 0, r.width, r.height);
-      im.src = img;
+    function selecionarTodos() {
+        bayLibrary.forEach(b => selectedBays.add(b.id));
+        refreshAll();
+        showToast('✅ Todos os bays selecionados');
     }
-  }
 
-  function pos(e) {
-    let r = canvas.getBoundingClientRect();
-    let t = e.touches ? e.touches[0] : e;
-    return { x: t.clientX - r.left, y: t.clientY - r.top };
-  }
+    function limparTudo() {
+        if (selectedBays.size > 0 && !confirm('Tem certeza? Isso removerá todos os bays e itens da proposta.'))
+        return;
+        selectedBays.clear();
+        customItems = [];
+        refreshAll();
+        showToast('🗑 Proposta limpa');
+    }
 
-  function st(e) {
-    e.preventDefault();
-    draw = true;
-    let p = pos(e);
-    ctx.beginPath();
-    ctx.moveTo(p.x, p.y);
-  }
+    function refreshAll() {
+        renderBaySelector();
+        renderItems();
+        renderUnifilar();
+        renderGantt();
+        updateSummary();
+    }
 
-  function mv(e) {
-    if (!draw) return;
-    e.preventDefault();
-    let p = pos(e);
-    ctx.lineTo(p.x, p.y);
-    ctx.stroke();
-    has = true;
-    saveDraft();
-  }
+    // ============================================================
+    //  ITEMS TABLE
+    // ============================================================
+    function getAllItems() {
+        const items = [];
+        bayLibrary.forEach(bay => {
+            if (!selectedBays.has(bay.id)) return;
+            bay.equipamentos.forEach(e => items.push({
+                bayId: bay.id,
+                bayNome: bay.nome,
+                bayCor: bay.cor,
+                tipo: 'equipamento',
+                nome: e.nome,
+                un: e.un,
+                qtd: e.qtd,
+                valor: e.valor,
+            }));
+            bay.servicos.forEach(s => items.push({
+                bayId: bay.id,
+                bayNome: bay.nome,
+                bayCor: bay.cor,
+                tipo: 'serviço',
+                nome: s.nome,
+                un: s.un,
+                qtd: s.qtd,
+                valor: s.valor,
+            }));
+        });
+        customItems.forEach(ci => items.push({
+            ...ci,
+            bayId: ci.bayId || '_custom',
+            bayNome: ci.bayNome || 'Itens adicionais',
+            bayCor: ci.bayCor || '#888',
+            tipo: 'custom'
+        }));
+        return items;
+    }
 
-  function en(e) {
-    if (!draw) return;
-    e.preventDefault();
-    draw = false;
-    saveDraft();
-  }
+    function renderItems() {
+        const items = getAllItems();
+        const tbody = document.getElementById('itemsBody');
+        document.getElementById('itemCount').textContent = `${items.length} itens`;
 
-  ['mousedown', 'touchstart'].forEach(ev => canvas.addEventListener(ev, st, { passive: false }));
-  ['mousemove', 'touchmove'].forEach(ev => canvas.addEventListener(ev, mv, { passive: false }));
-  ['mouseup', 'mouseleave', 'touchend'].forEach(ev => canvas.addEventListener(ev, en, { passive: false }));
-  addEventListener('resize', resize);
-  setTimeout(resize, 120);
+        if (items.length === 0) {
+            tbody.innerHTML = `
+              <tr>
+                <td colspan="7" style="text-align:center;padding:40px;color:var(--text2)">
+                  ⚡ Selecione os bays ao lado para começar a montar a proposta
+                </td>
+              </tr>`;
+            return;
+        }
 
-  return {
-    clear() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      has = false;
-      img = null;
-      saveDraft();
-    },
-    toDataURL() { return has ? canvas.toDataURL('image/png') : ''; },
-    resize
-  };
-}
+        let lastBay = '';
+        let html = '';
+        let itemCounter = 0;
+        items.forEach((item, idx) => {
+            if (item.bayNome !== lastBay) {
+                html += `
+                <tr class="bay-header">
+                  <td><span class="dot" style="background:${item.bayCor}"></span></td>
+                  <td colspan="6"><strong>${item.bayNome}</strong> (${item.tipo}s)</td>
+                </tr>`;
+                lastBay = item.bayNome;
+                itemCounter = 0;
+            }
+            const total = item.qtd * item.valor;
+            const rowId = `${item.bayId}_${itemCounter}`;
+            html += `
+              <tr id="row_${rowId}">
+                <td></td>
+                <td>${item.nome}</td>
+                <td>${item.un}</td>
+                <td><input type="number" class="qty-input" value="${item.qtd}" min="1" 
+                     onchange="updateQty('${item.bayId}', ${itemCounter}, this.value, '${item.tipo}')"></td>
+                <td><input type="number" class="price-input" value="${item.valor.toFixed(2)}" step="0.01"
+                     onchange="updatePrice('${item.bayId}', ${itemCounter}, this.value, '${item.tipo}')"></td>
+                <td class="col-total">R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+                <td><button class="delete-btn" onclick="removeItem('${item.bayId}', ${itemCounter}, '${item.tipo}')" title="Remover">✕</button></td>
+              </tr>`;
+            itemCounter++;
+        });
+        tbody.innerHTML = html;
+    }
 
-const sigs = { emp: pad($('#sigEmp')), cli: pad($('#sigCli')) };
+    function updateQty(bayId, idx, newQty, tipo) {
+        const qty = Math.max(1, parseInt(newQty) || 1);
+        if (tipo === 'custom') {
+            if (idx < customItems.length) customItems[idx].qtd = qty;
+        } else {
+            const bay = bayLibrary.find(b => b.id === bayId);
+            if (!bay) return;
+            const arr = tipo === 'serviço' ? bay.servicos : bay.equipamentos;
+            if (idx < arr.length) arr[idx].qtd = qty;
+        }
+        renderItems();
+        updateSummary();
+        renderGantt();
+    }
 
-function resizeSigs() {
-  setTimeout(() => Object.values(sigs).forEach(s => s.resize()), 80);
-}
+    function updatePrice(bayId, idx, newPrice, tipo) {
+        const price = Math.max(0, parseFloat(newPrice) || 0);
+        if (tipo === 'custom') {
+            if (idx < customItems.length) customItems[idx].valor = price;
+        } else {
+            const bay = bayLibrary.find(b => b.id === bayId);
+            if (!bay) return;
+            const arr = tipo === 'serviço' ? bay.servicos : bay.equipamentos;
+            if (idx < arr.length) arr[idx].valor = price;
+        }
+        renderItems();
+        updateSummary();
+    }
 
-$('#clearSigEmp').onclick = () => sigs.emp.clear();
-$('#clearSigCli').onclick = () => sigs.cli.clear();
+    function removeItem(bayId, idx, tipo) {
+        if (tipo === 'custom') {
+            if (confirm(`Remover "${customItems[idx]?.nome || 'item'}"?`)) {
+                customItems.splice(idx, 1);
+                refreshAll();
+                showToast('Item removido');
+            }
+            return;
+        }
+        const bay = bayLibrary.find(b => b.id === bayId);
+        if (!bay) return;
+        const arr = tipo === 'serviço' ? bay.servicos : bay.equipamentos;
+        if (idx < arr.length) {
+            const item = arr[idx];
+            if (confirm(`Remover "${item.nome}" deste bay?`)) {
+                if (tipo === 'serviço') bay.servicos.splice(idx, 1);
+                else bay.equipamentos.splice(idx, 1);
+                refreshAll();
+                showToast('Item removido');
+            }
+        }
+    }
 
-/* ─── Limpar proposta ─── */
-$('#clearBtn').onclick = () => $('#confirmDialog').showModal();
-$('#cancelClear').onclick = () => $('#confirmDialog').close();
+    // ============================================================
+    //  QUICK ADD
+    // ============================================================
+    function updateQuickBaySelect() {
+        const select = document.getElementById('quickBay');
+        let html = '<option value="">Geral (sem bay)</option>';
+        bayLibrary.filter(b => selectedBays.has(b.id)).forEach(b => {
+            html += `<option value="${b.id}">${b.nome}</option>`;
+        });
+        select.innerHTML = html;
+    }
 
-$('#confirmClear').onclick = () => {
-  formEl.reset();
-  $('#items').innerHTML = '';
-  addRow({ tipo: 'Serviço', unidade: 'serviço', qtd: '1' });
-  photos = [];
-  renderPhotos();
-  sigs.emp.clear();
-  sigs.cli.clear();
-  localStorage.removeItem('ta_draft');
-  $('#data').value = new Date().toISOString().slice(0, 10);
-  totals();
-  progress();
-  dash();
-  $('#confirmDialog').close();
-  toast('Proposta limpa.');
-};
+    function addQuickItem() {
+        const nome = document.getElementById('quickItem').value.trim();
+        const qtd = parseInt(document.getElementById('quickQty').value) || 1;
+        const valor = parseFloat(document.getElementById('quickPrice').value) || 0;
+        const bayId = document.getElementById('quickBay').value;
 
-/* ─── PDF ─── */
-async function loadImg(src) {
-  let r = await fetch(src);
-  let b = await r.blob();
-  return await new Promise((res, rej) => {
-    let fr = new FileReader();
-    fr.onloadend = () => res(fr.result);
-    fr.onerror = rej;
-    fr.readAsDataURL(b);
-  });
-}
+        if (!nome) {
+            alert('Digite o nome do item.');
+            return;
+        }
+        if (valor <= 0) {
+            alert('Informe um valor unitário.');
+            return;
+        }
 
-async function saveBlob(blob, name) {
-  if ('showSaveFilePicker' in window) {
-    let h = await showSaveFilePicker({
-      suggestedName: name,
-      types: [{ description: 'PDF', accept: { 'application/pdf': ['.pdf'] } }]
+        let bayNome = 'Itens adicionais';
+        let bayCor = '#888';
+        if (bayId) {
+            const bay = bayLibrary.find(b => b.id === bayId);
+            if (bay) { bayNome = bay.nome;
+                bayCor = bay.cor; }
+        }
+
+        customItems.push({ nome, un: 'un', qtd, valor, bayId, bayNome, bayCor, tipo: 'custom' });
+
+        document.getElementById('quickItem').value = '';
+        document.getElementById('quickPrice').value = '';
+        document.getElementById('quickQty').value = '1';
+        document.getElementById('quickItem').focus();
+        renderItems();
+        updateSummary();
+        showToast(`✅ "${nome}" adicionado!`);
+    }
+
+    // ============================================================
+    //  UNIFILAR DIAGRAM (SVG)
+    // ============================================================
+    function renderUnifilar() {
+        const svg = document.getElementById('unifilarSVG');
+        const has69 = selectedBays.has('entrada_69kv');
+        const has138 = selectedBays.has('entrada_138kv');
+        const hasTrafo = selectedBays.has('transformador');
+        const hasSaida = selectedBays.has('saida_13kv');
+        const hasCap = selectedBays.has('capacitores');
+        const hasMed = selectedBays.has('medicao');
+        const hasProt = selectedBays.has('protecao');
+        const hasAux = selectedBays.has('servicos_aux');
+        const hasSpda = selectedBays.has('spda_malha');
+        const hasObra = selectedBays.has('obra_civil');
+
+        let html = '<rect width="1000" height="250" fill="#1a1d27" rx="8"/>';
+        const anyBay = selectedBays.size > 0;
+
+        if (!anyBay) {
+            html +=
+                '<text x="500" y="130" text-anchor="middle" fill="#9ba3b0" font-size="14">Selecione os bays para visualizar o diagrama unifilar</text>';
+        } else {
+            // High voltage bus bar
+            if (has69 || has138) {
+                html += '<rect x="30" y="40" width="940" height="4" rx="2" fill="#f0b90b" opacity="0.6"/>';
+                html +=
+                '<text x="975" y="36" text-anchor="end" fill="#f0b90b" font-size="10" font-weight="bold">69/138 kV</text>';
+            }
+
+            // 69kV bay
+            if (has69) drawBay(html, 150, '#448aff', 'ENT 69kV', hasMed ? 210 : null);
+
+            // 138kV bay
+            if (has138) drawBay(html, 280, '#ff9100', 'ENT 138kV', null);
+
+            // Medição
+            if (hasMed && has69) {
+                const mx = 210;
+                html +=
+                    `<circle cx="${mx}" cy="60" r="12" fill="none" stroke="#e040fb" stroke-width="2" stroke-dasharray="3"/>`;
+                html += `<text x="${mx}" y="64" text-anchor="middle" fill="#e040fb" font-size="7">MED</text>`;
+            }
+
+            // Trafo connections and symbol
+            if (hasTrafo) {
+                const tx = 440;
+                if (has69) html +=
+                    `<line x1="154" y1="155" x2="${tx-10}" y2="155" stroke="#448aff" stroke-width="2"/>`;
+                if (has138) html +=
+                    `<line x1="284" y1="155" x2="${tx-10}" y2="155" stroke="#ff9100" stroke-width="2"/>`;
+                html += `<circle cx="${tx}" cy="155" r="24" fill="none" stroke="#b388ff" stroke-width="3"/>`;
+                html += `<circle cx="${tx}" cy="155" r="12" fill="none" stroke="#b388ff" stroke-width="1.5"/>`;
+                html +=
+                    `<text x="${tx}" y="195" text-anchor="middle" fill="#b388ff" font-size="9" font-weight="bold">TRAFO 15 MVA</text>`;
+                html += `<text x="${tx}" y="206" text-anchor="middle" fill="#b388ff" font-size="7">69/13.8 kV</text>`;
+                // Secondary bus
+                html += '<rect x="390" y="215" width="400" height="3" rx="2" fill="#00c853" opacity="0.6"/>';
+                html += '<text x="800" y="225" fill="#00c853" font-size="9" font-weight="bold">13.8 kV</text>';
+                html += `<line x1="${tx}" y1="179" x2="${tx}" y2="216" stroke="#b388ff" stroke-width="2"/>`;
+                // Protection relay
+                if (hasProt) {
+                    html +=
+                        `<rect x="${tx-20}" y="196" width="40" height="16" rx="3" fill="#76ff03" opacity="0.3" stroke="#76ff03" stroke-width="1"/>`;
+                    html +=
+                        `<text x="${tx}" y="208" text-anchor="middle" fill="#76ff03" font-size="6">SEL-787</text>`;
+                }
+            }
+
+            // Saída 13.8kV
+            if (hasSaida && hasTrafo) {
+                for (let i = 0; i < 5; i++) {
+                    const sx = 480 + i * 60;
+                    html += `<line x1="${sx}" y1="216" x2="${sx}" y2="165" stroke="#00c853" stroke-width="2"/>`;
+                    html +=
+                        `<rect x="${sx-16}" y="150" width="32" height="18" rx="3" fill="#00c853" opacity="0.2" stroke="#00c853" stroke-width="1"/>`;
+                    html +=
+                        `<text x="${sx}" y="163" text-anchor="middle" fill="#00c853" font-size="6">ALIM${i+1}</text>`;
+                }
+            }
+
+            // Banco Capacitores
+            if (hasCap && hasTrafo) {
+                const cx = 800;
+                html += `<line x1="${cx}" y1="216" x2="${cx}" y2="175" stroke="#ffc107" stroke-width="2"/>`;
+                html +=
+                    `<rect x="${cx-22}" y="158" width="44" height="20" rx="4" fill="#ffc107" opacity="0.2" stroke="#ffc107" stroke-width="1"/>`;
+                html +=
+                    `<text x="${cx}" y="172" text-anchor="middle" fill="#ffc107" font-size="7" font-weight="bold">CAP 2MVAr</text>`;
+            }
+
+            // Serviços Auxiliares
+            if (hasAux && hasTrafo) {
+                const ax = 890;
+                html +=
+                    `<line x1="${ax}" y1="216" x2="${ax}" y2="180" stroke="#ff5252" stroke-width="1.5" stroke-dasharray="4"/>`;
+                html +=
+                    `<rect x="${ax-20}" y="165" width="40" height="18" rx="3" fill="#ff5252" opacity="0.2" stroke="#ff5252" stroke-width="1"/>`;
+                html +=
+                    `<text x="${ax}" y="178" text-anchor="middle" fill="#ff5252" font-size="6">AUX 380V</text>`;
+            }
+
+            // SPDA / Malha
+            if (hasSpda) {
+                html += '<rect x="30" y="238" width="940" height="3" rx="1.5" fill="#00bcd4" opacity="0.5"/>';
+                html += '<text x="975" y="243" text-anchor="end" fill="#00bcd4" font-size="8" font-weight="bold">SPDA/MALHA</text>';
+                if (has69)
+                html += '<line x1="150" y1="145" x2="150" y2="239" stroke="#00bcd4" stroke-width="1" stroke-dasharray="3"/>';
+                if (has138)
+                html += '<line x1="280" y1="145" x2="280" y2="239" stroke="#00bcd4" stroke-width="1" stroke-dasharray="3"/>';
+                if (hasTrafo)
+                html +=
+                '<line x1="440" y1="185" x2="440" y2="239" stroke="#00bcd4" stroke-width="1.5" stroke-dasharray="3"/>';
+            }
+
+            // Obra Civil indicator
+            if (hasObra) {
+                html +=
+                '<text x="500" y="20" text-anchor="middle" fill="#795548" font-size="8">🏗 Obra Civil Incluída</text>';
+            }
+        }
+
+        // Parse HTML string into SVG
+        svg.innerHTML = html;
+
+        function drawBay(html, x, color, label, medX) {
+            const h = [];
+            h.push(`<line x1="${x}" y1="42" x2="${x}" y2="100" stroke="${color}" stroke-width="3"/>`);
+            h.push(
+                `<rect x="${x-35}" y="100" width="70" height="25" rx="4" fill="${color}" opacity="0.2" stroke="${color}" stroke-width="1"/>`
+                );
+            h.push(
+                `<text x="${x}" y="117" text-anchor="middle" fill="${color}" font-size="9" font-weight="bold">${label}</text>`
+                );
+            h.push(
+                `<rect x="${x-14}" y="125" width="28" height="18" rx="3" fill="none" stroke="${color}" stroke-width="1.5"/>`
+                );
+            h.push(`<line x1="${x}" y1="143" x2="${x}" y2="155" stroke="${color}" stroke-width="2"/>`);
+            if (medX) {
+                h.push(
+                    `<line x1="${x}" y1="60" x2="${medX}" y2="60" stroke="#e040fb" stroke-width="1.5" stroke-dasharray="3"/>`
+                    );
+            }
+            return h.join('');
+        }
+    }
+
+    // ============================================================
+    //  GANTT CHART
+    // ============================================================
+    function renderGantt() {
+        const container = document.getElementById('ganttChart');
+        const ganttData = [];
+        bayLibrary.forEach(bay => {
+            if (selectedBays.has(bay.id) && bay.gantt) {
+                const totalHoras = bay.servicos.reduce((s, sv) => s + sv.qtd, 0);
+                const semanas = Math.max(1, Math.ceil(totalHoras / 40));
+                ganttData.push({
+                    nome: bay.gantt.nome,
+                    semanas,
+                    inicio: bay.gantt.inicio,
+                    cor: bay.cor,
+                });
+            }
+        });
+
+        ganttData.sort((a, b) => a.inicio - b.inicio);
+
+        const totalSemanas = ganttData.length > 0 ?
+            Math.max(...ganttData.map(g => g.inicio + g.semanas), 8) :
+            8;
+
+        let html = '';
+        ganttData.forEach(g => {
+            const leftPct = (g.inicio / totalSemanas) * 100;
+            const widthPct = (g.semanas / totalSemanas) * 100;
+            html += `
+              <div class="gantt-row">
+                <div class="gantt-label">${g.nome}</div>
+                <div class="gantt-track">
+                  <div class="gantt-bar" style="
+                    left:${leftPct}%;
+                    width:${widthPct}%;
+                    background:${g.cor}dd;
+                  ">${g.semanas}s</div>
+                </div>
+              </div>`;
+        });
+
+        if (ganttData.length === 0) {
+            html =
+                '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text2);font-size:.85rem">Selecione os bays para visualizar o cronograma</div>';
+        } else {
+            html += '<div class="gantt-row" style="height:16px;margin-top:6px">';
+            html += '<div class="gantt-label" style="font-size:.55rem">Semanas</div>';
+            html += '<div class="gantt-track" style="background:transparent;height:12px">';
+            for (let w = 0; w <= totalSemanas; w++) {
+                const pct = (w / totalSemanas) * 100;
+                html +=
+                    `<span style="position:absolute;left:${pct}%;font-size:.5rem;color:var(--text2);transform:translateX(-50%)">${w}</span>`;
+            }
+            html += '</div></div>';
+        }
+
+        container.innerHTML = html;
+    }
+
+    // ============================================================
+    //  FINANCIAL SUMMARY
+    // ============================================================
+    function updateSummary() {
+        const items = getAllItems();
+        let totalEquip = 0;
+        let totalServ = 0;
+        let totalHoras = 0;
+        let subtotal = 0;
+
+        items.forEach(item => {
+            const total = item.qtd * item.valor;
+            subtotal += total;
+            if (item.tipo === 'equipamento') totalEquip += total;
+            if (item.tipo === 'serviço') {
+                totalServ += total;
+                if (item.un === 'h') totalHoras += item.qtd;
+            }
+            if (item.tipo === 'custom') totalEquip += total;
+        });
+
+        const descPct = parseFloat(document.getElementById('descPct').value) || 0;
+        const desconto = subtotal * (descPct / 100);
+        const base = subtotal - desconto;
+        const markup = base * 0.15;
+        const iss = base * 0.05;
+        const totalFinal = base + markup + iss;
+
+        const fmt = (v) => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+        document.getElementById('sumEquip').textContent = fmt(totalEquip);
+        document.getElementById('sumServ').textContent = fmt(totalServ);
+        document.getElementById('sumSub').textContent = fmt(subtotal);
+        document.getElementById('sumDesc').textContent = descPct > 0 ? '-' + fmt(desconto) : 'R$ 0,00';
+        document.getElementById('sumMarkup').textContent = fmt(markup);
+        document.getElementById('sumISS').textContent = fmt(iss);
+        document.getElementById('sumTotal').textContent = fmt(totalFinal);
+
+        document.getElementById('cardEquip').textContent = fmt(totalEquip);
+        document.getElementById('cardServ').textContent = fmt(totalServ);
+        document.getElementById('cardHoras').textContent = totalHoras + 'h';
+        document.getElementById('cardTotal').textContent = fmt(totalFinal);
+    }
+
+    // ============================================================
+    //  TABS
+    // ============================================================
+    function switchTab(tabId, el) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        const target = document.getElementById('tab-' + tabId);
+        if (target) target.classList.add('active');
+
+        // Re-render on tab switch to ensure correct sizing
+        if (tabId === 'unifilar') renderUnifilar();
+        if (tabId === 'cronograma') renderGantt();
+    }
+
+    // ============================================================
+    //  ACTIONS (PDF, WhatsApp, CSV, Save)
+    // ============================================================
+    function gerarPDF() {
+        if (selectedBays.size === 0 && customItems.length === 0) {
+            alert('Selecione pelo menos um bay ou adicione itens para gerar a proposta.');
+            return;
+        }
+        window.print();
+        showToast('📄 Proposta enviada para impressão/PDF');
+    }
+
+    function enviarWhatsApp() {
+        const items = getAllItems();
+        if (items.length === 0) {
+            alert('Adicione itens à proposta primeiro.');
+            return;
+        }
+        const clienteNome = document.getElementById('clienteNome').value || 'Cliente';
+        const propostaNum = document.getElementById('propostaNum').textContent;
+
+        let msg = `*TECNO ACRE 360 — Proposta ${propostaNum}*\n\n`;
+        msg += `*Cliente:* ${clienteNome}\n`;
+        msg += '*Data:* 22/06/2026\n\n';
+        msg += '*Itens da Subestação:*\n';
+
+        let lastBay = '';
+        items.forEach(item => {
+            if (item.bayNome !== lastBay) {
+                msg += `\n▸ *${item.bayNome}*\n`;
+                lastBay = item.bayNome;
+            }
+            const totalItem = item.qtd * item.valor;
+            msg +=
+                `  • ${item.nome} — ${item.qtd} ${item.un} x R$${item.valor.toLocaleString('pt-BR',{minimumFractionDigits:2})} = R$${totalItem.toLocaleString('pt-BR',{minimumFractionDigits:2})}\n`;
+        });
+
+        const subtotal = items.reduce((s, i) => s + i.qtd * i.valor, 0);
+        const total = subtotal * 1.20;
+        msg += `\n*TOTAL ESTIMADO: R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits:2})}*`;
+        msg += `\n\n_Proposta gerada via TECNO ACRE 360_`;
+
+        const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+        window.open(url, '_blank');
+        showToast('📱 Abrindo WhatsApp...');
+    }
+
+    function exportarCSV() {
+        const items = getAllItems();
+        if (items.length === 0) {
+            alert('Adicione itens à proposta primeiro.');
+            return;
+        }
+
+        let csv = 'Bay;Tipo;Item;Unidade;Quantidade;Valor Unitário;Total\n';
+        items.forEach(item => {
+            const total = item.qtd * item.valor;
+            csv +=
+                `"${item.bayNome}";"${item.tipo}";"${item.nome}";"${item.un}";${item.qtd};${item.valor.toFixed(2)};${total.toFixed(2)}\n`;
+        });
+
+        const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'proposta_subestacao.csv';
+        link.click();
+        URL.revokeObjectURL(url);
+        showToast('📊 CSV exportado!');
+    }
+
+    function salvarProposta() {
+        const data = {
+            selectedBays: [...selectedBays],
+            bayLibrary: bayLibrary.map(b => ({
+                id: b.id,
+                equipamentos: b.equipamentos.map(e => ({ ...e })),
+                servicos: b.servicos.map(s => ({ ...s })),
+            })),
+            customItems: customItems.map(ci => ({ ...ci })),
+            clienteNome: document.getElementById('clienteNome').value,
+            descPct: document.getElementById('descPct').value,
+            timestamp: new Date().toISOString(),
+        };
+        localStorage.setItem('tecnocre_proposta_sub_v2', JSON.stringify(data));
+        showToast('💾 Proposta salva! (Ctrl+S)');
+    }
+
+    function carregarProposta() {
+        const saved = localStorage.getItem('tecnocre_proposta_sub_v2');
+        if (!saved) return;
+        try {
+            const data = JSON.parse(saved);
+            selectedBays = new Set(data.selectedBays);
+            data.bayLibrary.forEach(savedBay => {
+                const bay = bayLibrary.find(b => b.id === savedBay.id);
+                if (bay) {
+                    bay.equipamentos = savedBay.equipamentos;
+                    bay.servicos = savedBay.servicos;
+                }
+            });
+            customItems = data.customItems || [];
+            if (data.clienteNome) document.getElementById('clienteNome').value = data.clienteNome;
+            if (data.descPct) document.getElementById('descPct').value = data.descPct;
+            refreshAll();
+            showToast('📂 Proposta carregada!');
+        } catch (e) {
+            console.error('Erro ao carregar:', e);
+            showToast('⚠ Erro ao carregar proposta');
+        }
+    }
+
+    // ============================================================
+    //  TOAST NOTIFICATION
+    // ============================================================
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.style.animation = 'none';
+        toast.offsetHeight;
+        toast.style.animation = 'slideIn .3s ease, fadeOut .3s ease 1.7s';
+        toast.style.opacity = '1';
+        setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+    }
+
+    // ============================================================
+    //  KEYBOARD SHORTCUTS & BEFOREUNLOAD
+    // ============================================================
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 's') {
+            e.preventDefault();
+            salvarProposta();
+        }
+        if (e.ctrlKey && e.key === 'p') {
+            e.preventDefault();
+            gerarPDF();
+        }
     });
-    let w = await h.createWritable();
-    await w.write(blob);
-    await w.close();
-    return true;
-  }
-  return false;
-}
 
-$('#pdfBtn').onclick = async () => {
-  if (!validate(true)) return;
-  await pdf();
-  toast('PDF gerado.');
-};
-
-async function pdf() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
-  const d = data();
-  const margin = 14;
-  const pageWidth = 210;
-  const contentWidth = pageWidth - margin * 2;
-  let y = 16;
-
-  function newP(e = 10) {
-    if (y + e > 276) { foot(); doc.addPage(); y = 18; }
-  }
-
-  function foot() {
-    let p = doc.internal.getCurrentPageInfo().pageNumber;
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(120);
-    doc.text('TECNO ACRE — Soluções em Tecnologia Sustentável', margin, 290);
-    doc.text(`Página ${p}`, pageWidth - margin - 16, 290);
-  }
-
-  function sec(t) {
-    newP(13);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12.2);
-    doc.setTextColor(15, 23, 42);
-    doc.text(t, margin, y);
-    y += 7;
-  }
-
-  function kv(l, v, w = 52) {
-    newP(10);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9.7);
-    doc.setTextColor(20);
-    doc.text(doc.splitTextToSize(l + ':', w - 2), margin, y);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(35);
-    let lines = doc.splitTextToSize(String(v || '-'), contentWidth - w);
-    doc.text(lines, margin + w, y);
-    y += Math.max(5.2, lines.length * 5.2);
-  }
-
-  function multi(l, v) {
-    newP(15);
-    doc.setFont('helvetica', 'bold');
-    doc.text(l + ':', margin, y);
-    y += 5.2;
-    doc.setFont('helvetica', 'normal');
-    let lines = doc.splitTextToSize(String(v || '-'), contentWidth);
-    doc.text(lines, margin, y);
-    y += Math.max(7, lines.length * 5.2) + 2;
-  }
-
-  function line(t) {
-    let lines = doc.splitTextToSize(t, contentWidth);
-    newP(lines.length * 5.2 + 2);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9.5);
-    doc.text(lines, margin, y);
-    y += Math.max(5.6, lines.length * 5.2);
-  }
-
-  let logo = await loadImg('./brand-logo.png').catch(() => null);
-  if (logo) {
-    try { doc.addImage(logo, 'PNG', margin, y, 40, 24); } catch (e) {}
-  }
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(13);
-  doc.setTextColor(15, 23, 42);
-  doc.text('ORÇAMENTO E PROPOSTA COMERCIAL', margin + 48, y + 5, { maxWidth: 140 });
-  doc.setFontSize(10.2);
-  doc.setTextColor(55, 65, 81);
-  doc.text('TECNO ACRE — Soluções em Tecnologia Sustentável', margin + 48, y + 14, { maxWidth: 140 });
-  doc.setDrawColor(255, 138, 0);
-  doc.line(margin, y + 32, pageWidth - margin, y + 32);
-  y = 56;
-
-  sec('1. Dados da Proposta');
-  kv('Nº da proposta', d.numero);
-  kv('Data', dateBR(d.data));
-  kv('Status', d.status);
-  kv('Validade', d.validade);
-  kv('Responsável', d.respCom);
-  kv('WhatsApp', d.telEmp);
-  kv('E-mail', d.emailEmp);
-
-  sec('2. Dados do Cliente');
-  kv('Cliente / Empresa', d.cliente);
-  kv('CPF / CNPJ', d.doc);
-  kv('Responsável', d.contato);
-  kv('WhatsApp', d.telCliente);
-  kv('E-mail', d.emailCliente);
-  kv('Local do serviço', d.endereco);
-
-  sec('3. Dados do Serviço');
-  kv('Tipo de serviço', d.tipoServico);
-  kv('Título', d.titulo);
-  kv('Prioridade', d.prioridade);
-  multi('Descrição geral', d.descricao);
-
-  sec('4. Itens de Material e Serviços');
-  let widths = [22, 70, 18, 18, 28, 28];
-  let heads = ['Tipo', 'Descrição', 'Un.', 'Qtd.', 'Unitário', 'Total'];
-  let x = margin;
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(8.8);
-  doc.setDrawColor(255, 138, 0);
-  heads.forEach((h, i) => {
-    doc.rect(x, y, widths[i], 8);
-    doc.text(h, x + 1.5, y + 5.3);
-    x += widths[i];
-  });
-  y += 8;
-  doc.setFont('helvetica', 'normal');
-  d.items.forEach(it => {
-    newP(14);
-    x = margin;
-    let row = [it.tipo, it.descricao, it.unidade, it.qtd, br(n(it.valorUnitario)), br(it.total)];
-    let rowH = Math.max(9, 4 + doc.splitTextToSize(it.descricao || '-', widths[1] - 3).length * 4.4);
-    row.forEach((c, i) => {
-      doc.rect(x, y, widths[i], rowH);
-      doc.text(doc.splitTextToSize(String(c || '-'), widths[i] - 3), x + 1.5, y + 5);
-      x += widths[i];
+    window.addEventListener('beforeunload', (e) => {
+        if (selectedBays.size > 0 || customItems.length > 0) {
+            e.preventDefault();
+            e.returnValue = 'Há alterações não salvas na proposta. Deseja realmente sair?';
+            return e.returnValue;
+        }
     });
-    y += rowH;
-  });
-  y += 5;
-  kv('Subtotal', br(d.totals.sub));
-  kv('Desconto', br(d.totals.desconto));
-  kv('Acréscimo', br(d.totals.acrescimo));
-  kv('Total geral', br(d.totals.total));
-  kv('Forma de pagamento', d.pagamento);
 
-  sec('5. Etapas dos Serviços');
-  String(d.etapas || '-').split('\n').forEach(line);
+    // ============================================================
+    //  INIT
+    // ============================================================
+    renderBaySelector();
+    renderItems();
+    renderUnifilar();
+    renderGantt();
+    updateSummary();
+    carregarProposta();
 
-  sec('6. Fotos e Evidências');
-  if (!d.photos.length) {
-    line('Nenhuma foto anexada.');
-  } else {
-    d.photos.forEach((p, i) => {
-      newP(78);
-      doc.setFont('helvetica', 'bold');
-      doc.text(`Foto ${i + 1}`, margin, y);
-      y += 5;
-      try { doc.addImage(p.dataUrl, 'JPEG', margin, y, 78, 58); } catch (e) {}
-      doc.setFont('helvetica', 'normal');
-      doc.text(doc.splitTextToSize(p.caption || 'Sem descrição.', 94), margin + 84, y + 5);
-      y += 64;
-    });
-  }
-
-  sec('7. Condições Comerciais');
-  kv('Prazo', d.prazo);
-  kv('Garantia', d.garantia);
-  multi('Condições', d.condicoes);
-
-  sec('8. Assinaturas');
-  newP(55);
-  let lx = margin, rx = pageWidth - margin - 78;
-  if (d.sigEmp) try { doc.addImage(d.sigEmp, 'PNG', lx, y, 78, 28); } catch (e) {}
-  if (d.sigCli) try { doc.addImage(d.sigCli, 'PNG', rx, y, 78, 28); } catch (e) {}
-  doc.setDrawColor(60);
-  doc.line(lx, y + 33, lx + 78, y + 33);
-  doc.line(rx, y + 33, rx + 78, y + 33);
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9);
-  doc.setTextColor(35);
-  doc.text(d.assEmpNome || 'Responsável pela proposta', lx, y + 39, { maxWidth: 78 });
-  doc.text(d.assCliNome || 'Cliente / Aprovador', rx, y + 39, { maxWidth: 78 });
-
-  for (let p = 1; p <= doc.internal.getNumberOfPages(); p++) { doc.setPage(p); foot(); }
-
-  let file = `Proposta_Tecno_Acre_${(d.cliente || 'Cliente').replace(/\s+/g, '_')}.pdf`;
-  let blob = doc.output('blob');
-  let saved = await saveBlob(blob, file).catch(() => false);
-  if (!saved) doc.save(file);
-}
-
-/* ─── WhatsApp ─── */
-$('#zapBtn').onclick = () => {
-  if (!validate(true)) return;
-  let d = data();
-  let phoneNum = String(d.telCliente || '').replace(/\D/g, '');
-  let msg = `Olá${d.contato ? ', ' + d.contato : ''}! Tudo bem?\n\nA TECNO ACRE — Soluções em Tecnologia Sustentável preparou uma proposta comercial para você.\n\n📄 Proposta: ${d.numero || 'sem número informado'}\n🔧 Serviço: ${d.titulo || d.tipoServico || 'serviço solicitado'}\n💰 Valor total: ${br(d.totals.total)}\n⏳ Validade: ${d.validade || 'conforme proposta'}\n🛠️ Prazo de execução: ${d.prazo || 'conforme alinhamento técnico'}\n💳 Forma de pagamento: ${d.pagamento || 'conforme proposta'}\n\nO PDF da proposta foi gerado pelo nosso aplicativo e será enviado nesta conversa para sua análise.\n\nQualquer dúvida, estamos à disposição.`;
-  open(`https://wa.me/${phoneNum ? '55' + phoneNum : ''}?text=${encodeURIComponent(msg)}`, '_blank');
-  toast('WhatsApp aberto. Anexe o PDF.');
-};
-
-/* ─── PWA ─── */
-function isStandalone() {
-  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-}
-
-function updateInstallButton() {
-  const b = $('#installBtn');
-  if (!b) return;
-  if (isStandalone() || localStorage.getItem('ta_app_instalado') === 'sim') {
-    b.hidden = true;
-    b.style.display = 'none';
-  }
-}
-
-if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
-  navigator.serviceWorker.register('./service-worker.js').catch(console.error);
-}
-
-updateInstallButton();
-
-addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  window.deferredPrompt = e;
-  if (!isStandalone() && localStorage.getItem('ta_app_instalado') !== 'sim') {
-    $('#installBtn').hidden = false;
-    $('#installBtn').style.display = 'inline-flex';
-  }
-});
-
-addEventListener('appinstalled', () => {
-  localStorage.setItem('ta_app_instalado', 'sim');
-  window.deferredPrompt = null;
-  updateInstallButton();
-  toast('Aplicativo instalado com sucesso.');
-});
-
-$('#installBtn').onclick = async () => {
-  if (!window.deferredPrompt) return;
-  window.deferredPrompt.prompt();
-  let c = await window.deferredPrompt.userChoice;
-  if (c && c.outcome === 'accepted') {
-    localStorage.setItem('ta_app_instalado', 'sim');
-  }
-  window.deferredPrompt = null;
-  updateInstallButton();
-};
-
-/* ─── Inicialização ─── */
-$('#data').value = new Date().toISOString().slice(0, 10);
-loadDraft();
-if (!$('#items').children.length) addRow({ tipo: 'Serviço', unidade: 'serviço', qtd: '1' });
-renderClients();
-renderLib();
-renderTpls();
-renderHist();
-renderPhotos();
-totals();
-validate();
-progress();
-dash();
+    console.log('⚡ TECNO ACRE 360 — Configurador de Subestações v2.0');
+    console.log('📌 ' + bayLibrary.length + ' bays disponíveis');
+    console.log('💡 Selecione os bays → tabela preenchida automaticamente');
+    console.log('💾 Ctrl+S para salvar | Ctrl+P para imprimir');
+    console.log('✅ Pronto para uso!');
 </script>
 </body>
 </html>
