@@ -2,42 +2,859 @@
 <html lang="pt-BR" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>TECNO ACRE Propostas 360</title>
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="./favicon-96.png">
+<meta name="theme-color" content="#080c14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
-:root{
---bg:#080c14;--surface:#0f172a;--card:#101827;--card2:#0d1424;--text:#f0f5fb;--strong:#fff;--muted:#a8b3c6;--line:#1f2d45;--input:#0b1322;--orange:#ff8a00;--blue:#00e676;--green:#22c55e;--red:#ef4444;--shadow:0 18px 45px rgba(0,0,0,.24);--neon:rgba(0,230,118,.16);color-scheme:dark}
-:root[data-theme=light]{--bg:#f8fafc;--surface:#fff;--card:#fff;--card2:#f8fafc;--text:#0f172a;--strong:#020617;--muted:#475569;--line:#cbd5e1;--input:#fff;--neon:rgba(0,143,90,.11);color-scheme:light}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Roboto,Arial,sans-serif;background:radial-gradient(circle at 20% 0%,rgba(0,230,118,.12),transparent 34%),radial-gradient(circle at 82% 12%,rgba(255,138,0,.10),transparent 30%),linear-gradient(180deg,var(--bg),var(--surface));color:var(--text)}
-.wrap{max-width:1260px;margin:auto;padding:18px}.top{display:grid;grid-template-columns:136px 1fr auto;gap:20px;align-items:center;background:linear-gradient(180deg,var(--surface),var(--card2)) padding-box,linear-gradient(135deg,rgba(0,230,118,.58),rgba(34,197,94,.22),rgba(255,138,0,.42)) border-box;border:1px solid transparent;border-radius:22px;box-shadow:var(--shadow),0 0 26px var(--neon);padding:18px;margin-bottom:16px}
-.logo{width:124px;height:94px;object-fit:contain;border-radius:18px;background:#fff;padding:8px}.top h1{margin:0 0 8px;font-size:clamp(1.35rem,2.7vw,2rem);line-height:1.18;color:var(--strong)}.top p{margin:0;color:var(--muted);line-height:1.5}
-.theme{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:11px 14px;font-weight:800;cursor:pointer}.progress{margin-top:10px;color:var(--muted);font-size:.84rem}.bar{height:8px;background:rgba(150,160,180,.18);border-radius:999px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--orange))}
-.shell{display:grid;grid-template-columns:250px 1fr;gap:16px;align-items:start}.nav{position:sticky;top:12px;display:grid;gap:8px;padding:12px;background:color-mix(in srgb,var(--surface) 86%,transparent);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 28px rgba(0,0,0,.16);max-height:calc(100vh - 24px);overflow:auto}
-button{appearance:none;border:0;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--orange),#ff6a00);padding:12px 16px;border-radius:12px;font-weight:800;box-shadow:0 8px 20px rgba(0,0,0,.16);font-size:.95rem;display:inline-flex;align-items:center;justify-content:center;gap:8px}button:hover{filter:brightness(1.04)}.secondary{background:linear-gradient(135deg,#008f5a,var(--blue))}.success{background:linear-gradient(135deg,#16a34a,var(--green))}.danger{background:linear-gradient(135deg,#dc2626,var(--red))}.ghost{background:var(--card);border:1px solid var(--line);color:var(--text)}.nav button{justify-content:flex-start;box-shadow:none;background:transparent;border:1px solid transparent;color:var(--text)}.nav button.active,.nav button:hover{background:color-mix(in srgb,var(--blue) 12%,transparent);border-color:color-mix(in srgb,var(--blue) 32%,transparent)}
-.toolbar{position:sticky;top:0;z-index:30;display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding:12px;border:1px solid var(--line);border-radius:16px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);box-shadow:0 10px 28px rgba(0,0,0,.16)}
-.rolling{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 14px;margin-bottom:4px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}.rolling::-webkit-scrollbar{height:8px}.rolling::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--blue) 28%,var(--line));border-radius:999px}
-.metric{flex:0 0 235px;scroll-snap-align:start;padding:14px;border-radius:16px;background:linear-gradient(180deg,var(--card),var(--card2)) padding-box,linear-gradient(135deg,rgba(0,230,118,.48),rgba(34,197,94,.18),rgba(255,138,0,.34)) border-box;border:1px solid transparent;box-shadow:0 10px 28px rgba(0,0,0,.16),0 0 18px var(--neon)}.metric strong{display:block;color:var(--blue);font-size:.84rem;margin-bottom:8px}.metric span{display:block;font-size:1.35rem;font-weight:950;color:var(--strong)}.metric em{display:block;font-style:normal;color:var(--muted);font-size:.8rem;margin-top:4px}
-.panel{display:none}.panel.active{display:block}.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
-.card{background:linear-gradient(180deg,var(--card),var(--card2)) padding-box,linear-gradient(135deg,rgba(0,230,118,.48),rgba(34,197,94,.18),rgba(255,138,0,.34)) border-box;border:1px solid transparent;border-radius:16px;padding:18px;box-shadow:0 10px 28px rgba(0,0,0,.16),0 0 18px var(--neon);margin-bottom:16px}.title{margin:0 0 14px;font-size:1.12rem;color:var(--strong);grid-column:1/-1;display:flex;gap:10px;align-items:center}.title span{color:var(--blue);background:color-mix(in srgb,var(--blue) 13%,transparent);border:1px solid color-mix(in srgb,var(--blue) 25%,transparent);min-width:30px;height:30px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center}
-.field{display:flex;flex-direction:column;gap:8px}.field label{font-weight:800}.req label:after{content:" *";color:var(--orange)}input,textarea,select{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--input);color:var(--text);font-size:.98rem}textarea{min-height:96px;resize:vertical}.bad input,.bad textarea,.bad select{border-color:var(--red);box-shadow:0 0 0 3px rgba(239,68,68,.13)}.err{display:none;color:var(--red);font-size:.8rem}.bad .err{display:block}.hint{color:var(--muted);font-size:.86rem}
-.table{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:780px}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--blue);background:color-mix(in srgb,var(--blue) 8%,transparent);font-size:.88rem}td textarea{min-height:60px}.mini{display:flex;gap:8px;flex-wrap:wrap}.mini button{padding:8px 10px;min-height:auto;font-size:.82rem;box-shadow:none}
-.totals{margin-top:14px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.total{background:color-mix(in srgb,var(--surface) 70%,transparent);border:1px solid var(--line);border-radius:14px;padding:12px}.total strong{display:block;color:var(--blue);font-size:.88rem;margin-bottom:6px}.total span{font-size:1.15rem;font-weight:900;color:var(--strong)}
-.list{display:grid;gap:10px}.item{border:1px solid var(--line);border-radius:14px;padding:12px;background:color-mix(in srgb,var(--surface) 68%,transparent);display:grid;gap:8px}.item header{display:flex;gap:10px;justify-content:space-between}.item h3{margin:0;color:var(--strong);font-size:1rem}.item p{margin:0;color:var(--muted);font-size:.88rem}.badge{padding:5px 9px;border-radius:999px;font-size:.78rem;font-weight:800;background:color-mix(in srgb,var(--blue) 15%,transparent);color:var(--blue);border:1px solid color-mix(in srgb,var(--blue) 35%,transparent);white-space:nowrap}.ok{color:var(--green);border-color:color-mix(in srgb,var(--green) 35%,transparent);background:color-mix(in srgb,var(--green) 15%,transparent)}.warn{color:#f59e0b;border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.15)}
-.sign{width:100%;height:190px;background:#fff;border:2px dashed var(--line);border-radius:16px;touch-action:none}.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.photo{border:1px solid var(--line);border-radius:14px;padding:10px;background:color-mix(in srgb,var(--surface) 62%,transparent)}.photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px}.toastbox{position:fixed;right:16px;bottom:16px;z-index:200;display:grid;gap:10px}.toast{padding:13px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
-dialog{border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--text);box-shadow:var(--shadow);max-width:440px;width:calc(100% - 28px)}dialog::backdrop{background:rgba(0,0,0,.58);backdrop-filter:blur(3px)}.dlg{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
-@media(max-width:1100px){.shell{grid-template-columns:1fr}.nav{position:sticky;top:0;z-index:40;display:flex;overflow-x:auto;max-height:none}.nav button{flex:0 0 auto}.top{grid-template-columns:1fr;text-align:center}.logo{margin:auto;width:min(260px,82%);height:auto}.g2,.g3,.g4{grid-template-columns:1fr}.totals{grid-template-columns:1fr 1fr}.photos{grid-template-columns:1fr 1fr}}
-@media(max-width:680px){.wrap{padding:10px}.toolbar{position:static;display:grid}.rolling{margin-left:-2px;margin-right:-2px}.metric{flex-basis:82vw}.card{padding:14px}input,textarea,select{font-size:16px;min-height:46px}.totals{grid-template-columns:1fr}.photos{grid-template-columns:1fr}.table{overflow:visible}table,thead,tbody,tr,th,td{display:block;width:100%;min-width:0}thead{display:none}tbody tr{border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px;background:color-mix(in srgb,var(--surface) 62%,transparent)}td{border:0;padding:7px 0}td:before{display:block;color:var(--muted);font-size:.82rem;font-weight:800;margin-bottom:5px}#itemsTable td:nth-child(1):before{content:"Tipo"}#itemsTable td:nth-child(2):before{content:"Descrição"}#itemsTable td:nth-child(3):before{content:"Unidade"}#itemsTable td:nth-child(4):before{content:"Quantidade"}#itemsTable td:nth-child(5):before{content:"Valor unitário"}#itemsTable td:nth-child(6):before{content:"Total"}#itemsTable td:nth-child(7):before{content:"Ação"}.mini{display:grid}.mini button{width:100%}}
+:root {
+  --bg: #080c14;
+  --surface: #0f172a;
+  --card: #101827;
+  --card2: #0d1424;
+  --text: #e2e8f0;
+  --strong: #ffffff;
+  --muted: #94a3b8;
+  --line: #1e293b;
+  --input: #0b1322;
+  --orange: #ff8a00;
+  --blue: #00e676;
+  --green: #22c55e;
+  --red: #ef4444;
+  --shadow: 0 18px 45px rgba(0, 0, 0, .28);
+  --neon: rgba(0, 230, 118, .14);
+  --badge-bg: rgba(0, 230, 118, .12);
+  --badge-border: rgba(0, 230, 118, .30);
+  --nav-hover: rgba(0, 230, 118, .10);
+  --nav-border: rgba(0, 230, 118, .26);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f1f5f9;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --card2: #f8fafc;
+  --text: #1e293b;
+  --strong: #0f172a;
+  --muted: #64748b;
+  --line: #cbd5e1;
+  --input: #ffffff;
+  --shadow: 0 12px 36px rgba(0, 0, 0, .08);
+  --neon: rgba(0, 143, 90, .09);
+  --badge-bg: rgba(0, 143, 90, .10);
+  --badge-border: rgba(0, 143, 90, .28);
+  --nav-hover: rgba(0, 143, 90, .08);
+  --nav-border: rgba(0, 143, 90, .22);
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(0, 230, 118, .12), transparent 34%),
+    radial-gradient(circle at 82% 12%, rgba(255, 138, 0, .10), transparent 30%),
+    linear-gradient(180deg, var(--bg), var(--surface));
+  color: var(--text);
+  transition: background .35s ease, color .35s ease;
+  min-height: 100dvh;
+}
+
+.wrap {
+  max-width: 1260px;
+  margin: auto;
+  padding: 18px;
+}
+
+/* ─── HEADER ─── */
+.top {
+  display: grid;
+  grid-template-columns: 136px 1fr auto;
+  gap: 20px;
+  align-items: center;
+  background:
+    linear-gradient(180deg, var(--surface), var(--card2)) padding-box,
+    linear-gradient(135deg, rgba(0,230,118,.58), rgba(34,197,94,.22), rgba(255,138,0,.42)) border-box;
+  border: 1px solid transparent;
+  border-radius: 22px;
+  box-shadow: var(--shadow), 0 0 26px var(--neon);
+  padding: 18px;
+  margin-bottom: 16px;
+  transition: background .35s ease;
+}
+
+.logo {
+  width: 124px;
+  height: 94px;
+  object-fit: contain;
+  border-radius: 18px;
+  background: #fff;
+  padding: 8px;
+}
+
+.top h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.35rem, 2.7vw, 2rem);
+  line-height: 1.18;
+  color: var(--strong);
+}
+
+.top p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.theme {
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 11px 18px;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: .9rem;
+  transition: all .25s ease;
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+.theme:hover {
+  border-color: var(--orange);
+  box-shadow: 0 0 14px rgba(255, 138, 0, .25);
+}
+
+.progress {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: .84rem;
+}
+
+.bar {
+  height: 8px;
+  background: rgba(150, 160, 180, .18);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--blue), var(--orange));
+  border-radius: 999px;
+  transition: width .4s ease;
+}
+
+/* ─── LAYOUT PRINCIPAL ─── */
+.shell {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* ─── NAVEGAÇÃO ─── */
+.nav {
+  position: sticky;
+  top: 12px;
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .16);
+  max-height: calc(100vh - 24px);
+  overflow: auto;
+  transition: background .35s ease;
+}
+
+/* ─── BOTÕES ─── */
+button {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, var(--orange), #ff6a00);
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-weight: 800;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .16);
+  font-size: .95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  touch-action: manipulation;
+  transition: filter .2s ease, transform .15s ease, box-shadow .2s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+button:hover {
+  filter: brightness(1.06);
+}
+
+.secondary {
+  background: linear-gradient(135deg, #008f5a, var(--blue));
+}
+
+.success {
+  background: linear-gradient(135deg, #16a34a, var(--green));
+}
+
+.danger {
+  background: linear-gradient(135deg, #dc2626, var(--red));
+}
+
+.ghost {
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: var(--text);
+  box-shadow: none;
+}
+
+.ghost:hover {
+  border-color: color-mix(in srgb, var(--blue) 40%, var(--line));
+}
+
+.nav button {
+  justify-content: flex-start;
+  box-shadow: none;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text);
+  font-size: .92rem;
+  padding: 11px 14px;
+  min-height: 44px;
+}
+
+.nav button.active,
+.nav button:hover {
+  background: var(--nav-hover);
+  border-color: var(--nav-border);
+}
+
+/* ─── TOOLBAR ─── */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .16);
+  transition: background .35s ease;
+}
+
+/* ─── MÉTRICAS ─── */
+.rolling {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 2px 2px 14px;
+  margin-bottom: 4px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--blue) 28%, var(--line)) transparent;
+}
+
+.rolling::-webkit-scrollbar { height: 8px; }
+.rolling::-webkit-scrollbar-track { background: transparent; }
+.rolling::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--blue) 28%, var(--line));
+  border-radius: 999px;
+}
+
+.metric {
+  flex: 0 0 235px;
+  scroll-snap-align: start;
+  padding: 16px;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, var(--card), var(--card2)) padding-box,
+    linear-gradient(135deg, rgba(0,230,118,.48), rgba(34,197,94,.18), rgba(255,138,0,.34)) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .16), 0 0 18px var(--neon);
+  transition: background .35s ease;
+}
+
+.metric strong {
+  display: block;
+  color: var(--blue);
+  font-size: .84rem;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+
+.metric span {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 950;
+  color: var(--strong);
+}
+
+.metric em {
+  display: block;
+  font-style: normal;
+  color: var(--muted);
+  font-size: .8rem;
+  margin-top: 4px;
+}
+
+/* ─── PAINÉIS ─── */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* ─── GRIDS ─── */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* ─── CARDS ─── */
+.card {
+  background:
+    linear-gradient(180deg, var(--card), var(--card2)) padding-box,
+    linear-gradient(135deg, rgba(0,230,118,.48), rgba(34,197,94,.18), rgba(255,138,0,.34)) border-box;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .16), 0 0 18px var(--neon);
+  transition: background .35s ease;
+}
+
+.grid > .card {
+  margin-bottom: 0;
+}
+
+.card + .card {
+  margin-top: 16px;
+}
+
+.title {
+  margin: 0 0 14px;
+  font-size: 1.12rem;
+  color: var(--strong);
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.title span {
+  color: var(--blue);
+  background: color-mix(in srgb, var(--blue) 13%, transparent);
+  border: 1px solid color-mix(in srgb, var(--blue) 25%, transparent);
+  min-width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: .88rem;
+}
+
+/* ─── CAMPOS ─── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-weight: 800;
+  font-size: .9rem;
+  color: var(--strong);
+}
+
+.req label::after {
+  content: " *";
+  color: var(--orange);
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--input);
+  color: var(--text);
+  font-size: .98rem;
+  font-family: inherit;
+  transition: border-color .2s ease, box-shadow .2s ease, background .35s ease, color .35s ease;
+  min-height: 44px;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(0, 230, 118, .15);
+}
+
+textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.bad input, .bad textarea, .bad select {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, .15);
+}
+
+.err {
+  display: none;
+  color: var(--red);
+  font-size: .8rem;
+}
+
+.bad .err { display: block; }
+
+.hint {
+  color: var(--muted);
+  font-size: .86rem;
+}
+
+/* ─── TABELA ─── */
+.table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 780px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  color: var(--blue);
+  background: color-mix(in srgb, var(--blue) 8%, transparent);
+  font-size: .85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+
+td textarea {
+  min-height: 60px;
+}
+
+.mini {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mini button {
+  padding: 8px 12px;
+  min-height: 38px;
+  font-size: .82rem;
+  box-shadow: none;
+}
+
+/* ─── TOTAIS ─── */
+.totals {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.total {
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  transition: background .35s ease;
+}
+
+.total strong {
+  display: block;
+  color: var(--blue);
+  font-size: .85rem;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+
+.total span {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--strong);
+}
+
+/* ─── LISTAS ─── */
+.list {
+  display: grid;
+  gap: 10px;
+}
+
+.item {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  background: color-mix(in srgb, var(--surface) 68%, transparent);
+  display: grid;
+  gap: 10px;
+  transition: background .35s ease;
+}
+
+.item header {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.item h3 {
+  margin: 0;
+  color: var(--strong);
+  font-size: 1rem;
+}
+
+.item p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+/* ─── BADGES ─── */
+.badge {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: .76rem;
+  font-weight: 800;
+  background: var(--badge-bg);
+  color: var(--blue);
+  border: 1px solid var(--badge-border);
+  white-space: nowrap;
+}
+
+.ok {
+  color: var(--green);
+  border-color: color-mix(in srgb, var(--green) 35%, transparent);
+  background: color-mix(in srgb, var(--green) 15%, transparent);
+}
+
+.warn {
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, .35);
+  background: rgba(245, 158, 11, .15);
+}
+
+/* ─── ASSINATURAS ─── */
+.sign {
+  width: 100%;
+  height: clamp(140px, 28vw, 190px);
+  background: #fff;
+  border: 2px dashed var(--line);
+  border-radius: 16px;
+  touch-action: none;
+}
+
+/* ─── FOTOS ─── */
+.photos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.photo {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px;
+  background: color-mix(in srgb, var(--surface) 62%, transparent);
+}
+
+.photo img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ─── TOAST ─── */
+.toastbox {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 200;
+  display: grid;
+  gap: 10px;
+  max-width: calc(100vw - 32px);
+}
+
+.toast {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  font-size: .9rem;
+  animation: toastIn .3s ease;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── DIALOG ─── */
+dialog {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  max-width: 440px;
+  width: calc(100% - 28px);
+  padding: 24px;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, .58);
+  backdrop-filter: blur(3px);
+}
+
+.dlg {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVO: TABLET (≤1100px)
+   ══════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    display: flex;
+    overflow-x: auto;
+    max-height: none;
+    padding: 8px;
+    gap: 6px;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    min-height: 40px;
+    padding: 10px 14px;
+    font-size: .88rem;
+  }
+
+  .top {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .logo {
+    margin: auto;
+    width: min(260px, 82%);
+    height: auto;
+  }
+
+  .g2, .g3, .g4 {
+    grid-template-columns: 1fr;
+  }
+
+  .totals {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .photos {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVO: SMARTPHONE (≤680px)
+   ══════════════════════════════════════ */
+@media (max-width: 680px) {
+  .wrap {
+    padding: 10px;
+  }
+
+  .top {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .toolbar {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .toolbar button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .rolling {
+    margin-left: -2px;
+    margin-right: -2px;
+  }
+
+  .metric {
+    flex: 0 0 clamp(220px, 78vw, 280px);
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .card + .card {
+    margin-top: 12px;
+  }
+
+  input, textarea, select {
+    font-size: 16px;
+    min-height: 46px;
+  }
+
+  .totals {
+    grid-template-columns: 1fr;
+  }
+
+  .photos {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tabela → cards empilhados */
+  .table {
+    overflow: visible;
+  }
+
+  table, thead, tbody, tr, th, td {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  thead { display: none; }
+
+  tbody tr {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 12px;
+    background: color-mix(in srgb, var(--surface) 62%, transparent);
+  }
+
+  td {
+    border: 0;
+    padding: 8px 0;
+  }
+
+  td::before {
+    display: block;
+    color: var(--muted);
+    font-size: .78rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+
+  #itemsTable td:nth-child(1)::before { content: "Tipo"; }
+  #itemsTable td:nth-child(2)::before { content: "Descrição"; }
+  #itemsTable td:nth-child(3)::before { content: "Unidade"; }
+  #itemsTable td:nth-child(4)::before { content: "Quantidade"; }
+  #itemsTable td:nth-child(5)::before { content: "Valor unitário"; }
+  #itemsTable td:nth-child(6)::before { content: "Total"; }
+  #itemsTable td:nth-child(7)::before { content: "Ação"; }
+
+  .mini {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mini button {
+    width: 100%;
+  }
+
+  .sign {
+    height: clamp(120px, 42vw, 160px);
+  }
+
+  .toastbox {
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    max-width: none;
+  }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header class="top">
-<img class="logo" src="./brand-logo.webp" onerror="this.src='./brand-logo.png'" alt="TECNO ACRE">
-<div><h1>TECNO ACRE Propostas 360</h1><p> </p></div>
-<div><button class="theme" id="themeBtn">Tema escuro</button><div class="progress"><span id="progText">Preenchimento: 0%</span><div class="bar"><div class="fill" id="progFill"></div></div></div></div>
+<img class="logo" src="./brand-logo.webp" onerror="this.onerror=null;this.src='./brand-logo.png'" alt="TECNO ACRE">
+<div>
+<h1>TECNO ACRE Propostas 360</h1>
+<p>Soluções em Tecnologia Sustentável</p>
+</div>
+<div>
+<button class="theme" id="themeBtn">Tema escuro</button>
+<div class="progress">
+<span id="progText">Preenchimento: 0%</span>
+<div class="bar"><div class="fill" id="progFill"></div></div>
+</div>
+</div>
 </header>
+
 <div class="shell">
 <nav class="nav">
 <button class="active" data-tab="dash">Visão Geral</button>
@@ -66,20 +883,30 @@ dialog{border:1px solid var(--line);border-radius:18px;background:var(--surface)
 <div class="metric"><strong>Propostas</strong><span id="mProps">0</span><em>histórico local</em></div>
 <div class="metric"><strong>Status</strong><span id="mStatus">Rascunho</span><em>situação comercial</em></div>
 </div>
-<div class="card"><h2 class="title"><span>1</span>Fluxo da Fase 1</h2><p class="hint">Use a navegação lateral e a tela rolante para acompanhar o andamento do orçamento. Tudo fica salvo no navegador do dispositivo via localStorage.</p></div>
+<div class="card">
+<h2 class="title"><span>1</span>Fluxo da Fase 1</h2>
+<p class="hint">Use a navegação lateral e os cards rolantes para acompanhar o andamento do orçamento. Tudo fica salvo no navegador do dispositivo via localStorage.</p>
+</div>
 </section>
 
 <section id="clientes" class="panel">
 <div class="card grid g3">
 <h2 class="title"><span>2</span>Cadastro de Clientes</h2>
-<div class="field req"><label>Cliente / Empresa</label><input id="cadNome"><small class="err">Informe o nome.</small></div>
-<div class="field"><label>CPF / CNPJ</label><input id="cadDoc"></div>
-<div class="field"><label>Responsável</label><input id="cadResp"></div>
-<div class="field"><label>WhatsApp</label><input id="cadTel"></div>
-<div class="field"><label>E-mail</label><input id="cadEmail"></div>
-<div class="field"><label>Endereço / Local padrão</label><input id="cadEnd"></div>
-<div style="grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap"><button class="success" id="saveClient">Salvar Cliente</button><button class="secondary" id="useClient">Usar na Proposta</button></div>
-</div><div class="card"><h2 class="title"><span>3</span>Clientes Salvos</h2><div class="list" id="clientsList"></div></div>
+<div class="field req"><label>Cliente / Empresa</label><input id="cadNome" autocomplete="organization"><small class="err">Informe o nome.</small></div>
+<div class="field"><label>CPF / CNPJ</label><input id="cadDoc" autocomplete="off"></div>
+<div class="field"><label>Responsável</label><input id="cadResp" autocomplete="name"></div>
+<div class="field"><label>WhatsApp</label><input id="cadTel" inputmode="tel" autocomplete="tel"></div>
+<div class="field"><label>E-mail</label><input id="cadEmail" type="email" autocomplete="email"></div>
+<div class="field"><label>Endereço / Local padrão</label><input id="cadEnd" autocomplete="street-address"></div>
+<div style="grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap">
+<button class="success" id="saveClient">Salvar Cliente</button>
+<button class="secondary" id="useClient">Usar na Proposta</button>
+</div>
+</div>
+<div class="card">
+<h2 class="title"><span>3</span>Clientes Salvos</h2>
+<div class="list" id="clientsList"><p class="hint">Nenhum cliente salvo ainda.</p></div>
+</div>
 </section>
 
 <section id="biblioteca" class="panel">
@@ -89,11 +916,23 @@ dialog{border:1px solid var(--line);border-radius:18px;background:var(--surface)
 <div class="field"><label>Descrição</label><input id="libDesc"></div>
 <div class="field"><label>Unidade</label><select id="libUn"><option>serviço</option><option>un</option><option>m</option><option>m²</option><option>h</option><option>dia</option><option>ponto</option><option>vb</option></select></div>
 <div class="field"><label>Valor unitário</label><input id="libVal" inputmode="decimal"></div>
-<div style="grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap"><button class="success" id="saveLib">Salvar Item</button><button class="secondary" id="addLib">Adicionar à Proposta</button></div>
-</div><div class="card"><h2 class="title"><span>5</span>Itens Frequentes</h2><div class="list" id="libList"></div></div>
+<div style="grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap">
+<button class="success" id="saveLib">Salvar Item</button>
+<button class="secondary" id="addLib">Adicionar à Proposta</button>
+</div>
+</div>
+<div class="card">
+<h2 class="title"><span>5</span>Itens Frequentes</h2>
+<div class="list" id="libList"></div>
+</div>
 </section>
 
-<section id="templates" class="panel"><div class="card"><h2 class="title"><span>6</span>Templates por Serviço</h2><div class="list" id="tplList"></div></div></section>
+<section id="templates" class="panel">
+<div class="card">
+<h2 class="title"><span>6</span>Templates por Serviço</h2>
+<div class="list" id="tplList"></div>
+</div>
+</section>
 
 <section id="proposta" class="panel">
 <form id="form" class="grid" novalidate>
@@ -103,19 +942,19 @@ dialog{border:1px solid var(--line);border-radius:18px;background:var(--surface)
 <div class="field req"><label>Data</label><input name="data" id="data" type="date" required><small class="err">Obrigatório.</small></div>
 <div class="field"><label>Validade</label><select name="validade" id="validade"><option>7 dias</option><option selected>15 dias</option><option>30 dias</option><option>45 dias</option><option>60 dias</option></select></div>
 <div class="field req"><label>Responsável</label><input name="respCom" id="respCom" required><small class="err">Obrigatório.</small></div>
-<div class="field"><label>WhatsApp da empresa</label><input name="telEmp" id="telEmp"></div>
-<div class="field"><label>E-mail da empresa</label><input name="emailEmp" id="emailEmp"></div>
+<div class="field"><label>WhatsApp da empresa</label><input name="telEmp" id="telEmp" inputmode="tel"></div>
+<div class="field"><label>E-mail da empresa</label><input name="emailEmp" id="emailEmp" type="email"></div>
 <div class="field"><label>Status</label><select name="status" id="status"><option>Rascunho</option><option>Enviada</option><option>Visualizada</option><option>Aprovada</option><option>Recusada</option><option>Vencida</option></select></div>
 </div>
 
 <div class="card grid g3">
 <h2 class="title"><span>8</span>Dados do Cliente</h2>
-<div class="field req"><label>Cliente / Empresa</label><input name="cliente" id="cliente" required><small class="err">Obrigatório.</small></div>
-<div class="field"><label>CPF / CNPJ</label><input name="doc" id="doc"></div>
-<div class="field"><label>Responsável</label><input name="contato" id="contato"></div>
-<div class="field"><label>WhatsApp do cliente</label><input name="telCliente" id="telCliente"></div>
-<div class="field"><label>E-mail</label><input name="emailCliente" id="emailCliente"></div>
-<div class="field req"><label>Local do serviço</label><input name="endereco" id="endereco" required><small class="err">Obrigatório.</small></div>
+<div class="field req"><label>Cliente / Empresa</label><input name="cliente" id="cliente" required autocomplete="organization"><small class="err">Obrigatório.</small></div>
+<div class="field"><label>CPF / CNPJ</label><input name="doc" id="doc" autocomplete="off"></div>
+<div class="field"><label>Responsável</label><input name="contato" id="contato" autocomplete="name"></div>
+<div class="field"><label>WhatsApp do cliente</label><input name="telCliente" id="telCliente" inputmode="tel"></div>
+<div class="field"><label>E-mail</label><input name="emailCliente" id="emailCliente" type="email"></div>
+<div class="field req"><label>Local do serviço</label><input name="endereco" id="endereco" required autocomplete="street-address"><small class="err">Obrigatório.</small></div>
 </div>
 
 <div class="card grid g3">
@@ -126,100 +965,856 @@ dialog{border:1px solid var(--line);border-radius:18px;background:var(--surface)
 <div class="field req" style="grid-column:1/-1"><label>Descrição geral</label><textarea name="descricao" id="descricao" required></textarea><small class="err">Obrigatório.</small></div>
 </div>
 
-<div class="card"><h2 class="title"><span>10</span>Itens de Material e Serviços</h2>
+<div class="card">
+<h2 class="title"><span>10</span>Itens de Material e Serviços</h2>
 <div class="table"><table id="itemsTable"><thead><tr><th>Tipo</th><th>Descrição</th><th>Unid.</th><th>Qtd.</th><th>Valor unit.</th><th>Total</th><th>Ação</th></tr></thead><tbody id="items"></tbody></table></div>
 <div class="totals"><div class="total"><strong>Subtotal</strong><span id="subV">R$ 0,00</span></div><div class="total"><strong>Desconto</strong><span id="descV">R$ 0,00</span></div><div class="total"><strong>Acréscimo</strong><span id="acreV">R$ 0,00</span></div><div class="total"><strong>Total Geral</strong><span id="totalV">R$ 0,00</span></div></div>
-<div class="grid g3" style="margin-top:14px"><div class="field"><label>Desconto</label><input name="desconto" id="desconto" inputmode="decimal"></div><div class="field"><label>Acréscimo / deslocamento</label><input name="acrescimo" id="acrescimo" inputmode="decimal"></div><div class="field"><label>Forma de pagamento</label><select name="pagamento" id="pagamento"><option>À vista</option><option>50% entrada + 50% na entrega</option><option>Parcelado</option><option>Pix</option><option>Cartão</option><option>Boleto</option><option>A combinar</option></select></div></div>
+<div class="grid g3" style="margin-top:14px">
+<div class="field"><label>Desconto</label><input name="desconto" id="desconto" inputmode="decimal"></div>
+<div class="field"><label>Acréscimo / deslocamento</label><input name="acrescimo" id="acrescimo" inputmode="decimal"></div>
+<div class="field"><label>Forma de pagamento</label><select name="pagamento" id="pagamento"><option>À vista</option><option>50% entrada + 50% na entrega</option><option>Parcelado</option><option>Pix</option><option>Cartão</option><option>Boleto</option><option>A combinar</option></select></div>
+</div>
 </div>
 
-<div class="card grid g2"><h2 class="title"><span>11</span>Etapas dos Serviços</h2><div class="field" style="grid-column:1/-1"><label>Etapas</label><textarea name="etapas" id="etapas">1. Levantamento e mobilização técnica
+<div class="card grid g2">
+<h2 class="title"><span>11</span>Etapas dos Serviços</h2>
+<div class="field" style="grid-column:1/-1"><label>Etapas</label><textarea name="etapas" id="etapas">1. Levantamento e mobilização técnica
 2. Execução dos serviços contratados
 3. Testes, validações e ajustes
-4. Entrega técnica e orientações ao cliente</textarea></div></div>
-
-<div class="card"><h2 class="title"><span>12</span>Fotos e Evidências</h2><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><label class="secondary" style="padding:12px 16px;border-radius:12px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#008f5a,var(--blue));color:white" for="photoInput">Anexar / Tirar Foto</label><input id="photoInput" type="file" accept="image/*" capture="environment" multiple hidden><button class="ghost" id="clearPhotos" type="button">Limpar Fotos</button></div><div class="photos" id="photos"></div></div>
-
-<div class="card grid g2"><h2 class="title"><span>13</span>Condições Comerciais</h2><div class="field"><label>Prazo</label><select name="prazo" id="prazo"><option value="">Selecione</option><option>Imediato após aprovação</option><option>Até 3 dias úteis</option><option>Até 5 dias úteis</option><option>Até 7 dias úteis</option><option>Até 15 dias úteis</option><option>A combinar</option></select></div><div class="field"><label>Garantia</label><select name="garantia" id="garantia"><option value="">Selecione</option><option>30 dias sobre mão de obra</option><option>60 dias sobre mão de obra</option><option>90 dias sobre mão de obra</option><option>Conforme garantia do fabricante</option><option>A combinar</option></select></div><div class="field" style="grid-column:1/-1"><label>Condições e observações</label><textarea name="condicoes" id="condicoes">Esta proposta contempla os serviços e materiais descritos neste orçamento. Serviços adicionais não previstos deverão ser avaliados e poderão gerar aditivo.</textarea></div></div>
-
-<div class="card grid g2"><h2 class="title"><span>14</span>Assinaturas Digitais</h2><div class="field"><label>Responsável pela proposta</label><input name="assEmpNome" id="assEmpNome"><canvas id="sigEmp" class="sign"></canvas><div class="mini"><button type="button" class="ghost" id="clearSigEmp">Limpar Assinatura</button></div></div><div class="field"><label>Cliente / Aprovador</label><input name="assCliNome" id="assCliNome"><canvas id="sigCli" class="sign"></canvas><div class="mini"><button type="button" class="ghost" id="clearSigCli">Limpar Assinatura</button></div></div></div>
-</form></section>
-
-<section id="historico" class="panel"><div class="card"><h2 class="title"><span>15</span>Histórico de Propostas</h2><div class="grid g3" style="margin-bottom:12px"><div class="field"><label>Buscar</label><input id="histBusca"></div><div class="field"><label>Status</label><select id="histStatus"><option value="">Todos</option><option>Rascunho</option><option>Enviada</option><option>Visualizada</option><option>Aprovada</option><option>Recusada</option><option>Vencida</option></select></div><div class="field"><label>&nbsp;</label><button class="ghost" id="histRefresh">Atualizar</button></div></div><div class="list" id="histList"></div></div></section>
-</main></div><p class="hint" style="text-align:center">TECNO ACRE - Soluções em Tecnologia Sustentável • Propostas 360.</p>
+4. Entrega técnica e orientações ao cliente</textarea></div>
 </div>
+
+<div class="card">
+<h2 class="title"><span>12</span>Fotos e Evidências</h2>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+<label class="secondary" style="padding:12px 16px;border-radius:12px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#008f5a,var(--blue));color:white;min-height:44px;display:inline-flex;align-items:center" for="photoInput">📷 Anexar / Tirar Foto</label>
+<input id="photoInput" type="file" accept="image/*" capture="environment" multiple hidden>
+<button class="ghost" id="clearPhotos" type="button">Limpar Fotos</button>
+</div>
+<div class="photos" id="photos"><p class="hint">Nenhuma foto anexada.</p></div>
+</div>
+
+<div class="card grid g2">
+<h2 class="title"><span>13</span>Condições Comerciais</h2>
+<div class="field"><label>Prazo</label><select name="prazo" id="prazo"><option value="">Selecione</option><option>Imediato após aprovação</option><option>Até 3 dias úteis</option><option>Até 5 dias úteis</option><option>Até 7 dias úteis</option><option>Até 15 dias úteis</option><option>A combinar</option></select></div>
+<div class="field"><label>Garantia</label><select name="garantia" id="garantia"><option value="">Selecione</option><option>30 dias sobre mão de obra</option><option>60 dias sobre mão de obra</option><option>90 dias sobre mão de obra</option><option>Conforme garantia do fabricante</option><option>A combinar</option></select></div>
+<div class="field" style="grid-column:1/-1"><label>Condições e observações</label><textarea name="condicoes" id="condicoes">Esta proposta contempla os serviços e materiais descritos neste orçamento. Serviços adicionais não previstos deverão ser avaliados e poderão gerar aditivo.</textarea></div>
+</div>
+
+<div class="card grid g2">
+<h2 class="title"><span>14</span>Assinaturas Digitais</h2>
+<div class="field"><label>Responsável pela proposta</label><input name="assEmpNome" id="assEmpNome"><canvas id="sigEmp" class="sign"></canvas><div class="mini"><button type="button" class="ghost" id="clearSigEmp">Limpar Assinatura</button></div></div>
+<div class="field"><label>Cliente / Aprovador</label><input name="assCliNome" id="assCliNome"><canvas id="sigCli" class="sign"></canvas><div class="mini"><button type="button" class="ghost" id="clearSigCli">Limpar Assinatura</button></div></div>
+</div>
+</form>
+</section>
+
+<section id="historico" class="panel">
+<div class="card">
+<h2 class="title"><span>15</span>Histórico de Propostas</h2>
+<div class="grid g3" style="margin-bottom:12px">
+<div class="field"><label>Buscar</label><input id="histBusca" placeholder="Nº, cliente, título..."></div>
+<div class="field"><label>Status</label><select id="histStatus"><option value="">Todos</option><option>Rascunho</option><option>Enviada</option><option>Visualizada</option><option>Aprovada</option><option>Recusada</option><option>Vencida</option></select></div>
+<div class="field"><label>&nbsp;</label><button class="ghost" id="histRefresh" style="width:100%">Atualizar</button></div>
+</div>
+<div class="list" id="histList"><p class="hint">Nenhuma proposta salva.</p></div>
+</div>
+</section>
+</main>
+</div>
+
+<p class="hint" style="text-align:center;margin-top:24px">TECNO ACRE — Soluções em Tecnologia Sustentável • Propostas 360.</p>
+</div>
+
 <div class="toastbox" id="toastbox"></div>
-<dialog id="confirmDialog"><h3>Limpar proposta?</h3><p>Essa ação apagará apenas a proposta em edição.</p><div class="dlg"><button class="ghost" id="cancelClear">Cancelar</button><button class="danger" id="confirmClear">Sim, limpar</button></div></dialog>
+
+<dialog id="confirmDialog">
+<h3 style="margin:0 0 8px">Limpar proposta?</h3>
+<p style="margin:0;color:var(--muted)">Essa ação apagará apenas a proposta em edição. Os dados salvos no histórico não serão afetados.</p>
+<div class="dlg"><button class="ghost" id="cancelClear">Cancelar</button><button class="danger" id="confirmClear">Sim, limpar</button></div>
+</dialog>
+
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
-const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s)), money=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
-let selectedClient=null,selectedLib=null,photos=[];
-const defaults=[{id:id(),tipo:'Serviço',descricao:'Manutenção preventiva de gerador',unidade:'serviço',valor:'R$ 450,00'},{id:id(),tipo:'Serviço',descricao:'Teste de funcionamento em carga',unidade:'serviço',valor:'R$ 280,00'},{id:id(),tipo:'Material',descricao:'Óleo lubrificante para gerador',unidade:'un',valor:'R$ 120,00'},{id:id(),tipo:'Deslocamento',descricao:'Deslocamento técnico urbano',unidade:'vb',valor:'R$ 80,00'}];
-const tpls=[{title:'Manutenção Preventiva de Gerador',type:'Manutenção em gerador',desc:'Serviço técnico de manutenção preventiva em grupo gerador, contemplando inspeção visual, verificação de níveis, análise elétrica, teste funcional e orientações ao cliente.',etapas:'1. Inspeção visual e registro das condições do equipamento\\n2. Verificação de óleo, filtros, bateria e conexões elétricas\\n3. Execução da manutenção preventiva conforme necessidade\\n4. Teste de funcionamento e validação operacional\\n5. Entrega técnica e recomendações ao cliente'},{title:'Instalação Elétrica',type:'Instalação elétrica',desc:'Execução de serviço de instalação elétrica conforme escopo aprovado, contemplando materiais, mão de obra, testes básicos e organização técnica da instalação.',etapas:'1. Levantamento e preparação do local\\n2. Instalação de infraestrutura, cabos e dispositivos\\n3. Identificação, acabamento e organização\\n4. Testes elétricos e entrega ao cliente'},{title:'Sistema Fotovoltaico',type:'Sistema fotovoltaico',desc:'Proposta técnica/comercial para fornecimento, instalação ou manutenção de sistema fotovoltaico.',etapas:'1. Levantamento técnico e análise do local\\n2. Instalação ou manutenção dos componentes\\n3. Testes de funcionamento\\n4. Entrega técnica e orientações de operação'}];
-function id(){return crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random())}
-function toast(msg){let e=document.createElement('div');e.className='toast';e.textContent=msg;$('#toastbox').appendChild(e);setTimeout(()=>e.remove(),4000)}
-function n(v){return parseFloat(String(v||'').replace(/\./g,'').replace(',','.').replace(/[^\d.-]/g,''))||0}
-function br(v){return money.format(Number(v||0))}
-function phone(v){let d=String(v).replace(/\D/g,'').slice(0,11);return d.length<=10?d.replace(/(\d{2})(\d{4})(\d{0,4})/,(_,a,b,c)=>c?`(${a}) ${b}-${c}`:`(${a}) ${b}`):d.replace(/(\d{2})(\d{5})(\d{0,4})/,(_,a,b,c)=>c?`(${a}) ${b}-${c}`:`(${a}) ${b}`)}
-function doc(v){let d=String(v).replace(/\D/g,'').slice(0,14);return d.length<=11?d.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2})/,(_,a,b,c,e)=>e?`${a}.${b}.${c}-${e}`:`${a}.${b}.${c}`):d.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/,(_,a,b,c,e,f)=>f?`${a}.${b}.${c}/${e}-${f}`:`${a}.${b}.${c}/${e}`)}
-function dateBR(d){if(!d)return'-';let [y,m,dd]=d.split('-');return `${dd}/${m}/${y}`}
-function loc(k,f){try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}}
-function set(k,v){localStorage.setItem(k,JSON.stringify(v))}
-function clients(){return loc('ta_clients',[])}function setClients(v){set('ta_clients',v);renderClients();dash()}
-function lib(){let l=loc('ta_lib',null);if(!l){set('ta_lib',defaults);return defaults}return l}function setLib(v){set('ta_lib',v);renderLib();dash()}
-function hist(){return loc('ta_hist',[])}function setHist(v){set('ta_hist',v);renderHist();dash()}
-function tab(t){$$('.panel').forEach(p=>p.classList.toggle('active',p.id==t));$$('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab==t));scrollTo({top:0,behavior:'smooth'})}
-$$('[data-tab]').forEach(b=>b.onclick=()=>tab(b.dataset.tab));
-$('#themeBtn').onclick=()=>{let th=document.documentElement.dataset.theme=='light'?'dark':'light';document.documentElement.dataset.theme=th;localStorage.setItem('ta_theme',th);$('#themeBtn').textContent=th=='light'?'Tema claro':'Tema escuro';resizeSigs()}
-let th=localStorage.getItem('ta_theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.dataset.theme=th;$('#themeBtn').textContent=th=='light'?'Tema claro':'Tema escuro';
-function addRow(it={}){let tr=document.createElement('tr');tr.innerHTML=`<td><select class="itTipo"><option ${it.tipo=='Serviço'?'selected':''}>Serviço</option><option ${it.tipo=='Material'?'selected':''}>Material</option><option ${it.tipo=='Deslocamento'?'selected':''}>Deslocamento</option><option ${it.tipo=='Equipamento'?'selected':''}>Equipamento</option></select></td><td><textarea class="itDesc" placeholder="Descrição">${it.descricao||''}</textarea></td><td><select class="itUn">${['un','m','m²','m³','kg','h','dia','serviço','ponto','cj','vb'].map(u=>`<option ${it.unidade==u?'selected':''}>${u}</option>`).join('')}</select></td><td><input class="itQtd" inputmode="decimal" value="${it.qtd||''}"></td><td><input class="itVal" inputmode="decimal" value="${it.valor||it.valorUnitario||''}"></td><td><input class="itTotal" readonly></td><td><div class="mini"><button type="button" class="danger rem">Remover</button><button type="button" class="ghost save">Biblioteca</button></div></td>`;tr.querySelectorAll('input,textarea,select').forEach(e=>{e.oninput=()=>{rowTotal(tr);saveDraft()};e.onchange=()=>{rowTotal(tr);saveDraft()};e.onblur=()=>{if(e.className=='itVal')e.value=br(n(e.value));rowTotal(tr);saveDraft()}});tr.querySelector('.rem').onclick=()=>{if($('#items').children.length<=1)tr.querySelectorAll('input,textarea').forEach(e=>e.value='');else tr.remove();totals();saveDraft()};tr.querySelector('.save').onclick=()=>{let i=rowItem(tr);if(!i.descricao)return toast('Informe a descrição.');let l=lib();l.unshift({id:id(),tipo:i.tipo,descricao:i.descricao,unidade:i.unidade,valor:i.valorUnitario});setLib(l);toast('Item salvo na biblioteca.')};$('#items').appendChild(tr);rowTotal(tr)}
-function rowItem(tr){let q=tr.querySelector('.itQtd').value,v=tr.querySelector('.itVal').value;return{tipo:tr.querySelector('.itTipo').value,descricao:tr.querySelector('.itDesc').value,unidade:tr.querySelector('.itUn').value,qtd:q,valorUnitario:v,total:n(q)*n(v)}}
-function items(){return $$('#items tr').map(rowItem).filter(i=>i.descricao||n(i.qtd)||n(i.valorUnitario))}
-function rowTotal(tr){tr.querySelector('.itTotal').value=br(rowItem(tr).total);totals();dash()}
-function totals(){let sub=items().reduce((a,i)=>a+i.total,0),d=n($('#desconto').value),a=n($('#acrescimo').value),t=Math.max(0,sub-d+a);$('#subV').textContent=br(sub);$('#descV').textContent=br(d);$('#acreV').textContent=br(a);$('#totalV').textContent=br(t);return{sub,desconto:d,acrescimo:a,total:t}}
-function data(){let o={};new FormData($('#form')).forEach((v,k)=>o[k]=v);o.items=items();o.totals=totals();o.photos=photos;o.sigEmp=sigs.emp.toDataURL();o.sigCli=sigs.cli.toDataURL();return o}
-function setData(o={}){$$('#form input,#form textarea,#form select').forEach(e=>{if(e.name&&o[e.name]!==undefined)e.value=o[e.name]});$('#items').innerHTML='';(o.items||[]).forEach(addRow);if(!$('#items').children.length)addRow({tipo:'Serviço',unidade:'serviço',qtd:'1'});photos.splice(0,photos.length,...(o.photos||[]));renderPhotos();totals();validate();progress();dash()}
-function saveDraft(){set('ta_draft',data());progress();dash()}
-function loadDraft(){let d=loc('ta_draft',null);if(d)setData(d)}
-function validate(show=false){let ok=true;$$('#form [required]').forEach(e=>{let bad=!String(e.value||'').trim();e.closest('.field').classList.toggle('bad',bad);if(bad)ok=false});if(show&&!ok)toast('Preencha os campos obrigatórios.');return ok}
-function progress(){let r=$$('#form [required]'),f=r.filter(e=>String(e.value||'').trim()).length,p=r.length?Math.round(f/r.length*100):0;$('#progText').textContent=`Preenchimento: ${p}%`;$('#progFill').style.width=p+'%'}
-function dash(){let sub=items().reduce((a,i)=>a+i.total,0),d=n($('#desconto').value),a=n($('#acrescimo').value),t=Math.max(0,sub-d+a);$('#mTotal').textContent=br(t);$('#mItems').textContent=items().length;$('#mClients').textContent=clients().length;$('#mProps').textContent=hist().length;$('#mStatus').textContent=$('#status').value||'Rascunho'}
-$('#addItemBtn').onclick=()=>{addRow();saveDraft();tab('proposta');toast('Item adicionado.')};['desconto','acrescimo'].forEach(i=>{$('#'+i).oninput=()=>{totals();saveDraft()};$('#'+i).onblur=e=>{e.target.value=br(n(e.target.value));totals();saveDraft()}});['telEmp','telCliente','cadTel'].forEach(i=>$('#'+i).oninput=e=>e.target.value=phone(e.target.value));['doc','cadDoc'].forEach(i=>$('#'+i).oninput=e=>e.target.value=doc(e.target.value));$('#form').oninput=()=>{validate();saveDraft()};$('#form').onchange=()=>{validate();saveDraft()};
-function renderClients(){let list=$('#clientsList'),c=clients();list.innerHTML=c.length?'':'<p class="hint">Nenhum cliente salvo ainda.</p>';c.forEach(x=>{let e=document.createElement('div');e.className='item';e.innerHTML=`<header><h3>${x.nome}</h3><span class="badge">Cliente</span></header><p>${x.resp||'-'} • ${x.tel||'-'} • ${x.email||'-'}</p><p>${x.end||'-'}</p><div class="mini"><button class="secondary">Usar</button><button class="ghost">Editar</button><button class="danger">Excluir</button></div>`;let [u,ed,del]=e.querySelectorAll('button');u.onclick=()=>useC(x);ed.onclick=()=>fillC(x);del.onclick=()=>setClients(c.filter(y=>y.id!=x.id));list.appendChild(e)})}
-function fillC(c){selectedClient=c.id;$('#cadNome').value=c.nome||'';$('#cadDoc').value=c.doc||'';$('#cadResp').value=c.resp||'';$('#cadTel').value=c.tel||'';$('#cadEmail').value=c.email||'';$('#cadEnd').value=c.end||'';toast('Cliente carregado.')}
-function useC(c){$('#cliente').value=c.nome||'';$('#doc').value=c.doc||'';$('#contato').value=c.resp||'';$('#telCliente').value=c.tel||'';$('#emailCliente').value=c.email||'';$('#endereco').value=c.end||'';saveDraft();tab('proposta');toast('Cliente aplicado.')}
-$('#saveClient').onclick=()=>{let nome=$('#cadNome').value.trim();if(!nome)return toast('Informe o cliente.');let c=clients(),o={id:selectedClient||id(),nome,doc:$('#cadDoc').value,resp:$('#cadResp').value,tel:$('#cadTel').value,email:$('#cadEmail').value,end:$('#cadEnd').value};let ix=c.findIndex(x=>x.id==o.id);if(ix>=0)c[ix]=o;else c.unshift(o);selectedClient=o.id;setClients(c);toast('Cliente salvo.')};$('#useClient').onclick=()=>{let c=clients().find(x=>x.id==selectedClient);c?useC(c):toast('Selecione/salve um cliente.')};
-function renderLib(){let list=$('#libList'),l=lib();list.innerHTML='';l.forEach(x=>{let e=document.createElement('div');e.className='item';e.innerHTML=`<header><h3>${x.descricao}</h3><span class="badge">${x.tipo}</span></header><p>${x.unidade} • ${x.valor||'R$ 0,00'}</p><div class="mini"><button class="secondary">Adicionar</button><button class="ghost">Editar</button><button class="danger">Excluir</button></div>`;let [a,ed,del]=e.querySelectorAll('button');a.onclick=()=>addLibItem(x);ed.onclick=()=>fillL(x);del.onclick=()=>setLib(l.filter(y=>y.id!=x.id));list.appendChild(e)})}
-function fillL(x){selectedLib=x.id;$('#libTipo').value=x.tipo;$('#libDesc').value=x.descricao;$('#libUn').value=x.unidade;$('#libVal').value=x.valor;toast('Item carregado.')}function addLibItem(x){addRow({tipo:x.tipo,descricao:x.descricao,unidade:x.unidade,qtd:'1',valor:x.valor});saveDraft();tab('proposta');toast('Item adicionado.')}
-$('#saveLib').onclick=()=>{let d=$('#libDesc').value.trim();if(!d)return toast('Informe a descrição.');let l=lib(),o={id:selectedLib||id(),tipo:$('#libTipo').value,descricao:d,unidade:$('#libUn').value,valor:$('#libVal').value};let ix=l.findIndex(x=>x.id==o.id);if(ix>=0)l[ix]=o;else l.unshift(o);selectedLib=o.id;setLib(l);toast('Item salvo.')};$('#addLib').onclick=()=>{let x=lib().find(i=>i.id==selectedLib);x?addLibItem(x):toast('Selecione/salve um item.')};$('#libVal').onblur=e=>e.target.value=br(n(e.target.value));
-function renderTpls(){let list=$('#tplList');list.innerHTML='';tpls.forEach(t=>{let e=document.createElement('div');e.className='item';e.innerHTML=`<header><h3>${t.title}</h3><span class="badge ok">Template</span></header><p>${t.desc}</p><div class="mini"><button class="secondary">Aplicar Template</button></div>`;e.querySelector('button').onclick=()=>{ $('#tipoServico').value=t.type;$('#titulo').value=t.title;$('#descricao').value=t.desc;$('#etapas').value=t.etapas;saveDraft();validate();tab('proposta');toast('Template aplicado.')};list.appendChild(e)})}
-async function resizeImg(file){return new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>{let img=new Image();img.onload=()=>{let s=Math.min(1,1280/Math.max(img.width,img.height)),w=img.width*s,h=img.height*s,c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);res(c.toDataURL('image/jpeg',.82))};img.onerror=rej;img.src=r.result};r.onerror=rej;r.readAsDataURL(file)})}
-$('#photoInput').onchange=async e=>{for(let f of Array.from(e.target.files||[])){if(f.type.startsWith('image/'))photos.push({id:id(),dataUrl:await resizeImg(f),caption:''})}e.target.value='';renderPhotos();saveDraft();toast('Foto anexada.')};$('#clearPhotos').onclick=()=>{photos=[];renderPhotos();saveDraft()};
-function renderPhotos(){let g=$('#photos');g.innerHTML=photos.length?'':'<p class="hint">Nenhuma foto anexada.</p>';photos.forEach((p,i)=>{let e=document.createElement('div');e.className='photo';e.innerHTML=`<img src="${p.dataUrl}"><textarea placeholder="Descrição">${p.caption||''}</textarea><button class="danger" type="button">Remover</button>`;e.querySelector('textarea').oninput=x=>{p.caption=x.target.value;saveDraft()};e.querySelector('button').onclick=()=>{photos.splice(i,1);renderPhotos();saveDraft()};g.appendChild(e)})}
-$('#savePropBtn').onclick=()=>{if(!validate(true))return;let h=hist(),d=data();d.id=d.numero||id();d.updatedAt=new Date().toISOString();let ix=h.findIndex(p=>p.id==d.id);if(ix>=0)h[ix]=d;else h.unshift(d);setHist(h);toast('Proposta salva.')};
-function renderHist(){let list=$('#histList'),q=($('#histBusca').value||'').toLowerCase(),st=$('#histStatus').value,h=hist();if(q)h=h.filter(p=>[p.numero,p.cliente,p.titulo,p.tipoServico].some(v=>String(v||'').toLowerCase().includes(q)));if(st)h=h.filter(p=>p.status==st);list.innerHTML=h.length?'':'<p class="hint">Nenhuma proposta salva.</p>';h.forEach(p=>{let e=document.createElement('div');e.className='item';let cls=p.status=='Aprovada'?'ok':(p.status=='Enviada'||p.status=='Visualizada')?'warn':'';e.innerHTML=`<header><h3>${p.numero||'Sem número'} • ${p.cliente||'Cliente não informado'}</h3><span class="badge ${cls}">${p.status||'Rascunho'}</span></header><p>${p.titulo||p.tipoServico||'-'} • ${br(p.totals?.total||0)}</p><p>Atualizada em: ${p.updatedAt?new Date(p.updatedAt).toLocaleString('pt-BR'):'-'}</p><div class="mini"><button class="secondary">Abrir</button><button class="danger">Excluir</button></div>`;let [open,del]=e.querySelectorAll('button');open.onclick=()=>{setData(p);tab('proposta');toast('Proposta carregada.')};del.onclick=()=>setHist(hist().filter(x=>x.id!=p.id));list.appendChild(e)})}
-$('#histBusca').oninput=renderHist;$('#histStatus').onchange=renderHist;$('#histRefresh').onclick=renderHist;
-function pad(canvas){let ctx=canvas.getContext('2d'),draw=false,has=false,img=null;function resize(){if(has)img=canvas.toDataURL();let r=canvas.getBoundingClientRect(),ratio=Math.max(devicePixelRatio||1,1);canvas.width=r.width*ratio;canvas.height=r.height*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);ctx.lineWidth=2.2;ctx.lineCap='round';ctx.strokeStyle='#0f172a';if(img){let im=new Image();im.onload=()=>ctx.drawImage(im,0,0,r.width,r.height);im.src=img}}function pos(e){let r=canvas.getBoundingClientRect(),t=e.touches?e.touches[0]:e;return{x:t.clientX-r.left,y:t.clientY-r.top}}function st(e){e.preventDefault();draw=true;let p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)}function mv(e){if(!draw)return;e.preventDefault();let p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();has=true;saveDraft()}function en(e){if(!draw)return;e.preventDefault();draw=false;saveDraft()}['mousedown','touchstart'].forEach(ev=>canvas.addEventListener(ev,st,{passive:false}));['mousemove','touchmove'].forEach(ev=>canvas.addEventListener(ev,mv,{passive:false}));['mouseup','mouseleave','touchend'].forEach(ev=>canvas.addEventListener(ev,en,{passive:false}));addEventListener('resize',resize);setTimeout(resize,120);return{clear(){ctx.clearRect(0,0,canvas.width,canvas.height);has=false;img=null;saveDraft()},toDataURL(){return has?canvas.toDataURL('image/png'):''},resize}}
-const sigs={emp:pad($('#sigEmp')),cli:pad($('#sigCli'))};function resizeSigs(){setTimeout(()=>Object.values(sigs).forEach(s=>s.resize()),80)}$('#clearSigEmp').onclick=()=>sigs.emp.clear();$('#clearSigCli').onclick=()=>sigs.cli.clear();
-$('#clearBtn').onclick=()=>$('#confirmDialog').showModal();$('#cancelClear').onclick=()=>$('#confirmDialog').close();$('#confirmClear').onclick=()=>{form.reset();$('#items').innerHTML='';addRow({tipo:'Serviço',unidade:'serviço',qtd:'1'});photos=[];renderPhotos();sigs.emp.clear();sigs.cli.clear();localStorage.removeItem('ta_draft');$('#data').value=new Date().toISOString().slice(0,10);totals();progress();$('#confirmDialog').close();toast('Proposta limpa.')};
-async function loadImg(src){let r=await fetch(src),b=await r.blob();return await new Promise((res,rej)=>{let fr=new FileReader();fr.onloadend=()=>res(fr.result);fr.onerror=rej;fr.readAsDataURL(b)})}
-async function saveBlob(blob,name){if('showSaveFilePicker'in window){let h=await showSaveFilePicker({suggestedName:name,types:[{description:'PDF',accept:{'application/pdf':['.pdf']}}]});let w=await h.createWritable();await w.write(blob);await w.close();return true}return false}
-$('#pdfBtn').onclick=async()=>{if(!validate(true))return;await pdf();toast('PDF gerado.')};
-async function pdf(){const{jsPDF}=window.jspdf,doc=new jsPDF({unit:'mm',format:'a4'}),d=data(),margin=14,pageWidth=210,contentWidth=pageWidth-margin*2;let y=16;function newP(e=10){if(y+e>276){foot();doc.addPage();y=18}}function foot(){let p=doc.internal.getCurrentPageInfo().pageNumber;doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(120);doc.text('TECNO ACRE - Soluções em Tecnologia Sustentável',margin,290);doc.text(`Página ${p}`,pageWidth-margin-16,290)}function sec(t){newP(13);doc.setFont('helvetica','bold');doc.setFontSize(12.2);doc.setTextColor(15,23,42);doc.text(t,margin,y);y+=7}function kv(l,v,w=52){newP(10);doc.setFont('helvetica','bold');doc.setFontSize(9.7);doc.setTextColor(20);doc.text(doc.splitTextToSize(l+':',w-2),margin,y);doc.setFont('helvetica','normal');doc.setTextColor(35);let lines=doc.splitTextToSize(String(v||'-'),contentWidth-w);doc.text(lines,margin+w,y);y+=Math.max(5.2,lines.length*5.2)}function multi(l,v){newP(15);doc.setFont('helvetica','bold');doc.text(l+':',margin,y);y+=5.2;doc.setFont('helvetica','normal');let lines=doc.splitTextToSize(String(v||'-'),contentWidth);doc.text(lines,margin,y);y+=Math.max(7,lines.length*5.2)+2}function line(t){let lines=doc.splitTextToSize(t,contentWidth);newP(lines.length*5.2+2);doc.setFont('helvetica','normal');doc.setFontSize(9.5);doc.text(lines,margin,y);y+=Math.max(5.6,lines.length*5.2)}
-let logo=await loadImg('./brand-logo.png').catch(()=>null);if(logo)try{doc.addImage(logo,'PNG',margin,y,40,24)}catch(e){};doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(15,23,42);doc.text('ORÇAMENTO E PROPOSTA COMERCIAL',margin+48,y+5,{maxWidth:140});doc.setFontSize(10.2);doc.setTextColor(55,65,81);doc.text('TECNO ACRE - Soluções em Tecnologia Sustentável',margin+48,y+14,{maxWidth:140});doc.setDrawColor(255,138,0);doc.line(margin,y+32,pageWidth-margin,y+32);y=56;
-sec('1. Dados da Proposta');kv('Nº da proposta',d.numero);kv('Data',dateBR(d.data));kv('Status',d.status);kv('Validade',d.validade);kv('Responsável',d.respCom);kv('WhatsApp',d.telEmp);kv('E-mail',d.emailEmp);
-sec('2. Dados do Cliente');kv('Cliente / Empresa',d.cliente);kv('CPF / CNPJ',d.doc);kv('Responsável',d.contato);kv('WhatsApp',d.telCliente);kv('E-mail',d.emailCliente);kv('Local do serviço',d.endereco);
-sec('3. Dados do Serviço');kv('Tipo de serviço',d.tipoServico);kv('Título',d.titulo);kv('Prioridade',d.prioridade);multi('Descrição geral',d.descricao);
-sec('4. Itens de Material e Serviços');let widths=[22,70,18,18,28,28],heads=['Tipo','Descrição','Un.','Qtd.','Unitário','Total'],x=margin;doc.setFont('helvetica','bold');doc.setFontSize(8.8);doc.setDrawColor(255,138,0);heads.forEach((h,i)=>{doc.rect(x,y,widths[i],8);doc.text(h,x+1.5,y+5.3);x+=widths[i]});y+=8;doc.setFont('helvetica','normal');d.items.forEach(it=>{newP(14);x=margin;let row=[it.tipo,it.descricao,it.unidade,it.qtd,br(n(it.valorUnitario)),br(it.total)],rowH=Math.max(9,4+doc.splitTextToSize(it.descricao||'-',widths[1]-3).length*4.4);row.forEach((c,i)=>{doc.rect(x,y,widths[i],rowH);doc.text(doc.splitTextToSize(String(c||'-'),widths[i]-3),x+1.5,y+5);x+=widths[i]});y+=rowH});y+=5;kv('Subtotal',br(d.totals.sub));kv('Desconto',br(d.totals.desconto));kv('Acréscimo',br(d.totals.acrescimo));kv('Total geral',br(d.totals.total));kv('Forma de pagamento',d.pagamento);
-sec('5. Etapas dos Serviços');String(d.etapas||'-').split('\\n').forEach(line);sec('6. Fotos e Evidências');if(!d.photos.length)line('Nenhuma foto anexada.');else d.photos.forEach((p,i)=>{newP(78);doc.setFont('helvetica','bold');doc.text(`Foto ${i+1}`,margin,y);y+=5;try{doc.addImage(p.dataUrl,'JPEG',margin,y,78,58)}catch(e){}doc.setFont('helvetica','normal');doc.text(doc.splitTextToSize(p.caption||'Sem descrição.',94),margin+84,y+5);y+=64});sec('7. Condições Comerciais');kv('Prazo',d.prazo);kv('Garantia',d.garantia);multi('Condições',d.condicoes);
-sec('8. Assinaturas');newP(55);let lx=margin,rx=pageWidth-margin-78;if(d.sigEmp)try{doc.addImage(d.sigEmp,'PNG',lx,y,78,28)}catch(e){}if(d.sigCli)try{doc.addImage(d.sigCli,'PNG',rx,y,78,28)}catch(e){}doc.setDrawColor(60);doc.line(lx,y+33,lx+78,y+33);doc.line(rx,y+33,rx+78,y+33);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(35);doc.text(d.assEmpNome||'Responsável pela proposta',lx,y+39,{maxWidth:78});doc.text(d.assCliNome||'Cliente / Aprovador',rx,y+39,{maxWidth:78});for(let p=1;p<=doc.internal.getNumberOfPages();p++){doc.setPage(p);foot()}let file=`Proposta_Tecno_Acre_${(d.cliente||'Cliente').replace(/\\s+/g,'_')}.pdf`,blob=doc.output('blob');let saved=await saveBlob(blob,file).catch(()=>false);if(!saved)doc.save(file)}
-$('#zapBtn').onclick=()=>{if(!validate(true))return;let d=data(),phone=String(d.telCliente||'').replace(/\\D/g,''),msg=`Olá${d.contato?', '+d.contato:''}! Tudo bem?\\n\\nA TECNO ACRE - Soluções em Tecnologia Sustentável preparou uma proposta comercial para você.\\n\\n📄 Proposta: ${d.numero||'sem número informado'}\\n🔧 Serviço: ${d.titulo||d.tipoServico||'serviço solicitado'}\\n💰 Valor total: ${br(d.totals.total)}\\n⏳ Validade: ${d.validade||'conforme proposta'}\\n🛠️ Prazo de execução: ${d.prazo||'conforme alinhamento técnico'}\\n💳 Forma de pagamento: ${d.pagamento||'conforme proposta'}\\n\\nO PDF da proposta foi gerado pelo nosso aplicativo e será enviado nesta conversa para sua análise.\\n\\nQualquer dúvida, estamos à disposição.`;open(`https://wa.me/${phone?'55'+phone:''}?text=${encodeURIComponent(msg)}`,'_blank');toast('WhatsApp aberto. Anexe o PDF.')};
-function isStandalone(){return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true}
-function updateInstallButton(){const b=$('#installBtn');if(!b)return;if(isStandalone()||localStorage.getItem('ta_app_instalado')==='sim'){b.hidden=true;b.style.display='none'}}
-if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./service-worker.js').catch(console.error);
+const $ = s => document.querySelector(s);
+const $$
+= s => Array.from(document.querySelectorAll(s)); const money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }); const formEl = $('#form'); let selectedClient = null, selectedLib = null, photos = []; const defaults = [ { id: id(), tipo: 'Serviço', descricao: 'Manutenção preventiva de gerador', unidade: 'serviço', valor: 'R$ 450,00' }, { id: id(), tipo: 'Serviço', descricao: 'Teste de funcionamento em carga', unidade: 'serviço', valor: 'R$ 280,00' }, { id: id(), tipo: 'Material', descricao: 'Óleo lubrificante para gerador', unidade: 'un', valor: 'R$ 120,00' }, { id: id(), tipo: 'Deslocamento', descricao: 'Deslocamento técnico urbano', unidade: 'vb', valor: 'R$ 80,00' } ]; const tpls = [ { title: 'Manutenção Preventiva de Gerador', type: 'Manutenção em gerador', desc: 'Serviço técnico de manutenção preventiva em grupo gerador, contemplando inspeção visual, verificação de níveis, análise elétrica, teste funcional e orientações ao cliente.', etapas: '1. Inspeção visual e registro das condições do equipamento\n2. Verificação de óleo, filtros, bateria e conexões elétricas\n3. Execução da manutenção preventiva conforme necessidade\n4. Teste de funcionamento e validação operacional\n5. Entrega técnica e recomendações ao cliente' }, { title: 'Instalação Elétrica', type: 'Instalação elétrica', desc: 'Execução de serviço de instalação elétrica conforme escopo aprovado, contemplando materiais, mão de obra, testes básicos e organização técnica da instalação.', etapas: '1. Levantamento e preparação do local\n2. Instalação de infraestrutura, cabos e dispositivos\n3. Identificação, acabamento e organização\n4. Testes elétricos e entrega ao cliente' }, { title: 'Sistema Fotovoltaico', type: 'Sistema fotovoltaico', desc: 'Proposta técnica/comercial para fornecimento, instalação ou manutenção de sistema fotovoltaico.', etapas: '1. Levantamento técnico e análise do local\n2. Instalação ou manutenção dos componentes\n3. Testes de funcionamento\n4. Entrega técnica e orientações de operação' } ]; function id() { return crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()); } function toast(msg) { let e = document.createElement('div'); e.className = 'toast'; e.textContent = msg; $('#toastbox').appendChild(e); setTimeout(() => e.remove(), 4000); } function n(v) { return parseFloat(String(v || '').replace(/\./g, '').replace(',', '.').replace(/[^\d.-]/g, '')) || 0; } function br(v) { return money.format(Number(v || 0)); } function phone(v) { let d = String(v).replace(/\D/g, '').slice(0, 11); return d.length <= 10 ? d.replace(/(\d{2})(\d{4})(\d{0,4})/, (_, a, b, c) => c ? `(${a}) ${b}-${c}` : `(${a}) ${b}`) : d.replace(/(\d{2})(\d{5})(\d{0,4})/, (_, a, b, c) => c ? `(${a}) ${b}-${c}` : `(${a}) ${b}`); } function docFmt(v) { let d = String(v).replace(/\D/g, '').slice(0, 14); return d.length <= 11 ? d.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2})/, (_, a, b, c, e) => e ? `${a}.${b}.${c}-${e}` : `${a}.${b}.${c}`) : d.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, (_, a, b, c, e, f) => f ? `${a}.${b}.${c}/${e}-${f}` : `${a}.${b}.${c}/${e}`); } function dateBR(d) { if (!d) return '-'; let [y, m, dd] = d.split('-'); return `${dd}/${m}/${y}`; } function loc(k, f) { try { return JSON.parse(localStorage.getItem(k)) ?? f; } catch (e) { return f; } } function set(k, v) { localStorage.setItem(k, JSON.stringify(v)); } function clients() { return loc('ta_clients', []); } function setClients(v) { set('ta_clients', v); renderClients(); dash(); } function lib() { let l = loc('ta_lib', null); if (!l) { set('ta_lib', defaults); return defaults; } return l; } function setLib(v) { set('ta_lib', v); renderLib(); dash(); } function hist() { return loc('ta_hist', []); } function setHist(v) { set('ta_hist', v); renderHist(); dash(); } function tab(t) {
+$$('.panel').forEach(p => p.classList.toggle('active', p.id === t));
+  $$
+('[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === t)); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+$$('[data-tab]').forEach(b => b.onclick = () => tab(b.dataset.tab));
+
+$('#themeBtn').onclick = () => {
+  let th = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+  document.documentElement.dataset.theme = th;
+  localStorage.setItem('ta_theme', th);
+  $('#themeBtn').textContent = th === 'light' ? 'Tema claro' : 'Tema escuro';
+  resizeSigs();
+};
+
+let th = localStorage.getItem('ta_theme') || (matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark');
+document.documentElement.dataset.theme = th;
+$('#themeBtn').textContent = th === 'light' ? 'Tema claro' : 'Tema escuro';
+
+function addRow(it = {}) {
+  let tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><select class="itTipo">
+      <option ${it.tipo === 'Serviço' ? 'selected' : ''}>Serviço</option>
+      <option ${it.tipo === 'Material' ? 'selected' : ''}>Material</option>
+      <option ${it.tipo === 'Deslocamento' ? 'selected' : ''}>Deslocamento</option>
+      <option ${it.tipo === 'Equipamento' ? 'selected' : ''}>Equipamento</option>
+    </select></td>
+    <td><textarea class="itDesc" placeholder="Descrição">${it.descricao || ''}</textarea></td>
+    <td><select class="itUn">${['un','m','m²','m³','kg','h','dia','serviço','ponto','cj','vb']
+      .map(u => `<option ${it.unidade === u ? 'selected' : ''}>${u}</option>`).join('')}</select></td>
+    <td><input class="itQtd" inputmode="decimal" value="${it.qtd || ''}"></td>
+    <td><input class="itVal" inputmode="decimal" value="${it.valor || it.valorUnitario || ''}"></td>
+    <td><input class="itTotal" readonly></td>
+    <td><div class="mini"><button type="button" class="danger rem">Remover</button><button type="button" class="ghost save">Biblioteca</button></div></td>`;
+
+  tr.querySelectorAll('input, textarea, select').forEach(e => {
+    e.oninput = () => { rowTotal(tr); saveDraft(); };
+    e.onchange = () => { rowTotal(tr); saveDraft(); };
+    e.onblur = () => {
+      if (e.className === 'itVal') e.value = br(n(e.value));
+      rowTotal(tr);
+      saveDraft();
+    };
+  });
+
+  tr.querySelector('.rem').onclick = () => {
+    if ($('#items').children.length <= 1) {
+      tr.querySelectorAll('input, textarea').forEach(e => e.value = '');
+    } else {
+      tr.remove();
+    }
+    totals();
+    saveDraft();
+  };
+
+  tr.querySelector('.save').onclick = () => {
+    let i = rowItem(tr);
+    if (!i.descricao) return toast('Informe a descrição.');
+    let l = lib();
+    l.unshift({ id: id(), tipo: i.tipo, descricao: i.descricao, unidade: i.unidade, valor: i.valorUnitario });
+    setLib(l);
+    toast('Item salvo na biblioteca.');
+  };
+
+  $('#items').appendChild(tr);
+  rowTotal(tr);
+}
+
+function rowItem(tr) {
+  let q = tr.querySelector('.itQtd').value;
+  let v = tr.querySelector('.itVal').value;
+  return {
+    tipo: tr.querySelector('.itTipo').value,
+    descricao: tr.querySelector('.itDesc').value,
+    unidade: tr.querySelector('.itUn').value,
+    qtd: q,
+    valorUnitario: v,
+    total: n(q) * n(v)
+  };
+}
+
+function items() {
+  return $$
+('#items tr').map(rowItem).filter(i => i.descricao || n(i.qtd) || n(i.valorUnitario)); } function rowTotal(tr) { tr.querySelector('.itTotal').value = br(rowItem(tr).total); totals(); dash(); } function totals() { let sub = items().reduce((a, i) => a + i.total, 0); let d = n($('#desconto').value); let a = n($('#acrescimo').value); let t = Math.max(0, sub - d + a); $('#subV').textContent = br(sub); $('#descV').textContent = br(d); $('#acreV').textContent = br(a); $('#totalV').textContent = br(t); return { sub, desconto: d, acrescimo: a, total: t }; } function data() { let o = {}; new FormData(formEl).forEach((v, k) => o[k] = v); o.items = items(); o.totals = totals(); o.photos = photos; o.sigEmp = sigs.emp.toDataURL(); o.sigCli = sigs.cli.toDataURL(); return o; } function setData(o = {}) {
+$$('#form input, #form textarea, #form select').forEach(e => {
+    if (e.name && o[e.name] !== undefined) e.value = o[e.name];
+  });
+  $('#items').innerHTML = '';
+  (o.items || []).forEach(addRow);
+  if (!$('#items').children.length) addRow({ tipo: 'Serviço', unidade: 'serviço', qtd: '1' });
+  photos.splice(0, photos.length, ...(o.photos || []));
+  renderPhotos();
+  totals();
+  validate();
+  progress();
+  dash();
+}
+
+function saveDraft() { set('ta_draft', data()); progress(); dash(); }
+
+function loadDraft() {
+  let d = loc('ta_draft', null);
+  if (d) setData(d);
+}
+
+function validate(show = false) {
+  let ok = true;
+  $$
+('#form [required]').forEach(e => { let bad = !String(e.value || '').trim(); e.closest('.field')?.classList.toggle('bad', bad); if (bad) ok = false; }); if (show && !ok) toast('Preencha os campos obrigatórios.'); return ok; } function progress() { let r =
+$$('#form [required]');
+  let f = r.filter(e => String(e.value || '').trim()).length;
+  let p = r.length ? Math.round(f / r.length * 100) : 0;
+  $('#progText').textContent = `Preenchimento: ${p}%`;
+  $('#progFill').style.width = p + '%';
+}
+
+function dash() {
+  let sub = items().reduce((a, i) => a + i.total, 0);
+  let d = n($('#desconto').value);
+  let a = n($('#acrescimo').value);
+  let t = Math.max(0, sub - d + a);
+  $('#mTotal').textContent = br(t);
+  $('#mItems').textContent = items().length;
+  $('#mClients').textContent = clients().length;
+  $('#mProps').textContent = hist().length;
+  $('#mStatus').textContent = $('#status').value || 'Rascunho';
+}
+
+$('#addItemBtn').onclick = () => { addRow(); saveDraft(); tab('proposta'); toast('Item adicionado.'); };
+
+['desconto', 'acrescimo'].forEach(i => {
+  $('#' + i).oninput = () => { totals(); saveDraft(); };
+  $('#' + i).onblur = e => { e.target.value = br(n(e.target.value)); totals(); saveDraft(); };
+});
+
+['telEmp', 'telCliente', 'cadTel'].forEach(i => {
+  $('#' + i).oninput = e => { e.target.value = phone(e.target.value); };
+});
+
+['doc', 'cadDoc'].forEach(i => {
+  $('#' + i).oninput = e => { e.target.value = docFmt(e.target.value); };
+});
+
+formEl.oninput = () => { validate(); saveDraft(); };
+formEl.onchange = () => { validate(); saveDraft(); };
+
+function renderClients() {
+  let list = $('#clientsList');
+  let c = clients();
+  list.innerHTML = c.length ? '' : '<p class="hint">Nenhum cliente salvo ainda.</p>';
+  c.forEach(x => {
+    let e = document.createElement('div');
+    e.className = 'item';
+    e.innerHTML = `
+      <header><h3>${x.nome}</h3><span class="badge">Cliente</span></header>
+      <p>${x.resp || '-'} • ${x.tel || '-'} • ${x.email || '-'}</p>
+      <p>${x.end || '-'}</p>
+      <div class="mini"><button class="secondary">Usar</button><button class="ghost">Editar</button><button class="danger">Excluir</button></div>`;
+    let [u, ed, del] = e.querySelectorAll('button');
+    u.onclick = () => useC(x);
+    ed.onclick = () => fillC(x);
+    del.onclick = () => setClients(c.filter(y => y.id !== x.id));
+    list.appendChild(e);
+  });
+}
+
+function fillC(c) {
+  selectedClient = c.id;
+  $('#cadNome').value = c.nome || '';
+  $('#cadDoc').value = c.doc || '';
+  $('#cadResp').value = c.resp || '';
+  $('#cadTel').value = c.tel || '';
+  $('#cadEmail').value = c.email || '';
+  $('#cadEnd').value = c.end || '';
+  toast('Cliente carregado.');
+}
+
+function useC(c) {
+  $('#cliente').value = c.nome || '';
+  $('#doc').value = c.doc || '';
+  $('#contato').value = c.resp || '';
+  $('#telCliente').value = c.tel || '';
+  $('#emailCliente').value = c.email || '';
+  $('#endereco').value = c.end || '';
+  saveDraft();
+  tab('proposta');
+  toast('Cliente aplicado.');
+}
+
+$('#saveClient').onclick = () => {
+  let nome = $('#cadNome').value.trim();
+  if (!nome) return toast('Informe o cliente.');
+  let c = clients();
+  let o = {
+    id: selectedClient || id(),
+    nome,
+    doc: $('#cadDoc').value,
+    resp: $('#cadResp').value,
+    tel: $('#cadTel').value,
+    email: $('#cadEmail').value,
+    end: $('#cadEnd').value
+  };
+  let ix = c.findIndex(x => x.id === o.id);
+  if (ix >= 0) c[ix] = o; else c.unshift(o);
+  selectedClient = o.id;
+  setClients(c);
+  toast('Cliente salvo.');
+};
+
+$('#useClient').onclick = () => {
+  let c = clients().find(x => x.id === selectedClient);
+  c ? useC(c) : toast('Selecione/salve um cliente.');
+};
+
+function renderLib() {
+  let list = $('#libList');
+  let l = lib();
+  list.innerHTML = '';
+  l.forEach(x => {
+    let e = document.createElement('div');
+    e.className = 'item';
+    e.innerHTML = `
+      <header><h3>${x.descricao}</h3><span class="badge">${x.tipo}</span></header>
+      <p>${x.unidade} • ${x.valor || 'R$ 0,00'}</p>
+      <div class="mini"><button class="secondary">Adicionar</button><button class="ghost">Editar</button><button class="danger">Excluir</button></div>`;
+    let [a, ed, del] = e.querySelectorAll('button');
+    a.onclick = () => addLibItem(x);
+    ed.onclick = () => fillL(x);
+    del.onclick = () => setLib(l.filter(y => y.id !== x.id));
+    list.appendChild(e);
+  });
+}
+
+function fillL(x) {
+  selectedLib = x.id;
+  $('#libTipo').value = x.tipo;
+  $('#libDesc').value = x.descricao;
+  $('#libUn').value = x.unidade;
+  $('#libVal').value = x.valor;
+  toast('Item carregado.');
+}
+
+function addLibItem(x) {
+  addRow({ tipo: x.tipo, descricao: x.descricao, unidade: x.unidade, qtd: '1', valor: x.valor });
+  saveDraft();
+  tab('proposta');
+  toast('Item adicionado.');
+}
+
+$('#saveLib').onclick = () => {
+  let d = $('#libDesc').value.trim();
+  if (!d) return toast('Informe a descrição.');
+  let l = lib();
+  let o = {
+    id: selectedLib || id(),
+    tipo: $('#libTipo').value,
+    descricao: d,
+    unidade: $('#libUn').value,
+    valor: $('#libVal').value
+  };
+  let ix = l.findIndex(x => x.id === o.id);
+  if (ix >= 0) l[ix] = o; else l.unshift(o);
+  selectedLib = o.id;
+  setLib(l);
+  toast('Item salvo.');
+};
+
+$('#addLib').onclick = () => {
+  let x = lib().find(i => i.id === selectedLib);
+  x ? addLibItem(x) : toast('Selecione/salve um item.');
+};
+
+$('#libVal').onblur = e => { e.target.value = br(n(e.target.value)); };
+
+function renderTpls() {
+  let list = $('#tplList');
+  list.innerHTML = '';
+  tpls.forEach(t => {
+    let e = document.createElement('div');
+    e.className = 'item';
+    e.innerHTML = `
+      <header><h3>${t.title}</h3><span class="badge ok">Template</span></header>
+      <p>${t.desc}</p>
+      <div class="mini"><button class="secondary">Aplicar Template</button></div>`;
+    e.querySelector('button').onclick = () => {
+      $('#tipoServico').value = t.type;
+      $('#titulo').value = t.title;
+      $('#descricao').value = t.desc;
+      $('#etapas').value = t.etapas;
+      saveDraft();
+      validate();
+      tab('proposta');
+      toast('Template aplicado.');
+    };
+    list.appendChild(e);
+  });
+}
+
+async function resizeImg(file) {
+  return new Promise((res, rej) => {
+    let r = new FileReader();
+    r.onload = () => {
+      let img = new Image();
+      img.onload = () => {
+        let s = Math.min(1, 1280 / Math.max(img.width, img.height));
+        let w = img.width * s, h = img.height * s;
+        let c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        res(c.toDataURL('image/jpeg', .82));
+      };
+      img.onerror = rej;
+      img.src = r.result;
+    };
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+$('#photoInput').onchange = async e => {
+  for (let f of Array.from(e.target.files || [])) {
+    if (f.type.startsWith('image/')) {
+      photos.push({ id: id(), dataUrl: await resizeImg(f), caption: '' });
+    }
+  }
+  e.target.value = '';
+  renderPhotos();
+  saveDraft();
+  toast('Foto anexada.');
+};
+
+$('#clearPhotos').onclick = () => {
+  photos = [];
+  renderPhotos();
+  saveDraft();
+};
+
+function renderPhotos() {
+  let g = $('#photos');
+  g.innerHTML = photos.length ? '' : '<p class="hint">Nenhuma foto anexada.</p>';
+  photos.forEach((p, i) => {
+    let e = document.createElement('div');
+    e.className = 'photo';
+    e.innerHTML = `
+      <img src="${p.dataUrl}" alt="Foto ${i + 1}">
+      <textarea placeholder="Descrição da foto" style="margin-top:8px">${p.caption || ''}</textarea>
+      <button class="danger" type="button" style="margin-top:6px;width:100%">Remover</button>`;
+    e.querySelector('textarea').oninput = x => { p.caption = x.target.value; saveDraft(); };
+    e.querySelector('button').onclick = () => { photos.splice(i, 1); renderPhotos(); saveDraft(); };
+    g.appendChild(e);
+  });
+}
+
+$('#savePropBtn').onclick = () => {
+  if (!validate(true)) return;
+  let h = hist();
+  let d = data();
+  d.id = d.numero || id();
+  d.updatedAt = new Date().toISOString();
+  let ix = h.findIndex(p => p.id === d.id);
+  if (ix >= 0) h[ix] = d; else h.unshift(d);
+  setHist(h);
+  toast('Proposta salva.');
+};
+
+function renderHist() {
+  let list = $('#histList');
+  let q = ($('#histBusca').value || '').toLowerCase();
+  let st = $('#histStatus').value;
+  let h = hist();
+  if (q) h = h.filter(p => [p.numero, p.cliente, p.titulo, p.tipoServico].some(v => String(v || '').toLowerCase().includes(q)));
+  if (st) h = h.filter(p => p.status === st);
+  list.innerHTML = h.length ? '' : '<p class="hint">Nenhuma proposta salva.</p>';
+  h.forEach(p => {
+    let e = document.createElement('div');
+    e.className = 'item';
+    let cls = p.status === 'Aprovada' ? 'ok' : (p.status === 'Enviada' || p.status === 'Visualizada') ? 'warn' : '';
+    e.innerHTML = `
+      <header><h3>${p.numero || 'Sem número'} • ${p.cliente || 'Cliente não informado'}</h3><span class="badge ${cls}">${p.status || 'Rascunho'}</span></header>
+      <p>${p.titulo || p.tipoServico || '-'} • ${br(p.totals?.total || 0)}</p>
+      <p>Atualizada em: ${p.updatedAt ? new Date(p.updatedAt).toLocaleString('pt-BR') : '-'}</p>
+      <div class="mini"><button class="secondary">Abrir</button><button class="danger">Excluir</button></div>`;
+    let [open, del] = e.querySelectorAll('button');
+    open.onclick = () => { setData(p); tab('proposta'); toast('Proposta carregada.'); };
+    del.onclick = () => setHist(hist().filter(x => x.id !== p.id));
+    list.appendChild(e);
+  });
+}
+
+$('#histBusca').oninput = renderHist;
+$('#histStatus').onchange = renderHist;
+$('#histRefresh').onclick = renderHist;
+
+/* ─── Assinaturas ─── */
+function pad(canvas) {
+  let ctx = canvas.getContext('2d');
+  let draw = false, has = false, img = null;
+
+  function resize() {
+    if (has) img = canvas.toDataURL();
+    let r = canvas.getBoundingClientRect();
+    let ratio = Math.max(devicePixelRatio || 1, 1);
+    canvas.width = r.width * ratio;
+    canvas.height = r.height * ratio;
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    ctx.lineWidth = 2.2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#0f172a';
+    if (img) {
+      let im = new Image();
+      im.onload = () => ctx.drawImage(im, 0, 0, r.width, r.height);
+      im.src = img;
+    }
+  }
+
+  function pos(e) {
+    let r = canvas.getBoundingClientRect();
+    let t = e.touches ? e.touches[0] : e;
+    return { x: t.clientX - r.left, y: t.clientY - r.top };
+  }
+
+  function st(e) {
+    e.preventDefault();
+    draw = true;
+    let p = pos(e);
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+  }
+
+  function mv(e) {
+    if (!draw) return;
+    e.preventDefault();
+    let p = pos(e);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+    has = true;
+    saveDraft();
+  }
+
+  function en(e) {
+    if (!draw) return;
+    e.preventDefault();
+    draw = false;
+    saveDraft();
+  }
+
+  ['mousedown', 'touchstart'].forEach(ev => canvas.addEventListener(ev, st, { passive: false }));
+  ['mousemove', 'touchmove'].forEach(ev => canvas.addEventListener(ev, mv, { passive: false }));
+  ['mouseup', 'mouseleave', 'touchend'].forEach(ev => canvas.addEventListener(ev, en, { passive: false }));
+  addEventListener('resize', resize);
+  setTimeout(resize, 120);
+
+  return {
+    clear() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      has = false;
+      img = null;
+      saveDraft();
+    },
+    toDataURL() { return has ? canvas.toDataURL('image/png') : ''; },
+    resize
+  };
+}
+
+const sigs = { emp: pad($('#sigEmp')), cli: pad($('#sigCli')) };
+
+function resizeSigs() {
+  setTimeout(() => Object.values(sigs).forEach(s => s.resize()), 80);
+}
+
+$('#clearSigEmp').onclick = () => sigs.emp.clear();
+$('#clearSigCli').onclick = () => sigs.cli.clear();
+
+/* ─── Limpar proposta ─── */
+$('#clearBtn').onclick = () => $('#confirmDialog').showModal();
+$('#cancelClear').onclick = () => $('#confirmDialog').close();
+
+$('#confirmClear').onclick = () => {
+  formEl.reset();
+  $('#items').innerHTML = '';
+  addRow({ tipo: 'Serviço', unidade: 'serviço', qtd: '1' });
+  photos = [];
+  renderPhotos();
+  sigs.emp.clear();
+  sigs.cli.clear();
+  localStorage.removeItem('ta_draft');
+  $('#data').value = new Date().toISOString().slice(0, 10);
+  totals();
+  progress();
+  dash();
+  $('#confirmDialog').close();
+  toast('Proposta limpa.');
+};
+
+/* ─── PDF ─── */
+async function loadImg(src) {
+  let r = await fetch(src);
+  let b = await r.blob();
+  return await new Promise((res, rej) => {
+    let fr = new FileReader();
+    fr.onloadend = () => res(fr.result);
+    fr.onerror = rej;
+    fr.readAsDataURL(b);
+  });
+}
+
+async function saveBlob(blob, name) {
+  if ('showSaveFilePicker' in window) {
+    let h = await showSaveFilePicker({
+      suggestedName: name,
+      types: [{ description: 'PDF', accept: { 'application/pdf': ['.pdf'] } }]
+    });
+    let w = await h.createWritable();
+    await w.write(blob);
+    await w.close();
+    return true;
+  }
+  return false;
+}
+
+$('#pdfBtn').onclick = async () => {
+  if (!validate(true)) return;
+  await pdf();
+  toast('PDF gerado.');
+};
+
+async function pdf() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  const d = data();
+  const margin = 14;
+  const pageWidth = 210;
+  const contentWidth = pageWidth - margin * 2;
+  let y = 16;
+
+  function newP(e = 10) {
+    if (y + e > 276) { foot(); doc.addPage(); y = 18; }
+  }
+
+  function foot() {
+    let p = doc.internal.getCurrentPageInfo().pageNumber;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(120);
+    doc.text('TECNO ACRE — Soluções em Tecnologia Sustentável', margin, 290);
+    doc.text(`Página ${p}`, pageWidth - margin - 16, 290);
+  }
+
+  function sec(t) {
+    newP(13);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12.2);
+    doc.setTextColor(15, 23, 42);
+    doc.text(t, margin, y);
+    y += 7;
+  }
+
+  function kv(l, v, w = 52) {
+    newP(10);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9.7);
+    doc.setTextColor(20);
+    doc.text(doc.splitTextToSize(l + ':', w - 2), margin, y);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(35);
+    let lines = doc.splitTextToSize(String(v || '-'), contentWidth - w);
+    doc.text(lines, margin + w, y);
+    y += Math.max(5.2, lines.length * 5.2);
+  }
+
+  function multi(l, v) {
+    newP(15);
+    doc.setFont('helvetica', 'bold');
+    doc.text(l + ':', margin, y);
+    y += 5.2;
+    doc.setFont('helvetica', 'normal');
+    let lines = doc.splitTextToSize(String(v || '-'), contentWidth);
+    doc.text(lines, margin, y);
+    y += Math.max(7, lines.length * 5.2) + 2;
+  }
+
+  function line(t) {
+    let lines = doc.splitTextToSize(t, contentWidth);
+    newP(lines.length * 5.2 + 2);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.5);
+    doc.text(lines, margin, y);
+    y += Math.max(5.6, lines.length * 5.2);
+  }
+
+  let logo = await loadImg('./brand-logo.png').catch(() => null);
+  if (logo) {
+    try { doc.addImage(logo, 'PNG', margin, y, 40, 24); } catch (e) {}
+  }
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(15, 23, 42);
+  doc.text('ORÇAMENTO E PROPOSTA COMERCIAL', margin + 48, y + 5, { maxWidth: 140 });
+  doc.setFontSize(10.2);
+  doc.setTextColor(55, 65, 81);
+  doc.text('TECNO ACRE — Soluções em Tecnologia Sustentável', margin + 48, y + 14, { maxWidth: 140 });
+  doc.setDrawColor(255, 138, 0);
+  doc.line(margin, y + 32, pageWidth - margin, y + 32);
+  y = 56;
+
+  sec('1. Dados da Proposta');
+  kv('Nº da proposta', d.numero);
+  kv('Data', dateBR(d.data));
+  kv('Status', d.status);
+  kv('Validade', d.validade);
+  kv('Responsável', d.respCom);
+  kv('WhatsApp', d.telEmp);
+  kv('E-mail', d.emailEmp);
+
+  sec('2. Dados do Cliente');
+  kv('Cliente / Empresa', d.cliente);
+  kv('CPF / CNPJ', d.doc);
+  kv('Responsável', d.contato);
+  kv('WhatsApp', d.telCliente);
+  kv('E-mail', d.emailCliente);
+  kv('Local do serviço', d.endereco);
+
+  sec('3. Dados do Serviço');
+  kv('Tipo de serviço', d.tipoServico);
+  kv('Título', d.titulo);
+  kv('Prioridade', d.prioridade);
+  multi('Descrição geral', d.descricao);
+
+  sec('4. Itens de Material e Serviços');
+  let widths = [22, 70, 18, 18, 28, 28];
+  let heads = ['Tipo', 'Descrição', 'Un.', 'Qtd.', 'Unitário', 'Total'];
+  let x = margin;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8.8);
+  doc.setDrawColor(255, 138, 0);
+  heads.forEach((h, i) => {
+    doc.rect(x, y, widths[i], 8);
+    doc.text(h, x + 1.5, y + 5.3);
+    x += widths[i];
+  });
+  y += 8;
+  doc.setFont('helvetica', 'normal');
+  d.items.forEach(it => {
+    newP(14);
+    x = margin;
+    let row = [it.tipo, it.descricao, it.unidade, it.qtd, br(n(it.valorUnitario)), br(it.total)];
+    let rowH = Math.max(9, 4 + doc.splitTextToSize(it.descricao || '-', widths[1] - 3).length * 4.4);
+    row.forEach((c, i) => {
+      doc.rect(x, y, widths[i], rowH);
+      doc.text(doc.splitTextToSize(String(c || '-'), widths[i] - 3), x + 1.5, y + 5);
+      x += widths[i];
+    });
+    y += rowH;
+  });
+  y += 5;
+  kv('Subtotal', br(d.totals.sub));
+  kv('Desconto', br(d.totals.desconto));
+  kv('Acréscimo', br(d.totals.acrescimo));
+  kv('Total geral', br(d.totals.total));
+  kv('Forma de pagamento', d.pagamento);
+
+  sec('5. Etapas dos Serviços');
+  String(d.etapas || '-').split('\n').forEach(line);
+
+  sec('6. Fotos e Evidências');
+  if (!d.photos.length) {
+    line('Nenhuma foto anexada.');
+  } else {
+    d.photos.forEach((p, i) => {
+      newP(78);
+      doc.setFont('helvetica', 'bold');
+      doc.text(`Foto ${i + 1}`, margin, y);
+      y += 5;
+      try { doc.addImage(p.dataUrl, 'JPEG', margin, y, 78, 58); } catch (e) {}
+      doc.setFont('helvetica', 'normal');
+      doc.text(doc.splitTextToSize(p.caption || 'Sem descrição.', 94), margin + 84, y + 5);
+      y += 64;
+    });
+  }
+
+  sec('7. Condições Comerciais');
+  kv('Prazo', d.prazo);
+  kv('Garantia', d.garantia);
+  multi('Condições', d.condicoes);
+
+  sec('8. Assinaturas');
+  newP(55);
+  let lx = margin, rx = pageWidth - margin - 78;
+  if (d.sigEmp) try { doc.addImage(d.sigEmp, 'PNG', lx, y, 78, 28); } catch (e) {}
+  if (d.sigCli) try { doc.addImage(d.sigCli, 'PNG', rx, y, 78, 28); } catch (e) {}
+  doc.setDrawColor(60);
+  doc.line(lx, y + 33, lx + 78, y + 33);
+  doc.line(rx, y + 33, rx + 78, y + 33);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(35);
+  doc.text(d.assEmpNome || 'Responsável pela proposta', lx, y + 39, { maxWidth: 78 });
+  doc.text(d.assCliNome || 'Cliente / Aprovador', rx, y + 39, { maxWidth: 78 });
+
+  for (let p = 1; p <= doc.internal.getNumberOfPages(); p++) { doc.setPage(p); foot(); }
+
+  let file = `Proposta_Tecno_Acre_${(d.cliente || 'Cliente').replace(/\s+/g, '_')}.pdf`;
+  let blob = doc.output('blob');
+  let saved = await saveBlob(blob, file).catch(() => false);
+  if (!saved) doc.save(file);
+}
+
+/* ─── WhatsApp ─── */
+$('#zapBtn').onclick = () => {
+  if (!validate(true)) return;
+  let d = data();
+  let phoneNum = String(d.telCliente || '').replace(/\D/g, '');
+  let msg = `Olá${d.contato ? ', ' + d.contato : ''}! Tudo bem?\n\nA TECNO ACRE — Soluções em Tecnologia Sustentável preparou uma proposta comercial para você.\n\n📄 Proposta: ${d.numero || 'sem número informado'}\n🔧 Serviço: ${d.titulo || d.tipoServico || 'serviço solicitado'}\n💰 Valor total: ${br(d.totals.total)}\n⏳ Validade: ${d.validade || 'conforme proposta'}\n🛠️ Prazo de execução: ${d.prazo || 'conforme alinhamento técnico'}\n💳 Forma de pagamento: ${d.pagamento || 'conforme proposta'}\n\nO PDF da proposta foi gerado pelo nosso aplicativo e será enviado nesta conversa para sua análise.\n\nQualquer dúvida, estamos à disposição.`;
+  open(`https://wa.me/${phoneNum ? '55' + phoneNum : ''}?text=${encodeURIComponent(msg)}`, '_blank');
+  toast('WhatsApp aberto. Anexe o PDF.');
+};
+
+/* ─── PWA ─── */
+function isStandalone() {
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+
+function updateInstallButton() {
+  const b = $('#installBtn');
+  if (!b) return;
+  if (isStandalone() || localStorage.getItem('ta_app_instalado') === 'sim') {
+    b.hidden = true;
+    b.style.display = 'none';
+  }
+}
+
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('./service-worker.js').catch(console.error);
+}
+
 updateInstallButton();
-addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredPrompt=e;if(!isStandalone()&&localStorage.getItem('ta_app_instalado')!=='sim'){$('#installBtn').hidden=false;$('#installBtn').style.display='inline-flex'}});
-addEventListener('appinstalled',()=>{localStorage.setItem('ta_app_instalado','sim');window.deferredPrompt=null;updateInstallButton();toast('Aplicativo instalado com sucesso.')});
-$('#installBtn').onclick=async()=>{if(!window.deferredPrompt)return;window.deferredPrompt.prompt();let c=await window.deferredPrompt.userChoice;if(c&&c.outcome==='accepted'){localStorage.setItem('ta_app_instalado','sim')}window.deferredPrompt=null;updateInstallButton()};
-$('#data').value=new Date().toISOString().slice(0,10);loadDraft();if(!$('#items').children.length)addRow({tipo:'Serviço',unidade:'serviço',qtd:'1'});renderClients();renderLib();renderTpls();renderHist();renderPhotos();totals();dash();validate();progress();dash();
+
+addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  window.deferredPrompt = e;
+  if (!isStandalone() && localStorage.getItem('ta_app_instalado') !== 'sim') {
+    $('#installBtn').hidden = false;
+    $('#installBtn').style.display = 'inline-flex';
+  }
+});
+
+addEventListener('appinstalled', () => {
+  localStorage.setItem('ta_app_instalado', 'sim');
+  window.deferredPrompt = null;
+  updateInstallButton();
+  toast('Aplicativo instalado com sucesso.');
+});
+
+$('#installBtn').onclick = async () => {
+  if (!window.deferredPrompt) return;
+  window.deferredPrompt.prompt();
+  let c = await window.deferredPrompt.userChoice;
+  if (c && c.outcome === 'accepted') {
+    localStorage.setItem('ta_app_instalado', 'sim');
+  }
+  window.deferredPrompt = null;
+  updateInstallButton();
+};
+
+/* ─── Inicialização ─── */
+$('#data').value = new Date().toISOString().slice(0, 10);
+loadDraft();
+if (!$('#items').children.length) addRow({ tipo: 'Serviço', unidade: 'serviço', qtd: '1' });
+renderClients();
+renderLib();
+renderTpls();
+renderHist();
+renderPhotos();
+totals();
+validate();
+progress();
+dash();
 </script>
-</body></html>
+</body>
+</html>
