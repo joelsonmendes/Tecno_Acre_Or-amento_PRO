@@ -1,675 +1,219 @@
-<!DOCTYPE html>
-<html lang="pt-BR" data-theme="auto">
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TECNO ACRE | Orçamento e Proposta Comercial</title>
-  <meta name="theme-color" content="#0f172a" />
-  <link rel="manifest" href="./manifest.json" />
-  <link rel="icon" type="image/png" sizes="96x96" href="./favicon-96.png" />
-  <style>
-    :root {
-      --font: Inter, Roboto, Arial, Helvetica, sans-serif;
-      --radius-sm: 10px;
-      --radius: 16px;
-      --radius-lg: 22px;
-      --transition: 180ms ease;
-      --shadow: 0 18px 45px rgba(0, 0, 0, .24);
-      --shadow-soft: 0 10px 28px rgba(0, 0, 0, .16);
-
-      --orange: #ff8a00;
-      --orange-2: #ff6a00;
-      --blue: #29b6f6;
-      --blue-2: #1d4ed8;
-      --green: #22c55e;
-      --red: #ef4444;
-      --yellow: #f59e0b;
-
-      --bg: #080c14;
-      --surface: #0f172a;
-      --surface-2: #111b2f;
-      --card: #101827;
-      --card-2: #0d1424;
-      --text: #f0f5fb;
-      --text-strong: #ffffff;
-      --muted: #a8b3c6;
-      --line: #1f2d45;
-      --input: #0b1322;
-      --input-border: #2c3a56;
-      --focus: rgba(41,182,246,.22);
-      --neon: rgba(41,182,246,.16);
-      --neon-2: rgba(255,138,0,.12);
-      --toast-bg: rgba(15,23,42,.94);
-      --toast-text: #f8fafc;
-      color-scheme: dark;
-    }
-    :root[data-theme="light"] {
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --surface-2: #f1f5f9;
-      --card: #ffffff;
-      --card-2: #f8fafc;
-      --text: #0f172a;
-      --text-strong: #020617;
-      --muted: #475569;
-      --line: #cbd5e1;
-      --input: #ffffff;
-      --input-border: #cbd5e1;
-      --focus: rgba(29,78,216,.16);
-      --neon: rgba(29,78,216,.11);
-      --neon-2: rgba(255,138,0,.14);
-      --toast-bg: rgba(255,255,255,.96);
-      --toast-text: #0f172a;
-      color-scheme: light;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; min-height: 100%; font-family: var(--font); background: var(--bg); color: var(--text); }
-    body {
-      background:
-        radial-gradient(circle at 20% 0%, rgba(41,182,246,.12), transparent 34%),
-        radial-gradient(circle at 82% 12%, rgba(255,138,0,.10), transparent 30%),
-        linear-gradient(180deg, var(--bg), var(--surface-2));
-      transition: background var(--transition), color var(--transition);
-    }
-    a { color: inherit; }
-    .wrap { max-width: 1220px; margin: 0 auto; padding: 18px; }
-    .topbar {
-      display: grid;
-      grid-template-columns: 132px 1fr auto;
-      gap: 20px;
-      align-items: center;
-      background:
-        linear-gradient(180deg, color-mix(in srgb, var(--surface) 92%, transparent), color-mix(in srgb, var(--surface-2) 92%, transparent)) padding-box,
-        linear-gradient(135deg, rgba(41,182,246,.58), rgba(34,197,94,.22), rgba(255,138,0,.42)) border-box;
-      border: 1px solid transparent;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow), 0 0 26px var(--neon);
-      padding: 18px;
-      margin-bottom: 16px;
-    }
-    .brand-image {
-      width: 120px; height: 92px; object-fit: contain;
-      border-radius: 18px; background: #fff; padding: 8px;
-      border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-      box-shadow: var(--shadow-soft);
-    }
-    .headline h1 {
-      margin: 0 0 8px;
-      font-size: clamp(1.35rem, 2.7vw, 2rem);
-      line-height: 1.18;
-      color: var(--text-strong);
-      letter-spacing: -.02em;
-    }
-    .headline p { margin: 0; color: var(--muted); line-height: 1.5; max-width: 820px; }
-    .header-actions { display: flex; flex-direction: column; gap: 10px; align-items: stretch; min-width: 160px; }
-    .theme-toggle { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 10px 12px; border-radius: 999px; background: color-mix(in srgb, var(--card) 80%, transparent); border: 1px solid var(--line); color: var(--text); }
-    .theme-toggle span { font-size: .86rem; font-weight: 700; }
-    .switch { width: 46px; height: 26px; border-radius: 999px; background: color-mix(in srgb, var(--blue) 28%, var(--surface)); border: 1px solid var(--line); position: relative; }
-    .switch::after { content: ""; position: absolute; width: 20px; height: 20px; border-radius: 50%; top: 2px; left: 2px; background: var(--text-strong); transition: transform var(--transition); }
-    :root[data-theme="light"] .switch::after { transform: translateX(20px); }
-    .progress-card { display: grid; gap: 7px; font-size: .83rem; color: var(--muted); }
-    .progress-track { height: 8px; background: color-mix(in srgb, var(--line) 40%, transparent); border-radius: 999px; overflow: hidden; }
-    .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--blue), var(--orange)); transition: width var(--transition); }
-    .toolbar {
-      position: sticky; top: 0; z-index: 50;
-      display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0;
-      padding: 12px; border: 1px solid var(--line); border-radius: var(--radius);
-      background: color-mix(in srgb, var(--surface) 88%, transparent);
-      backdrop-filter: blur(12px);
-      box-shadow: var(--shadow-soft);
-    }
-    button, .file-label {
-      appearance: none; border: 0; cursor: pointer; color: #fff;
-      background: linear-gradient(135deg, var(--orange), var(--orange-2));
-      padding: 12px 16px; border-radius: 12px; font-weight: 800;
-      box-shadow: 0 8px 20px rgba(0,0,0,.16);
-      font-size: .95rem; transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    }
-    button:hover, .file-label:hover { transform: translateY(-1px); filter: brightness(1.04); box-shadow: 0 10px 24px rgba(0,0,0,.22); }
-    button:active { transform: translateY(0); }
-    button.secondary { background: linear-gradient(135deg, var(--blue-2), var(--blue)); }
-    button.success { background: linear-gradient(135deg, #16a34a, var(--green)); }
-    button.danger { background: linear-gradient(135deg, #dc2626, var(--red)); }
-    button.ghost { background: color-mix(in srgb, var(--card) 88%, transparent); border: 1px solid var(--line); color: var(--text); }
-    button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-    button.loading { opacity: .8; pointer-events: none; }
-    button.loading::after { content: ""; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.5); border-top-color: #fff; border-radius: 50%; animation: spin 800ms linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .grid { display: grid; gap: 16px; }
-    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .card {
-      position: relative;
-      background:
-        linear-gradient(180deg, var(--card), var(--card-2)) padding-box,
-        linear-gradient(135deg, rgba(41,182,246,.48), rgba(34,197,94,.18), rgba(255,138,0,.34)) border-box;
-      border: 1px solid transparent;
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow-soft), 0 0 18px var(--neon);
-      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-    }
-    .card:hover { box-shadow: var(--shadow-soft), 0 0 24px var(--neon), 0 0 22px var(--neon-2); }
-    .section-title { margin: 0 0 14px; font-size: 1.12rem; color: var(--text-strong); grid-column: 1/-1; display:flex; align-items:center; gap:10px; }
-    .section-title span { color: var(--blue); background: color-mix(in srgb, var(--blue) 13%, transparent); border:1px solid color-mix(in srgb, var(--blue) 25%, transparent); min-width: 30px; height: 30px; border-radius: 999px; display:inline-flex; align-items:center; justify-content:center; font-size:.9rem; }
-    .field { display: flex; flex-direction: column; gap: 8px; }
-    .field label { color: var(--text); font-weight: 800; font-size: .94rem; }
-    .required label::after { content: " *"; color: var(--orange); }
-    input, textarea, select {
-      width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--input-border);
-      background: var(--input); color: var(--text); font-size: .98rem; outline: none;
-      transition: border-color var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
-    }
-    textarea { min-height: 96px; resize: vertical; }
-    input::placeholder, textarea::placeholder { color: color-mix(in srgb, var(--muted) 70%, transparent); }
-    input:focus, textarea:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--focus); }
-    .invalid input, .invalid textarea, .invalid select { border-color: var(--red); box-shadow: 0 0 0 3px rgba(239,68,68,.13); }
-    .error-msg { color: var(--red); font-size: .8rem; display: none; }
-    .invalid .error-msg { display: block; }
-    .hint { color: var(--muted); font-size: .82rem; }
-
-    .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; min-width: 780px; }
-    th, td { padding: 9px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
-    th { color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, transparent); font-size: .88rem; }
-    td input, td select, td textarea { min-height: 42px; }
-    td textarea { min-height: 60px; }
-    .mini-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    .mini-actions button { padding: 8px 10px; min-height: auto; font-size: .82rem; box-shadow: none; }
-
-    .totals { margin-top: 14px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-    .total-box { background: color-mix(in srgb, var(--surface) 70%, transparent); border: 1px solid var(--line); border-radius: 14px; padding: 12px; }
-    .total-box strong { display:block; color: var(--blue); margin-bottom: 6px; font-size: .88rem; }
-    .total-box span { font-size: 1.15rem; font-weight: 900; color: var(--text-strong); }
-    .total-box.grand { border-color: color-mix(in srgb, var(--orange) 55%, var(--line)); box-shadow: 0 0 18px var(--neon-2); }
-    .signature-pad { width: 100%; height: 190px; background: var(--signature-bg, #fff); border: 2px dashed var(--input-border); border-radius: 16px; touch-action: none; display: block; }
-    .signature-actions { display:flex; gap:10px; margin-top:10px; flex-wrap: wrap; }
-    .footer-note { margin: 22px 0 10px; text-align: center; color: var(--muted); }
-    .toast-wrap { position: fixed; right: 16px; bottom: 16px; z-index: 200; display: grid; gap: 10px; max-width: min(420px, calc(100vw - 32px)); }
-    .toast { padding: 13px 14px; border-radius: 14px; background: var(--toast-bg); color: var(--toast-text); border: 1px solid var(--line); box-shadow: var(--shadow); animation: toastIn 220ms ease; }
-    .toast.success { border-color: color-mix(in srgb, var(--green) 55%, var(--line)); }
-    .toast.error { border-color: color-mix(in srgb, var(--red) 55%, var(--line)); }
-    .toast.warn { border-color: color-mix(in srgb, var(--yellow) 55%, var(--line)); }
-    @keyframes toastIn { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-    dialog { border: 1px solid var(--line); border-radius: 18px; background: var(--surface); color: var(--text); box-shadow: var(--shadow); max-width: 440px; width: calc(100% - 28px); }
-    dialog::backdrop { background: rgba(0,0,0,.58); backdrop-filter: blur(3px); }
-    .dialog-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:18px; }
-
-    @media (max-width: 960px) {
-      .topbar { grid-template-columns: 1fr; text-align:center; }
-      .brand-image { margin:auto; width: min(240px, 80%); height:auto; aspect-ratio:auto; }
-      .header-actions { max-width: 320px; margin:auto; width:100%; }
-      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-      .totals { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 680px) {
-      .wrap { padding: 10px; }
-      .toolbar { position: static; display: grid; grid-template-columns: 1fr; }
-      button, .file-label { width: 100%; min-height: 48px; }
-      .card { padding: 14px; }
-      input, textarea, select { font-size: 16px; min-height: 46px; }
-      .totals { grid-template-columns: 1fr; }
-      .table-wrap { overflow: visible; }
-      table, thead, tbody, tr, th, td { display:block; width:100%; min-width:0; }
-      table { min-width:0; }
-      thead { display:none; }
-      tbody tr { border:1px solid var(--line); border-radius:14px; padding:12px; margin-bottom:12px; background: color-mix(in srgb, var(--surface) 62%, transparent); }
-      td { border:0; padding:7px 0; }
-      td::before { display:block; color: var(--muted); font-size:.82rem; font-weight:800; margin-bottom:5px; }
-      #itemsTable td:nth-child(1)::before { content:"Tipo"; }
-      #itemsTable td:nth-child(2)::before { content:"Descrição"; }
-      #itemsTable td:nth-child(3)::before { content:"Unidade"; }
-      #itemsTable td:nth-child(4)::before { content:"Quantidade"; }
-      #itemsTable td:nth-child(5)::before { content:"Valor unitário"; }
-      #itemsTable td:nth-child(6)::before { content:"Total"; }
-      #itemsTable td:nth-child(7)::before { content:"Ação"; }
-      .mini-actions { display:grid; grid-template-columns:1fr; }
-    }
-    @media print {
-      body { background:#fff !important; color:#111 !important; }
-      .toolbar, .toast-wrap, dialog, .signature-actions, .mini-actions, .header-actions { display:none !important; }
-      .wrap { max-width:100%; padding:0; }
-      .topbar, .card { background:#fff !important; color:#111 !important; box-shadow:none !important; border:1px solid #ddd !important; }
-      input, textarea, select { color:#111 !important; background:#fff !important; border:1px solid #bbb !important; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TECNO ACRE Propostas 360</title>
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./favicon-96.png">
+<style>
+:root{
+--bg:#080c14;--surface:#0f172a;--card:#101827;--card2:#0d1424;--text:#f0f5fb;--strong:#fff;--muted:#a8b3c6;--line:#1f2d45;--input:#0b1322;--orange:#ff8a00;--blue:#29b6f6;--green:#22c55e;--red:#ef4444;--shadow:0 18px 45px rgba(0,0,0,.24);--neon:rgba(41,182,246,.16);color-scheme:dark}
+:root[data-theme=light]{--bg:#f8fafc;--surface:#fff;--card:#fff;--card2:#f8fafc;--text:#0f172a;--strong:#020617;--muted:#475569;--line:#cbd5e1;--input:#fff;--neon:rgba(29,78,216,.11);color-scheme:light}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Roboto,Arial,sans-serif;background:radial-gradient(circle at 20% 0%,rgba(41,182,246,.12),transparent 34%),radial-gradient(circle at 82% 12%,rgba(255,138,0,.10),transparent 30%),linear-gradient(180deg,var(--bg),var(--surface));color:var(--text)}
+.wrap{max-width:1260px;margin:auto;padding:18px}.top{display:grid;grid-template-columns:136px 1fr auto;gap:20px;align-items:center;background:linear-gradient(180deg,var(--surface),var(--card2)) padding-box,linear-gradient(135deg,rgba(41,182,246,.58),rgba(34,197,94,.22),rgba(255,138,0,.42)) border-box;border:1px solid transparent;border-radius:22px;box-shadow:var(--shadow),0 0 26px var(--neon);padding:18px;margin-bottom:16px}
+.logo{width:124px;height:94px;object-fit:contain;border-radius:18px;background:#fff;padding:8px}.top h1{margin:0 0 8px;font-size:clamp(1.35rem,2.7vw,2rem);line-height:1.18;color:var(--strong)}.top p{margin:0;color:var(--muted);line-height:1.5}
+.theme{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:11px 14px;font-weight:800;cursor:pointer}.progress{margin-top:10px;color:var(--muted);font-size:.84rem}.bar{height:8px;background:rgba(150,160,180,.18);border-radius:999px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--orange))}
+.shell{display:grid;grid-template-columns:250px 1fr;gap:16px;align-items:start}.nav{position:sticky;top:12px;display:grid;gap:8px;padding:12px;background:color-mix(in srgb,var(--surface) 86%,transparent);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 28px rgba(0,0,0,.16);max-height:calc(100vh - 24px);overflow:auto}
+button{appearance:none;border:0;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--orange),#ff6a00);padding:12px 16px;border-radius:12px;font-weight:800;box-shadow:0 8px 20px rgba(0,0,0,.16);font-size:.95rem;display:inline-flex;align-items:center;justify-content:center;gap:8px}button:hover{filter:brightness(1.04)}.secondary{background:linear-gradient(135deg,#1d4ed8,var(--blue))}.success{background:linear-gradient(135deg,#16a34a,var(--green))}.danger{background:linear-gradient(135deg,#dc2626,var(--red))}.ghost{background:var(--card);border:1px solid var(--line);color:var(--text)}.nav button{justify-content:flex-start;box-shadow:none;background:transparent;border:1px solid transparent;color:var(--text)}.nav button.active,.nav button:hover{background:color-mix(in srgb,var(--blue) 12%,transparent);border-color:color-mix(in srgb,var(--blue) 32%,transparent)}
+.toolbar{position:sticky;top:0;z-index:30;display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding:12px;border:1px solid var(--line);border-radius:16px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px);box-shadow:0 10px 28px rgba(0,0,0,.16)}
+.rolling{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 14px;margin-bottom:4px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}.rolling::-webkit-scrollbar{height:8px}.rolling::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--blue) 28%,var(--line));border-radius:999px}
+.metric{flex:0 0 235px;scroll-snap-align:start;padding:14px;border-radius:16px;background:linear-gradient(180deg,var(--card),var(--card2)) padding-box,linear-gradient(135deg,rgba(41,182,246,.48),rgba(34,197,94,.18),rgba(255,138,0,.34)) border-box;border:1px solid transparent;box-shadow:0 10px 28px rgba(0,0,0,.16),0 0 18px var(--neon)}.metric strong{display:block;color:var(--blue);font-size:.84rem;margin-bottom:8px}.metric span{display:block;font-size:1.35rem;font-weight:950;color:var(--strong)}.metric em{display:block;font-style:normal;color:var(--muted);font-size:.8rem;margin-top:4px}
+.panel{display:none}.panel.active{display:block}.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:linear-gradient(180deg,var(--card),var(--card2)) padding-box,linear-gradient(135deg,rgba(41,182,246,.48),rgba(34,197,94,.18),rgba(255,138,0,.34)) border-box;border:1px solid transparent;border-radius:16px;padding:18px;box-shadow:0 10px 28px rgba(0,0,0,.16),0 0 18px var(--neon);margin-bottom:16px}.title{margin:0 0 14px;font-size:1.12rem;color:var(--strong);grid-column:1/-1;display:flex;gap:10px;align-items:center}.title span{color:var(--blue);background:color-mix(in srgb,var(--blue) 13%,transparent);border:1px solid color-mix(in srgb,var(--blue) 25%,transparent);min-width:30px;height:30px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center}
+.field{display:flex;flex-direction:column;gap:8px}.field label{font-weight:800}.req label:after{content:" *";color:var(--orange)}input,textarea,select{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--input);color:var(--text);font-size:.98rem}textarea{min-height:96px;resize:vertical}.bad input,.bad textarea,.bad select{border-color:var(--red);box-shadow:0 0 0 3px rgba(239,68,68,.13)}.err{display:none;color:var(--red);font-size:.8rem}.bad .err{display:block}.hint{color:var(--muted);font-size:.86rem}
+.table{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:780px}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--blue);background:color-mix(in srgb,var(--blue) 8%,transparent);font-size:.88rem}td textarea{min-height:60px}.mini{display:flex;gap:8px;flex-wrap:wrap}.mini button{padding:8px 10px;min-height:auto;font-size:.82rem;box-shadow:none}
+.totals{margin-top:14px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.total{background:color-mix(in srgb,var(--surface) 70%,transparent);border:1px solid var(--line);border-radius:14px;padding:12px}.total strong{display:block;color:var(--blue);font-size:.88rem;margin-bottom:6px}.total span{font-size:1.15rem;font-weight:900;color:var(--strong)}
+.list{display:grid;gap:10px}.item{border:1px solid var(--line);border-radius:14px;padding:12px;background:color-mix(in srgb,var(--surface) 68%,transparent);display:grid;gap:8px}.item header{display:flex;gap:10px;justify-content:space-between}.item h3{margin:0;color:var(--strong);font-size:1rem}.item p{margin:0;color:var(--muted);font-size:.88rem}.badge{padding:5px 9px;border-radius:999px;font-size:.78rem;font-weight:800;background:color-mix(in srgb,var(--blue) 15%,transparent);color:var(--blue);border:1px solid color-mix(in srgb,var(--blue) 35%,transparent);white-space:nowrap}.ok{color:var(--green);border-color:color-mix(in srgb,var(--green) 35%,transparent);background:color-mix(in srgb,var(--green) 15%,transparent)}.warn{color:#f59e0b;border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.15)}
+.sign{width:100%;height:190px;background:#fff;border:2px dashed var(--line);border-radius:16px;touch-action:none}.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.photo{border:1px solid var(--line);border-radius:14px;padding:10px;background:color-mix(in srgb,var(--surface) 62%,transparent)}.photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px}.toastbox{position:fixed;right:16px;bottom:16px;z-index:200;display:grid;gap:10px}.toast{padding:13px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
+dialog{border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--text);box-shadow:var(--shadow);max-width:440px;width:calc(100% - 28px)}dialog::backdrop{background:rgba(0,0,0,.58);backdrop-filter:blur(3px)}.dlg{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+@media(max-width:1100px){.shell{grid-template-columns:1fr}.nav{position:sticky;top:0;z-index:40;display:flex;overflow-x:auto;max-height:none}.nav button{flex:0 0 auto}.top{grid-template-columns:1fr;text-align:center}.logo{margin:auto;width:min(260px,82%);height:auto}.g2,.g3,.g4{grid-template-columns:1fr}.totals{grid-template-columns:1fr 1fr}.photos{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.wrap{padding:10px}.toolbar{position:static;display:grid}.rolling{margin-left:-2px;margin-right:-2px}.metric{flex-basis:82vw}.card{padding:14px}input,textarea,select{font-size:16px;min-height:46px}.totals{grid-template-columns:1fr}.photos{grid-template-columns:1fr}.table{overflow:visible}table,thead,tbody,tr,th,td{display:block;width:100%;min-width:0}thead{display:none}tbody tr{border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px;background:color-mix(in srgb,var(--surface) 62%,transparent)}td{border:0;padding:7px 0}td:before{display:block;color:var(--muted);font-size:.82rem;font-weight:800;margin-bottom:5px}#itemsTable td:nth-child(1):before{content:"Tipo"}#itemsTable td:nth-child(2):before{content:"Descrição"}#itemsTable td:nth-child(3):before{content:"Unidade"}#itemsTable td:nth-child(4):before{content:"Quantidade"}#itemsTable td:nth-child(5):before{content:"Valor unitário"}#itemsTable td:nth-child(6):before{content:"Total"}#itemsTable td:nth-child(7):before{content:"Ação"}.mini{display:grid}.mini button{width:100%}}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="topbar">
-      <img class="brand-image" src="./brand-logo.webp" alt="Logomarca TECNO ACRE" />
-      <div class="headline">
-        <h1>Orçamento e Proposta Comercial</h1>
-        <p>Preencha os dados, adicione materiais e serviços, assine digitalmente, gere o PDF e envie a proposta pelo WhatsApp.</p>
-      </div>
-      <div class="header-actions">
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro e escuro">
-          <span id="themeLabel">Tema</span>
-          <i class="switch" aria-hidden="true"></i>
-        </button>
-        <div class="progress-card" aria-live="polite">
-          <span id="progressText">Preenchimento: 0%</span>
-          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-        </div>
-      </div>
-    </header>
+<div class="wrap">
+<header class="top">
+<img class="logo" src="./brand-logo.webp" onerror="this.src='./brand-logo.png'" alt="TECNO ACRE">
+<div><h1>TECNO ACRE Propostas 360</h1><p>Fase 1 com clientes, biblioteca de itens, templates, fotos, histórico, status comercial, PDF e tela rolante de indicadores.</p></div>
+<div><button class="theme" id="themeBtn">Tema escuro</button><div class="progress"><span id="progText">Preenchimento: 0%</span><div class="bar"><div class="fill" id="progFill"></div></div></div></div>
+</header>
+<div class="shell">
+<nav class="nav">
+<button class="active" data-tab="dash">Visão Geral</button>
+<button data-tab="clientes">Clientes</button>
+<button data-tab="biblioteca">Biblioteca</button>
+<button data-tab="templates">Templates</button>
+<button data-tab="proposta">Proposta</button>
+<button data-tab="historico">Histórico</button>
+</nav>
+<main>
+<div class="toolbar">
+<button class="success" id="pdfBtn">Gerar PDF</button>
+<button class="secondary" id="zapBtn">Enviar WhatsApp</button>
+<button class="ghost" id="addItemBtn">Adicionar Item</button>
+<button class="ghost" id="savePropBtn">Salvar Proposta</button>
+<button class="ghost" onclick="window.print()">Imprimir</button>
+<button class="danger" id="clearBtn">Limpar</button>
+<button class="secondary" id="installBtn" hidden>Instalar App</button>
+</div>
 
-    <div class="toolbar" aria-label="Ações principais">
-      <button class="success" id="btnPdf" type="button">Gerar PDF</button>
-      <button class="secondary" id="btnWhatsApp" type="button">Enviar WhatsApp</button>
-      <button class="ghost" id="btnAddItem" type="button">Adicionar Item</button>
-      <button class="ghost" id="btnAddStage" type="button">Adicionar Etapa</button>
-      <button class="ghost" id="btnPrint" type="button">Imprimir</button>
-      <button class="danger" id="btnClear" type="button">Limpar</button>
-      <button class="secondary" id="btnInstall" hidden type="button">Instalar App</button>
-    </div>
+<section id="dash" class="panel active">
+<div class="rolling">
+<div class="metric"><strong>Total atual</strong><span id="mTotal">R$ 0,00</span><em>valor em edição</em></div>
+<div class="metric"><strong>Itens</strong><span id="mItems">0</span><em>materiais e serviços</em></div>
+<div class="metric"><strong>Clientes</strong><span id="mClients">0</span><em>cadastro local</em></div>
+<div class="metric"><strong>Propostas</strong><span id="mProps">0</span><em>histórico local</em></div>
+<div class="metric"><strong>Status</strong><span id="mStatus">Rascunho</span><em>situação comercial</em></div>
+</div>
+<div class="card"><h2 class="title"><span>1</span>Fluxo da Fase 1</h2><p class="hint">Use a navegação lateral e a tela rolante para acompanhar o andamento do orçamento. Tudo fica salvo no navegador do dispositivo via localStorage.</p></div>
+</section>
 
-    <form id="proposalForm" class="grid" novalidate>
-      <section class="card grid grid-3">
-        <h2 class="section-title"><span>1</span> Dados da Proposta</h2>
-        <div class="field required"><label for="numeroProposta">Nº da proposta</label><input id="numeroProposta" name="numeroProposta" type="text" placeholder="PROP-001/2026" required><small class="error-msg">Informe o número da proposta.</small></div>
-        <div class="field required"><label for="dataProposta">Data</label><input id="dataProposta" name="dataProposta" type="date" required><small class="error-msg">Informe a data.</small></div>
-        <div class="field"><label for="validade">Validade</label><select id="validade" name="validade"><option>7 dias</option><option selected>15 dias</option><option>30 dias</option><option>45 dias</option><option>60 dias</option></select></div>
-        <div class="field required"><label for="responsavelComercial">Responsável</label><input id="responsavelComercial" name="responsavelComercial" type="text" required><small class="error-msg">Informe o responsável.</small></div>
-        <div class="field"><label for="telefoneEmpresa">WhatsApp da empresa</label><input id="telefoneEmpresa" name="telefoneEmpresa" type="tel" placeholder="(68) 99999-9999" inputmode="numeric"></div>
-        <div class="field"><label for="emailEmpresa">E-mail da empresa</label><input id="emailEmpresa" name="emailEmpresa" type="email" placeholder="contato@empresa.com.br"></div>
-      </section>
+<section id="clientes" class="panel">
+<div class="card grid g3">
+<h2 class="title"><span>2</span>Cadastro de Clientes</h2>
+<div class="field req"><label>Cliente / Empresa</label><input id="cadNome"><small class="err">Informe o nome.</small></div>
+<div class="field"><label>CPF / CNPJ</label><input id="cadDoc"></div>
+<div class="field"><label>Responsável</label><input id="cadResp"></div>
+<div class="field"><label>WhatsApp</label><input id="cadTel"></div>
+<div class="field"><label>E-mail</label><input id="cadEmail"></div>
+<div class="field"><label>Endereço / Local padrão</label><input id="cadEnd"></div>
+<div style="grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap"><button class="success" id="saveClient">Salvar Cliente</button><button class="secondary" id="useClient">Usar na Proposta</button></div>
+</div><div class="card"><h2 class="title"><span>3</span>Clientes Salvos</h2><div class="list" id="clientsList"></div></div>
+</section>
 
-      <section class="card grid grid-3">
-        <h2 class="section-title"><span>2</span> Dados do Cliente</h2>
-        <div class="field required"><label for="clienteNome">Cliente / Empresa</label><input id="clienteNome" name="clienteNome" type="text" required><small class="error-msg">Informe o cliente.</small></div>
-        <div class="field"><label for="clienteDocumento">CPF / CNPJ</label><input id="clienteDocumento" name="clienteDocumento" type="text" inputmode="numeric"></div>
-        <div class="field"><label for="clienteResponsavel">Responsável</label><input id="clienteResponsavel" name="clienteResponsavel" type="text"></div>
-        <div class="field"><label for="clienteTelefone">WhatsApp do cliente</label><input id="clienteTelefone" name="clienteTelefone" type="tel" placeholder="(68) 99999-9999" inputmode="numeric"></div>
-        <div class="field"><label for="clienteEmail">E-mail</label><input id="clienteEmail" name="clienteEmail" type="email"></div>
-        <div class="field required"><label for="clienteEndereco">Local do serviço</label><input id="clienteEndereco" name="clienteEndereco" type="text" required><small class="error-msg">Informe o local do serviço.</small></div>
-      </section>
+<section id="biblioteca" class="panel">
+<div class="card grid g4">
+<h2 class="title"><span>4</span>Biblioteca de Itens</h2>
+<div class="field"><label>Tipo</label><select id="libTipo"><option>Serviço</option><option>Material</option><option>Deslocamento</option><option>Equipamento</option></select></div>
+<div class="field"><label>Descrição</label><input id="libDesc"></div>
+<div class="field"><label>Unidade</label><select id="libUn"><option>serviço</option><option>un</option><option>m</option><option>m²</option><option>h</option><option>dia</option><option>ponto</option><option>vb</option></select></div>
+<div class="field"><label>Valor unitário</label><input id="libVal" inputmode="decimal"></div>
+<div style="grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap"><button class="success" id="saveLib">Salvar Item</button><button class="secondary" id="addLib">Adicionar à Proposta</button></div>
+</div><div class="card"><h2 class="title"><span>5</span>Itens Frequentes</h2><div class="list" id="libList"></div></div>
+</section>
 
-      <section class="card grid grid-3">
-        <h2 class="section-title"><span>3</span> Dados do Serviço</h2>
-        <div class="field required"><label for="tipoServico">Tipo de serviço</label><select id="tipoServico" name="tipoServico" required><option value="">Selecione</option><option>Instalação elétrica</option><option>Manutenção preventiva</option><option>Manutenção corretiva</option><option>Manutenção em gerador</option><option>Sistema fotovoltaico</option><option>Automação / IoT</option><option>Adequação técnica</option><option>Laudo / Relatório técnico</option><option>Outro</option></select><small class="error-msg">Selecione o tipo de serviço.</small></div>
-        <div class="field required"><label for="tituloServico">Título da proposta</label><input id="tituloServico" name="tituloServico" type="text" placeholder="Proposta para manutenção..." required><small class="error-msg">Informe o título.</small></div>
-        <div class="field"><label for="prioridade">Prioridade</label><select id="prioridade" name="prioridade"><option>Normal</option><option>Urgente</option><option>Programado</option><option>Emergencial</option></select></div>
-        <div class="field required" style="grid-column:1/-1;"><label for="descricaoServico">Descrição geral</label><textarea id="descricaoServico" name="descricaoServico" required placeholder="Descreva o escopo geral do serviço proposto"></textarea><small class="error-msg">Descreva o escopo do serviço.</small></div>
-      </section>
+<section id="templates" class="panel"><div class="card"><h2 class="title"><span>6</span>Templates por Serviço</h2><div class="list" id="tplList"></div></div></section>
 
-      <section class="card">
-        <h2 class="section-title"><span>4</span> Itens de Material e Serviços</h2>
-        <div class="table-wrap">
-          <table id="itemsTable">
-            <thead><tr><th>Tipo</th><th>Descrição</th><th>Unid.</th><th>Qtd.</th><th>Valor unit.</th><th>Total</th><th>Ação</th></tr></thead>
-            <tbody id="itemsBody"></tbody>
-          </table>
-        </div>
-        <div class="totals">
-          <div class="total-box"><strong>Subtotal</strong><span id="subtotalView">R$ 0,00</span></div>
-          <div class="total-box"><strong>Desconto</strong><span id="descontoView">R$ 0,00</span></div>
-          <div class="total-box"><strong>Acréscimo</strong><span id="acrescimoView">R$ 0,00</span></div>
-          <div class="total-box grand"><strong>Total Geral</strong><span id="totalView">R$ 0,00</span></div>
-        </div>
-        <div class="grid grid-3" style="margin-top:14px;">
-          <div class="field"><label for="desconto">Desconto</label><input id="desconto" name="desconto" type="text" inputmode="decimal" placeholder="R$ 0,00"></div>
-          <div class="field"><label for="acrescimo">Acréscimo / deslocamento</label><input id="acrescimo" name="acrescimo" type="text" inputmode="decimal" placeholder="R$ 0,00"></div>
-          <div class="field"><label for="formaPagamento">Forma de pagamento</label><select id="formaPagamento" name="formaPagamento"><option>À vista</option><option>50% entrada + 50% na entrega</option><option>Parcelado</option><option>Pix</option><option>Cartão</option><option>Boleto</option><option>A combinar</option></select></div>
-        </div>
-      </section>
+<section id="proposta" class="panel">
+<form id="form" class="grid" novalidate>
+<div class="card grid g3">
+<h2 class="title"><span>7</span>Dados da Proposta</h2>
+<div class="field req"><label>Nº da proposta</label><input name="numero" id="numero" required><small class="err">Obrigatório.</small></div>
+<div class="field req"><label>Data</label><input name="data" id="data" type="date" required><small class="err">Obrigatório.</small></div>
+<div class="field"><label>Validade</label><select name="validade" id="validade"><option>7 dias</option><option selected>15 dias</option><option>30 dias</option><option>45 dias</option><option>60 dias</option></select></div>
+<div class="field req"><label>Responsável</label><input name="respCom" id="respCom" required><small class="err">Obrigatório.</small></div>
+<div class="field"><label>WhatsApp da empresa</label><input name="telEmp" id="telEmp"></div>
+<div class="field"><label>E-mail da empresa</label><input name="emailEmp" id="emailEmp"></div>
+<div class="field"><label>Status</label><select name="status" id="status"><option>Rascunho</option><option>Enviada</option><option>Visualizada</option><option>Aprovada</option><option>Recusada</option><option>Vencida</option></select></div>
+</div>
 
-      <section class="card grid grid-2">
-        <h2 class="section-title"><span>5</span> Etapas dos Serviços</h2>
-        <div class="field" style="grid-column:1/-1;"><label for="stagesText">Etapas da execução</label><textarea id="stagesText" name="stagesText">1. Levantamento e mobilização técnica
+<div class="card grid g3">
+<h2 class="title"><span>8</span>Dados do Cliente</h2>
+<div class="field req"><label>Cliente / Empresa</label><input name="cliente" id="cliente" required><small class="err">Obrigatório.</small></div>
+<div class="field"><label>CPF / CNPJ</label><input name="doc" id="doc"></div>
+<div class="field"><label>Responsável</label><input name="contato" id="contato"></div>
+<div class="field"><label>WhatsApp do cliente</label><input name="telCliente" id="telCliente"></div>
+<div class="field"><label>E-mail</label><input name="emailCliente" id="emailCliente"></div>
+<div class="field req"><label>Local do serviço</label><input name="endereco" id="endereco" required><small class="err">Obrigatório.</small></div>
+</div>
+
+<div class="card grid g3">
+<h2 class="title"><span>9</span>Dados do Serviço</h2>
+<div class="field req"><label>Tipo de serviço</label><select name="tipoServico" id="tipoServico" required><option value="">Selecione</option><option>Instalação elétrica</option><option>Manutenção preventiva</option><option>Manutenção corretiva</option><option>Manutenção em gerador</option><option>Sistema fotovoltaico</option><option>Automação / IoT</option><option>Laudo / Relatório técnico</option><option>Outro</option></select><small class="err">Obrigatório.</small></div>
+<div class="field req"><label>Título da proposta</label><input name="titulo" id="titulo" required><small class="err">Obrigatório.</small></div>
+<div class="field"><label>Prioridade</label><select name="prioridade" id="prioridade"><option>Normal</option><option>Urgente</option><option>Programado</option><option>Emergencial</option></select></div>
+<div class="field req" style="grid-column:1/-1"><label>Descrição geral</label><textarea name="descricao" id="descricao" required></textarea><small class="err">Obrigatório.</small></div>
+</div>
+
+<div class="card"><h2 class="title"><span>10</span>Itens de Material e Serviços</h2>
+<div class="table"><table id="itemsTable"><thead><tr><th>Tipo</th><th>Descrição</th><th>Unid.</th><th>Qtd.</th><th>Valor unit.</th><th>Total</th><th>Ação</th></tr></thead><tbody id="items"></tbody></table></div>
+<div class="totals"><div class="total"><strong>Subtotal</strong><span id="subV">R$ 0,00</span></div><div class="total"><strong>Desconto</strong><span id="descV">R$ 0,00</span></div><div class="total"><strong>Acréscimo</strong><span id="acreV">R$ 0,00</span></div><div class="total"><strong>Total Geral</strong><span id="totalV">R$ 0,00</span></div></div>
+<div class="grid g3" style="margin-top:14px"><div class="field"><label>Desconto</label><input name="desconto" id="desconto" inputmode="decimal"></div><div class="field"><label>Acréscimo / deslocamento</label><input name="acrescimo" id="acrescimo" inputmode="decimal"></div><div class="field"><label>Forma de pagamento</label><select name="pagamento" id="pagamento"><option>À vista</option><option>50% entrada + 50% na entrega</option><option>Parcelado</option><option>Pix</option><option>Cartão</option><option>Boleto</option><option>A combinar</option></select></div></div>
+</div>
+
+<div class="card grid g2"><h2 class="title"><span>11</span>Etapas dos Serviços</h2><div class="field" style="grid-column:1/-1"><label>Etapas</label><textarea name="etapas" id="etapas">1. Levantamento e mobilização técnica
 2. Execução dos serviços contratados
 3. Testes, validações e ajustes
-4. Entrega técnica e orientações ao cliente</textarea></div>
-      </section>
+4. Entrega técnica e orientações ao cliente</textarea></div></div>
 
-      <section class="card grid grid-2">
-        <h2 class="section-title"><span>6</span> Condições Comerciais</h2>
-        <div class="field"><label for="prazoExecucao">Prazo de execução</label><select id="prazoExecucao" name="prazoExecucao"><option value="">Selecione</option><option>Imediato após aprovação</option><option>Até 3 dias úteis</option><option>Até 5 dias úteis</option><option>Até 7 dias úteis</option><option>Até 15 dias úteis</option><option>A combinar</option></select></div>
-        <div class="field"><label for="garantia">Garantia</label><select id="garantia" name="garantia"><option value="">Selecione</option><option>30 dias sobre mão de obra</option><option>60 dias sobre mão de obra</option><option>90 dias sobre mão de obra</option><option>Conforme garantia do fabricante para materiais</option><option>A combinar</option></select></div>
-        <div class="field" style="grid-column:1/-1;"><label for="condicoes">Condições e observações</label><textarea id="condicoes" name="condicoes">Esta proposta contempla os serviços e materiais descritos neste orçamento. Serviços adicionais não previstos deverão ser avaliados e poderão gerar aditivo. A proposta está sujeita à disponibilidade de agenda, materiais e validação técnica no local.</textarea></div>
-      </section>
+<div class="card"><h2 class="title"><span>12</span>Fotos e Evidências</h2><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><label class="secondary" style="padding:12px 16px;border-radius:12px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#1d4ed8,var(--blue));color:white" for="photoInput">Anexar / Tirar Foto</label><input id="photoInput" type="file" accept="image/*" capture="environment" multiple hidden><button class="ghost" id="clearPhotos" type="button">Limpar Fotos</button></div><div class="photos" id="photos"></div></div>
 
-      <section class="card grid grid-2">
-        <h2 class="section-title"><span>7</span> Assinaturas Digitais</h2>
-        <div class="field">
-          <label for="assinaturaEmpresaNome">Responsável pela proposta</label>
-          <input id="assinaturaEmpresaNome" name="assinaturaEmpresaNome" type="text">
-          <canvas id="sigEmpresa" class="signature-pad" aria-label="Área de assinatura do responsável pela proposta"></canvas>
-          <div class="signature-actions"><button type="button" class="ghost" id="clearSigEmpresa">Limpar Assinatura</button></div>
-        </div>
-        <div class="field">
-          <label for="assinaturaClienteNome">Cliente / Aprovador</label>
-          <input id="assinaturaClienteNome" name="assinaturaClienteNome" type="text">
-          <canvas id="sigCliente" class="signature-pad" aria-label="Área de assinatura do cliente"></canvas>
-          <div class="signature-actions"><button type="button" class="ghost" id="clearSigCliente">Limpar Assinatura</button></div>
-        </div>
-      </section>
-    </form>
+<div class="card grid g2"><h2 class="title"><span>13</span>Condições Comerciais</h2><div class="field"><label>Prazo</label><select name="prazo" id="prazo"><option value="">Selecione</option><option>Imediato após aprovação</option><option>Até 3 dias úteis</option><option>Até 5 dias úteis</option><option>Até 7 dias úteis</option><option>Até 15 dias úteis</option><option>A combinar</option></select></div><div class="field"><label>Garantia</label><select name="garantia" id="garantia"><option value="">Selecione</option><option>30 dias sobre mão de obra</option><option>60 dias sobre mão de obra</option><option>90 dias sobre mão de obra</option><option>Conforme garantia do fabricante</option><option>A combinar</option></select></div><div class="field" style="grid-column:1/-1"><label>Condições e observações</label><textarea name="condicoes" id="condicoes">Esta proposta contempla os serviços e materiais descritos neste orçamento. Serviços adicionais não previstos deverão ser avaliados e poderão gerar aditivo.</textarea></div></div>
 
-    <p class="footer-note">TECNO ACRE - Soluções em Tecnologia Sustentável • Orçamento e Proposta Comercial.</p>
-  </div>
+<div class="card grid g2"><h2 class="title"><span>14</span>Assinaturas Digitais</h2><div class="field"><label>Responsável pela proposta</label><input name="assEmpNome" id="assEmpNome"><canvas id="sigEmp" class="sign"></canvas><div class="mini"><button type="button" class="ghost" id="clearSigEmp">Limpar Assinatura</button></div></div><div class="field"><label>Cliente / Aprovador</label><input name="assCliNome" id="assCliNome"><canvas id="sigCli" class="sign"></canvas><div class="mini"><button type="button" class="ghost" id="clearSigCli">Limpar Assinatura</button></div></div></div>
+</form></section>
 
-  <div class="toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="true"></div>
-
-  <dialog id="confirmDialog">
-    <h3>Limpar proposta?</h3>
-    <p>Essa ação apagará os dados preenchidos neste dispositivo.</p>
-    <div class="dialog-actions">
-      <button class="ghost" id="cancelClear" type="button">Cancelar</button>
-      <button class="danger" id="confirmClear" type="button">Sim, limpar</button>
-    </div>
-  </dialog>
-
-  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-  <script>
-    const form = document.getElementById('proposalForm');
-    const itemsBody = document.getElementById('itemsBody');
-    const money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
-    let deferredPrompt = null;
-
-    function toast(message, type = 'success') {
-      const wrap = document.getElementById('toastWrap');
-      const el = document.createElement('div');
-      el.className = `toast ${type}`;
-      el.textContent = message;
-      wrap.appendChild(el);
-      setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateY(8px)'; }, 3600);
-      setTimeout(() => el.remove(), 4100);
-    }
-
-    function toNumber(v) {
-      if (v === null || v === undefined) return 0;
-      const s = String(v).replace(/\./g, '').replace(',', '.').replace(/[^\d.-]/g, '');
-      return parseFloat(s) || 0;
-    }
-    function currencyFromNumber(n) { return money.format(Number(n || 0)); }
-    function maskPhone(v) {
-      const d = String(v).replace(/\D/g, '').slice(0, 11);
-      if (d.length <= 10) return d.replace(/(\d{2})(\d{4})(\d{0,4})/, (_, a,b,c) => c ? `(${a}) ${b}-${c}` : `(${a}) ${b}`);
-      return d.replace(/(\d{2})(\d{5})(\d{0,4})/, (_, a,b,c) => c ? `(${a}) ${b}-${c}` : `(${a}) ${b}`);
-    }
-    function maskDoc(v) {
-      const d = String(v).replace(/\D/g, '').slice(0, 14);
-      if (d.length <= 11) return d.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2})/, (_,a,b,c,e) => e ? `${a}.${b}.${c}-${e}` : `${a}.${b}.${c}`);
-      return d.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, (_,a,b,c,e,f) => f ? `${a}.${b}.${c}/${e}-${f}` : `${a}.${b}.${c}/${e}`);
-    }
-    function formatDate(dateStr) {
-      if (!dateStr) return '-';
-      const [y,m,d] = dateStr.split('-');
-      return `${d}/${m}/${y}`;
-    }
-    function safe(v) { return (v === undefined || v === null || String(v).trim() === '') ? '-' : String(v).trim(); }
-
-    const themeToggle = document.getElementById('themeToggle');
-    function getPreferredTheme() {
-      const stored = localStorage.getItem('tecno_acre_theme');
-      if (stored) return stored;
-      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    }
-    function applyTheme(theme) {
-      document.documentElement.dataset.theme = theme;
-      document.getElementById('themeLabel').textContent = theme === 'light' ? 'Tema claro' : 'Tema escuro';
-      localStorage.setItem('tecno_acre_theme', theme);
-      redrawSignaturesForTheme();
-    }
-    themeToggle.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'));
-    applyTheme(getPreferredTheme());
-
-    function getFormData() {
-      const fd = new FormData(form);
-      const data = {};
-      for (const [key, value] of fd.entries()) data[key] = value;
-      data.items = getItems();
-      data.sigEmpresa = signaturePads.empresa ? signaturePads.empresa.toDataURL() : '';
-      data.sigCliente = signaturePads.cliente ? signaturePads.cliente.toDataURL() : '';
-      data.totals = calculateTotals();
-      return data;
-    }
-    function saveLocal() {
-      try { localStorage.setItem('tecno_acre_orcamento_pro_refatorado', JSON.stringify(getFormData())); } catch (e) {}
-      updateProgress();
-    }
-    function loadLocal() {
-      try {
-        const saved = localStorage.getItem('tecno_acre_orcamento_pro_refatorado');
-        if (!saved) return;
-        const data = JSON.parse(saved);
-        form.querySelectorAll('input, textarea, select').forEach(el => { if (el.name && data[el.name] !== undefined) el.value = data[el.name]; });
-        itemsBody.innerHTML = '';
-        (data.items || []).forEach(addItemRow);
-      } catch(e) {}
-    }
-
-    function addItemRow(item = {}) {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><select class="item-tipo"><option ${item.tipo==='Serviço'?'selected':''}>Serviço</option><option ${item.tipo==='Material'?'selected':''}>Material</option><option ${item.tipo==='Deslocamento'?'selected':''}>Deslocamento</option><option ${item.tipo==='Equipamento'?'selected':''}>Equipamento</option></select></td>
-        <td><textarea class="item-desc" placeholder="Descrição do item">${item.descricao || ''}</textarea></td>
-        <td><select class="item-unid">${['un','m','m²','m³','kg','h','dia','serviço','ponto','cj','vb'].map(u => `<option ${item.unidade === u ? 'selected' : ''}>${u}</option>`).join('')}</select></td>
-        <td><input class="item-qtd" type="text" inputmode="decimal" value="${item.qtd || ''}" placeholder="1"></td>
-        <td><input class="item-unit" type="text" inputmode="decimal" value="${item.valorUnitario || ''}" placeholder="R$ 0,00"></td>
-        <td><input class="item-total" type="text" readonly value="R$ 0,00"></td>
-        <td><div class="mini-actions"><button type="button" class="danger btn-remove">Remover</button></div></td>`;
-      tr.querySelectorAll('input, textarea, select').forEach(el => {
-        el.addEventListener('input', () => { if (el.classList.contains('item-unit')) el.value = el.value; updateRowTotal(tr); saveLocal(); });
-        el.addEventListener('blur', () => { if (el.classList.contains('item-unit')) el.value = currencyFromNumber(toNumber(el.value)); updateRowTotal(tr); saveLocal(); });
-        el.addEventListener('change', () => { updateRowTotal(tr); saveLocal(); });
-      });
-      tr.querySelector('.btn-remove').addEventListener('click', () => {
-        if (itemsBody.children.length <= 1) {
-          tr.querySelectorAll('input, textarea').forEach(el => el.value = '');
-        } else tr.remove();
-        updateTotals(); saveLocal();
-      });
-      itemsBody.appendChild(tr);
-      updateRowTotal(tr);
-    }
-    function getItems() {
-      return Array.from(itemsBody.querySelectorAll('tr')).map(tr => {
-        const qtd = tr.querySelector('.item-qtd').value;
-        const unit = tr.querySelector('.item-unit').value;
-        return {
-          tipo: tr.querySelector('.item-tipo').value,
-          descricao: tr.querySelector('.item-desc').value,
-          unidade: tr.querySelector('.item-unid').value,
-          qtd,
-          valorUnitario: unit,
-          total: toNumber(qtd) * toNumber(unit)
-        };
-      }).filter(item => item.descricao || toNumber(item.qtd) || toNumber(item.valorUnitario));
-    }
-    function updateRowTotal(tr) {
-      const qtd = toNumber(tr.querySelector('.item-qtd').value);
-      const unit = toNumber(tr.querySelector('.item-unit').value);
-      tr.querySelector('.item-total').value = currencyFromNumber(qtd * unit);
-      updateTotals();
-    }
-    function calculateTotals() {
-      const subtotal = getItems().reduce((acc, item) => acc + Number(item.total || 0), 0);
-      const desconto = toNumber(document.getElementById('desconto').value);
-      const acrescimo = toNumber(document.getElementById('acrescimo').value);
-      return { subtotal, desconto, acrescimo, total: Math.max(0, subtotal - desconto + acrescimo) };
-    }
-    function updateTotals() {
-      const t = calculateTotals();
-      document.getElementById('subtotalView').textContent = currencyFromNumber(t.subtotal);
-      document.getElementById('descontoView').textContent = currencyFromNumber(t.desconto);
-      document.getElementById('acrescimoView').textContent = currencyFromNumber(t.acrescimo);
-      document.getElementById('totalView').textContent = currencyFromNumber(t.total);
-    }
-    function validateForm(show = false) {
-      let ok = true;
-      form.querySelectorAll('[required]').forEach(el => {
-        const field = el.closest('.field');
-        const invalid = !String(el.value || '').trim();
-        field.classList.toggle('invalid', invalid);
-        if (invalid) ok = false;
-      });
-      if (show && !ok) toast('Preencha os campos obrigatórios destacados.', 'warn');
-      return ok;
-    }
-    function updateProgress() {
-      const required = Array.from(form.querySelectorAll('[required]'));
-      const filled = required.filter(el => String(el.value || '').trim()).length;
-      const pct = required.length ? Math.round((filled / required.length) * 100) : 0;
-      document.getElementById('progressText').textContent = `Preenchimento: ${pct}%`;
-      document.getElementById('progressFill').style.width = pct + '%';
-    }
-
-    document.getElementById('btnAddItem').addEventListener('click', () => { addItemRow(); saveLocal(); toast('Item adicionado.'); });
-    document.getElementById('btnAddStage').addEventListener('click', () => {
-      const ta = document.getElementById('stagesText');
-      const current = ta.value.trim();
-      const count = current ? current.split('\n').filter(Boolean).length + 1 : 1;
-      ta.value = current + (current ? '\n' : '') + `${count}. `;
-      ta.focus(); saveLocal();
-    });
-    ['desconto','acrescimo'].forEach(id => {
-      const el = document.getElementById(id);
-      el.addEventListener('input', () => { updateTotals(); saveLocal(); });
-      el.addEventListener('blur', () => { el.value = currencyFromNumber(toNumber(el.value)); updateTotals(); saveLocal(); });
-    });
-    ['telefoneEmpresa','clienteTelefone'].forEach(id => document.getElementById(id).addEventListener('input', e => { e.target.value = maskPhone(e.target.value); }));
-    document.getElementById('clienteDocumento').addEventListener('input', e => { e.target.value = maskDoc(e.target.value); });
-    form.addEventListener('input', () => { validateForm(false); saveLocal(); });
-    form.addEventListener('change', () => { validateForm(false); saveLocal(); });
-    document.getElementById('btnPrint').addEventListener('click', () => window.print());
-
-    const dialog = document.getElementById('confirmDialog');
-    document.getElementById('btnClear').addEventListener('click', () => dialog.showModal());
-    document.getElementById('cancelClear').addEventListener('click', () => dialog.close());
-    document.getElementById('confirmClear').addEventListener('click', () => {
-      form.reset(); itemsBody.innerHTML = ''; addItemRow({ tipo:'Serviço', unidade:'serviço', qtd:'1' });
-      signaturePads.empresa.clear(); signaturePads.cliente.clear();
-      localStorage.removeItem('tecno_acre_orcamento_pro_refatorado');
-      updateTotals(); updateProgress(); dialog.close(); toast('Proposta limpa com sucesso.');
-    });
-
-    function setupSignaturePad(canvasId) {
-      const canvas = document.getElementById(canvasId);
-      const ctx = canvas.getContext('2d');
-      let drawing = false, hasDrawn = false, savedImage = null;
-      function getColors() {
-        return document.documentElement.dataset.theme === 'light'
-          ? { bg: '#ffffff', pen: '#0f172a' }
-          : { bg: '#f8fafc', pen: '#0f172a' };
-      }
-      function resize() {
-        if (hasDrawn) savedImage = canvas.toDataURL();
-        const rect = canvas.getBoundingClientRect();
-        const ratio = Math.max(window.devicePixelRatio || 1, 1);
-        canvas.width = rect.width * ratio; canvas.height = rect.height * ratio;
-        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-        const colors = getColors();
-        canvas.style.setProperty('--signature-bg', colors.bg);
-        ctx.lineWidth = 2.2; ctx.lineCap = 'round'; ctx.strokeStyle = colors.pen;
-        if (savedImage) { const img = new Image(); img.onload = () => ctx.drawImage(img, 0, 0, rect.width, rect.height); img.src = savedImage; }
-      }
-      function pos(e) { const rect = canvas.getBoundingClientRect(); const t = e.touches ? e.touches[0] : e; return { x: t.clientX - rect.left, y: t.clientY - rect.top }; }
-      function start(e) { e.preventDefault(); drawing = true; const p = pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); }
-      function move(e) { if (!drawing) return; e.preventDefault(); const p = pos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); hasDrawn = true; saveLocal(); }
-      function end(e) { if (!drawing) return; e.preventDefault(); drawing = false; saveLocal(); }
-      canvas.addEventListener('mousedown', start); canvas.addEventListener('mousemove', move); canvas.addEventListener('mouseup', end); canvas.addEventListener('mouseleave', end);
-      canvas.addEventListener('touchstart', start, { passive:false }); canvas.addEventListener('touchmove', move, { passive:false }); canvas.addEventListener('touchend', end, { passive:false });
-      window.addEventListener('resize', resize); setTimeout(resize, 120);
-      return { clear(){ ctx.clearRect(0,0,canvas.width,canvas.height); hasDrawn=false; savedImage=null; saveLocal(); }, toDataURL(){ return hasDrawn ? canvas.toDataURL('image/png') : ''; }, resize };
-    }
-    const signaturePads = { empresa: setupSignaturePad('sigEmpresa'), cliente: setupSignaturePad('sigCliente') };
-    function redrawSignaturesForTheme() { setTimeout(() => Object.values(signaturePads || {}).forEach(p => p.resize()), 80); }
-    document.getElementById('clearSigEmpresa').addEventListener('click', () => signaturePads.empresa.clear());
-    document.getElementById('clearSigCliente').addEventListener('click', () => signaturePads.cliente.clear());
-
-    async function loadImageAsDataURL(src) { const r = await fetch(src); const b = await r.blob(); return await new Promise((res, rej) => { const fr = new FileReader(); fr.onloadend = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(b); }); }
-    async function saveBlobWithPicker(blob, suggestedName) {
-      if ('showSaveFilePicker' in window) {
-        const handle = await window.showSaveFilePicker({ suggestedName, types:[{ description:'PDF', accept:{'application/pdf':['.pdf']} }] });
-        const writable = await handle.createWritable(); await writable.write(blob); await writable.close(); return true;
-      }
-      return false;
-    }
-
-    document.getElementById('btnPdf').addEventListener('click', async (e) => {
-      if (!validateForm(true)) return;
-      e.currentTarget.classList.add('loading');
-      try { await generatePdf(false); toast('PDF gerado com sucesso.'); } finally { e.currentTarget.classList.remove('loading'); }
-    });
-
-    async function generatePdf(returnBlob = false) {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({ unit:'mm', format:'a4' });
-      const data = getFormData();
-      const margin = 14, pageWidth = 210, contentWidth = pageWidth - margin*2;
-      let y = 16;
-      function footer(pageNumber = null) { const p = pageNumber || doc.internal.getCurrentPageInfo().pageNumber; doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(120); doc.text('TECNO ACRE - Soluções em Tecnologia Sustentável', margin, 290); doc.text(`Página ${p}`, pageWidth-margin-16, 290); }
-      function newPage(extra = 10) { if (y + extra > 276) { footer(); doc.addPage(); y = 18; } }
-      const logo = await loadImageAsDataURL('./brand-logo.png').catch(()=>null);
-      if (logo) { try { doc.addImage(logo, 'PNG', margin, y, 34, 22); } catch(e){} }
-      const titleX = margin + 42, titleW = pageWidth - titleX - margin;
-      doc.setFont('helvetica','bold'); doc.setFontSize(13); doc.setTextColor(15,23,42); doc.text('ORÇAMENTO E PROPOSTA COMERCIAL', titleX, y+5, { maxWidth:titleW });
-      doc.setFontSize(10.2); doc.setTextColor(55,65,81); doc.text('TECNO ACRE - Soluções em Tecnologia Sustentável', titleX, y+14, { maxWidth:titleW });
-      doc.setDrawColor(255,138,0); doc.setLineWidth(.55); doc.line(margin, y+32, pageWidth-margin, y+32); y=56;
-      function section(t){ newPage(13); doc.setFont('helvetica','bold'); doc.setFontSize(12.2); doc.setTextColor(15,23,42); doc.text(t, margin, y); y += 7; }
-      function kv(l,v,w=52){ newPage(10); doc.setFont('helvetica','bold'); doc.setFontSize(9.7); doc.setTextColor(20); const ll=doc.splitTextToSize(l+':',w-2); doc.text(ll,margin,y); doc.setFont('helvetica','normal'); doc.setTextColor(35); const vl=doc.splitTextToSize(safe(v),contentWidth-w); doc.text(vl,margin+w,y); y += Math.max(ll.length,vl.length)*5.2; }
-      function multiline(l,v){ newPage(15); doc.setFont('helvetica','bold'); doc.setFontSize(9.8); doc.text(l+':', margin, y); y+=5.2; doc.setFont('helvetica','normal'); const lines=doc.splitTextToSize(safe(v), contentWidth); doc.text(lines, margin, y); y += Math.max(7, lines.length*5.2)+2; }
-      function smallLine(t){ const lines=doc.splitTextToSize(t, contentWidth); newPage(lines.length*5.2+2); doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.text(lines, margin, y); y += Math.max(5.6, lines.length*5.2); }
-      section('1. Dados da Proposta'); kv('Nº da proposta',data.numeroProposta); kv('Data',formatDate(data.dataProposta)); kv('Validade',data.validade); kv('Responsável',data.responsavelComercial); kv('WhatsApp',data.telefoneEmpresa); kv('E-mail',data.emailEmpresa);
-      section('2. Dados do Cliente'); kv('Cliente / Empresa',data.clienteNome); kv('CPF / CNPJ',data.clienteDocumento); kv('Responsável',data.clienteResponsavel); kv('WhatsApp',data.clienteTelefone); kv('E-mail',data.clienteEmail); kv('Local do serviço',data.clienteEndereco);
-      section('3. Dados do Serviço'); kv('Tipo de serviço',data.tipoServico); kv('Título',data.tituloServico); kv('Prioridade',data.prioridade); multiline('Descrição geral do serviço',data.descricaoServico);
-      section('4. Itens de Material e Serviços');
-      const widths=[22,70,18,18,28,28], headers=['Tipo','Descrição','Un.','Qtd.','Unitário','Total']; let x=margin;
-      doc.setFont('helvetica','bold'); doc.setFontSize(8.8); doc.setDrawColor(255,138,0);
-      headers.forEach((h,i)=>{doc.rect(x,y,widths[i],8);doc.text(h,x+1.5,y+5.3);x+=widths[i];}); y+=8;
-      doc.setFont('helvetica','normal');
-      data.items.forEach(item=>{ newPage(14); x=margin; const row=[item.tipo,item.descricao,item.unidade,item.qtd,currencyFromNumber(toNumber(item.valorUnitario)),currencyFromNumber(toNumber(item.total))]; const descLines=doc.splitTextToSize(safe(item.descricao),widths[1]-3); const rowH=Math.max(9,4+descLines.length*4.4); row.forEach((cell,i)=>{doc.rect(x,y,widths[i],rowH); const lines=doc.splitTextToSize(safe(cell),widths[i]-3); doc.text(lines,x+1.5,y+5); x+=widths[i];}); y+=rowH; });
-      y+=5; kv('Subtotal',currencyFromNumber(data.totals.subtotal)); kv('Desconto',currencyFromNumber(data.totals.desconto)); kv('Acréscimo',currencyFromNumber(data.totals.acrescimo)); kv('Total geral',currencyFromNumber(data.totals.total)); kv('Forma de pagamento',data.formaPagamento);
-      section('5. Etapas dos Serviços'); safe(data.stagesText).split('\\n').forEach(line=>smallLine(line));
-      section('6. Condições Comerciais'); kv('Prazo de execução',data.prazoExecucao); kv('Garantia',data.garantia); multiline('Condições e observações',data.condicoes);
-      section('7. Assinaturas'); newPage(55); const leftX=margin, rightX=pageWidth-margin-78;
-      if(data.sigEmpresa){try{doc.addImage(data.sigEmpresa,'PNG',leftX,y,78,28);}catch(e){}} if(data.sigCliente){try{doc.addImage(data.sigCliente,'PNG',rightX,y,78,28);}catch(e){}}
-      doc.setDrawColor(60); doc.line(leftX,y+33,leftX+78,y+33); doc.line(rightX,y+33,rightX+78,y+33);
-      doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(35); doc.text(data.assinaturaEmpresaNome||'Responsável pela proposta',leftX,y+39,{maxWidth:78}); doc.text(data.assinaturaClienteNome||'Cliente / Aprovador',rightX,y+39,{maxWidth:78});
-      const totalPages=doc.internal.getNumberOfPages(); for(let p=1;p<=totalPages;p++){doc.setPage(p); footer(p);}
-      const filename=`Proposta_Tecno_Acre_${(data.clienteNome||'Cliente').replace(/\\s+/g,'_')}.pdf`; const blob=doc.output('blob');
-      if(returnBlob) return {blob, filename}; const saved=await saveBlobWithPicker(blob, filename).catch(()=>false); if(!saved) doc.save(filename);
-    }
-
-    document.getElementById('btnWhatsApp').addEventListener('click', () => {
-      if (!validateForm(true)) return;
-      const data = getFormData();
-      const phone = String(data.clienteTelefone || '').replace(/\\D/g, '');
-      const proposta = data.numeroProposta || 'sem número informado';
-      const servico = data.tituloServico || data.tipoServico || 'serviço solicitado';
-      const msg = `Olá${data.clienteResponsavel ? ', ' + data.clienteResponsavel : ''}! Tudo bem?
-
-A TECNO ACRE - Soluções em Tecnologia Sustentável preparou uma proposta comercial para você.
-
-📄 Proposta: ${proposta}
-🔧 Serviço: ${servico}
-💰 Valor total: ${currencyFromNumber(data.totals.total)}
-⏳ Validade: ${data.validade || 'conforme proposta'}
-🛠️ Prazo de execução: ${data.prazoExecucao || 'conforme alinhamento técnico'}
-💳 Forma de pagamento: ${data.formaPagamento || 'conforme proposta'}
-
-O PDF da proposta foi gerado pelo nosso aplicativo e será enviado nesta conversa para sua análise.
-
-Qualquer dúvida, estamos à disposição.`;
-      window.open(`https://wa.me/${phone ? '55' + phone : ''}?text=${encodeURIComponent(msg)}`, '_blank');
-      toast('WhatsApp aberto com mensagem profissional. Anexe o PDF da proposta.');
-    });
-
-    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./service-worker.js').catch(console.error);
-    window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt=e; document.getElementById('btnInstall').hidden=false; });
-    document.getElementById('btnInstall').addEventListener('click', async()=>{ if(!deferredPrompt)return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; document.getElementById('btnInstall').hidden=true; });
-
-    const today = new Date().toISOString().slice(0,10);
-    document.getElementById('dataProposta').value = today;
-    loadLocal();
-    if (!itemsBody.children.length) addItemRow({ tipo:'Serviço', unidade:'serviço', qtd:'1' });
-    updateTotals(); validateForm(false); updateProgress();
-  </script>
-</body>
-</html>
+<section id="historico" class="panel"><div class="card"><h2 class="title"><span>15</span>Histórico de Propostas</h2><div class="grid g3" style="margin-bottom:12px"><div class="field"><label>Buscar</label><input id="histBusca"></div><div class="field"><label>Status</label><select id="histStatus"><option value="">Todos</option><option>Rascunho</option><option>Enviada</option><option>Visualizada</option><option>Aprovada</option><option>Recusada</option><option>Vencida</option></select></div><div class="field"><label>&nbsp;</label><button class="ghost" id="histRefresh">Atualizar</button></div></div><div class="list" id="histList"></div></div></section>
+</main></div><p class="hint" style="text-align:center">TECNO ACRE - Soluções em Tecnologia Sustentável • Propostas 360.</p>
+</div>
+<div class="toastbox" id="toastbox"></div>
+<dialog id="confirmDialog"><h3>Limpar proposta?</h3><p>Essa ação apagará apenas a proposta em edição.</p><div class="dlg"><button class="ghost" id="cancelClear">Cancelar</button><button class="danger" id="confirmClear">Sim, limpar</button></div></dialog>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script>
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s)), money=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+let selectedClient=null,selectedLib=null,photos=[];
+const defaults=[{id:id(),tipo:'Serviço',descricao:'Manutenção preventiva de gerador',unidade:'serviço',valor:'R$ 450,00'},{id:id(),tipo:'Serviço',descricao:'Teste de funcionamento em carga',unidade:'serviço',valor:'R$ 280,00'},{id:id(),tipo:'Material',descricao:'Óleo lubrificante para gerador',unidade:'un',valor:'R$ 120,00'},{id:id(),tipo:'Deslocamento',descricao:'Deslocamento técnico urbano',unidade:'vb',valor:'R$ 80,00'}];
+const tpls=[{title:'Manutenção Preventiva de Gerador',type:'Manutenção em gerador',desc:'Serviço técnico de manutenção preventiva em grupo gerador, contemplando inspeção visual, verificação de níveis, análise elétrica, teste funcional e orientações ao cliente.',etapas:'1. Inspeção visual e registro das condições do equipamento\\n2. Verificação de óleo, filtros, bateria e conexões elétricas\\n3. Execução da manutenção preventiva conforme necessidade\\n4. Teste de funcionamento e validação operacional\\n5. Entrega técnica e recomendações ao cliente'},{title:'Instalação Elétrica',type:'Instalação elétrica',desc:'Execução de serviço de instalação elétrica conforme escopo aprovado, contemplando materiais, mão de obra, testes básicos e organização técnica da instalação.',etapas:'1. Levantamento e preparação do local\\n2. Instalação de infraestrutura, cabos e dispositivos\\n3. Identificação, acabamento e organização\\n4. Testes elétricos e entrega ao cliente'},{title:'Sistema Fotovoltaico',type:'Sistema fotovoltaico',desc:'Proposta técnica/comercial para fornecimento, instalação ou manutenção de sistema fotovoltaico.',etapas:'1. Levantamento técnico e análise do local\\n2. Instalação ou manutenção dos componentes\\n3. Testes de funcionamento\\n4. Entrega técnica e orientações de operação'}];
+function id(){return crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random())}
+function toast(msg){let e=document.createElement('div');e.className='toast';e.textContent=msg;$('#toastbox').appendChild(e);setTimeout(()=>e.remove(),4000)}
+function n(v){return parseFloat(String(v||'').replace(/\./g,'').replace(',','.').replace(/[^\d.-]/g,''))||0}
+function br(v){return money.format(Number(v||0))}
+function phone(v){let d=String(v).replace(/\D/g,'').slice(0,11);return d.length<=10?d.replace(/(\d{2})(\d{4})(\d{0,4})/,(_,a,b,c)=>c?`(${a}) ${b}-${c}`:`(${a}) ${b}`):d.replace(/(\d{2})(\d{5})(\d{0,4})/,(_,a,b,c)=>c?`(${a}) ${b}-${c}`:`(${a}) ${b}`)}
+function doc(v){let d=String(v).replace(/\D/g,'').slice(0,14);return d.length<=11?d.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2})/,(_,a,b,c,e)=>e?`${a}.${b}.${c}-${e}`:`${a}.${b}.${c}`):d.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/,(_,a,b,c,e,f)=>f?`${a}.${b}.${c}/${e}-${f}`:`${a}.${b}.${c}/${e}`)}
+function dateBR(d){if(!d)return'-';let [y,m,dd]=d.split('-');return `${dd}/${m}/${y}`}
+function loc(k,f){try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}}
+function set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+function clients(){return loc('ta_clients',[])}function setClients(v){set('ta_clients',v);renderClients();dash()}
+function lib(){let l=loc('ta_lib',null);if(!l){set('ta_lib',defaults);return defaults}return l}function setLib(v){set('ta_lib',v);renderLib();dash()}
+function hist(){return loc('ta_hist',[])}function setHist(v){set('ta_hist',v);renderHist();dash()}
+function tab(t){$$('.panel').forEach(p=>p.classList.toggle('active',p.id==t));$$('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab==t));scrollTo({top:0,behavior:'smooth'})}
+$$('[data-tab]').forEach(b=>b.onclick=()=>tab(b.dataset.tab));
+$('#themeBtn').onclick=()=>{let th=document.documentElement.dataset.theme=='light'?'dark':'light';document.documentElement.dataset.theme=th;localStorage.setItem('ta_theme',th);$('#themeBtn').textContent=th=='light'?'Tema claro':'Tema escuro';resizeSigs()}
+let th=localStorage.getItem('ta_theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.dataset.theme=th;$('#themeBtn').textContent=th=='light'?'Tema claro':'Tema escuro';
+function addRow(it={}){let tr=document.createElement('tr');tr.innerHTML=`<td><select class="itTipo"><option ${it.tipo=='Serviço'?'selected':''}>Serviço</option><option ${it.tipo=='Material'?'selected':''}>Material</option><option ${it.tipo=='Deslocamento'?'selected':''}>Deslocamento</option><option ${it.tipo=='Equipamento'?'selected':''}>Equipamento</option></select></td><td><textarea class="itDesc" placeholder="Descrição">${it.descricao||''}</textarea></td><td><select class="itUn">${['un','m','m²','m³','kg','h','dia','serviço','ponto','cj','vb'].map(u=>`<option ${it.unidade==u?'selected':''}>${u}</option>`).join('')}</select></td><td><input class="itQtd" inputmode="decimal" value="${it.qtd||''}"></td><td><input class="itVal" inputmode="decimal" value="${it.valor||it.valorUnitario||''}"></td><td><input class="itTotal" readonly></td><td><div class="mini"><button type="button" class="danger rem">Remover</button><button type="button" class="ghost save">Biblioteca</button></div></td>`;tr.querySelectorAll('input,textarea,select').forEach(e=>{e.oninput=()=>{rowTotal(tr);saveDraft()};e.onchange=()=>{rowTotal(tr);saveDraft()};e.onblur=()=>{if(e.className=='itVal')e.value=br(n(e.value));rowTotal(tr);saveDraft()}});tr.querySelector('.rem').onclick=()=>{if($('#items').children.length<=1)tr.querySelectorAll('input,textarea').forEach(e=>e.value='');else tr.remove();totals();saveDraft()};tr.querySelector('.save').onclick=()=>{let i=rowItem(tr);if(!i.descricao)return toast('Informe a descrição.');let l=lib();l.unshift({id:id(),tipo:i.tipo,descricao:i.descricao,unidade:i.unidade,valor:i.valorUnitario});setLib(l);toast('Item salvo na biblioteca.')};$('#items').appendChild(tr);rowTotal(tr)}
+function rowItem(tr){let q=tr.querySelector('.itQtd').value,v=tr.querySelector('.itVal').value;return{tipo:tr.querySelector('.itTipo').value,descricao:tr.querySelector('.itDesc').value,unidade:tr.querySelector('.itUn').value,qtd:q,valorUnitario:v,total:n(q)*n(v)}}
+function items(){return $$('#items tr').map(rowItem).filter(i=>i.descricao||n(i.qtd)||n(i.valorUnitario))}
+function rowTotal(tr){tr.querySelector('.itTotal').value=br(rowItem(tr).total);totals()}
+function totals(){let sub=items().reduce((a,i)=>a+i.total,0),d=n($('#desconto').value),a=n($('#acrescimo').value),t=Math.max(0,sub-d+a);$('#subV').textContent=br(sub);$('#descV').textContent=br(d);$('#acreV').textContent=br(a);$('#totalV').textContent=br(t);dash();return{sub,desconto:d,acrescimo:a,total:t}}
+function data(){let o={};new FormData($('#form')).forEach((v,k)=>o[k]=v);o.items=items();o.totals=totals();o.photos=photos;o.sigEmp=sigs.emp.toDataURL();o.sigCli=sigs.cli.toDataURL();return o}
+function setData(o={}){$$('#form input,#form textarea,#form select').forEach(e=>{if(e.name&&o[e.name]!==undefined)e.value=o[e.name]});$('#items').innerHTML='';(o.items||[]).forEach(addRow);if(!$('#items').children.length)addRow({tipo:'Serviço',unidade:'serviço',qtd:'1'});photos.splice(0,photos.length,...(o.photos||[]));renderPhotos();totals();validate();progress();dash()}
+function saveDraft(){set('ta_draft',data());progress();dash()}
+function loadDraft(){let d=loc('ta_draft',null);if(d)setData(d)}
+function validate(show=false){let ok=true;$$('#form [required]').forEach(e=>{let bad=!String(e.value||'').trim();e.closest('.field').classList.toggle('bad',bad);if(bad)ok=false});if(show&&!ok)toast('Preencha os campos obrigatórios.');return ok}
+function progress(){let r=$$('#form [required]'),f=r.filter(e=>String(e.value||'').trim()).length,p=r.length?Math.round(f/r.length*100):0;$('#progText').textContent=`Preenchimento: ${p}%`;$('#progFill').style.width=p+'%'}
+function dash(){let t=totals();$('#mTotal').textContent=br(t.total);$('#mItems').textContent=items().length;$('#mClients').textContent=clients().length;$('#mProps').textContent=hist().length;$('#mStatus').textContent=$('#status').value||'Rascunho'}
+$('#addItemBtn').onclick=()=>{addRow();saveDraft();tab('proposta');toast('Item adicionado.')};['desconto','acrescimo'].forEach(i=>{$('#'+i).oninput=()=>{totals();saveDraft()};$('#'+i).onblur=e=>{e.target.value=br(n(e.target.value));totals();saveDraft()}});['telEmp','telCliente','cadTel'].forEach(i=>$('#'+i).oninput=e=>e.target.value=phone(e.target.value));['doc','cadDoc'].forEach(i=>$('#'+i).oninput=e=>e.target.value=doc(e.target.value));$('#form').oninput=()=>{validate();saveDraft()};$('#form').onchange=()=>{validate();saveDraft()};
+function renderClients(){let list=$('#clientsList'),c=clients();list.innerHTML=c.length?'':'<p class="hint">Nenhum cliente salvo ainda.</p>';c.forEach(x=>{let e=document.createElement('div');e.className='item';e.innerHTML=`<header><h3>${x.nome}</h3><span class="badge">Cliente</span></header><p>${x.resp||'-'} • ${x.tel||'-'} • ${x.email||'-'}</p><p>${x.end||'-'}</p><div class="mini"><button class="secondary">Usar</button><button class="ghost">Editar</button><button class="danger">Excluir</button></div>`;let [u,ed,del]=e.querySelectorAll('button');u.onclick=()=>useC(x);ed.onclick=()=>fillC(x);del.onclick=()=>setClients(c.filter(y=>y.id!=x.id));list.appendChild(e)})}
+function fillC(c){selectedClient=c.id;$('#cadNome').value=c.nome||'';$('#cadDoc').value=c.doc||'';$('#cadResp').value=c.resp||'';$('#cadTel').value=c.tel||'';$('#cadEmail').value=c.email||'';$('#cadEnd').value=c.end||'';toast('Cliente carregado.')}
+function useC(c){$('#cliente').value=c.nome||'';$('#doc').value=c.doc||'';$('#contato').value=c.resp||'';$('#telCliente').value=c.tel||'';$('#emailCliente').value=c.email||'';$('#endereco').value=c.end||'';saveDraft();tab('proposta');toast('Cliente aplicado.')}
+$('#saveClient').onclick=()=>{let nome=$('#cadNome').value.trim();if(!nome)return toast('Informe o cliente.');let c=clients(),o={id:selectedClient||id(),nome,doc:$('#cadDoc').value,resp:$('#cadResp').value,tel:$('#cadTel').value,email:$('#cadEmail').value,end:$('#cadEnd').value};let ix=c.findIndex(x=>x.id==o.id);if(ix>=0)c[ix]=o;else c.unshift(o);selectedClient=o.id;setClients(c);toast('Cliente salvo.')};$('#useClient').onclick=()=>{let c=clients().find(x=>x.id==selectedClient);c?useC(c):toast('Selecione/salve um cliente.')};
+function renderLib(){let list=$('#libList'),l=lib();list.innerHTML='';l.forEach(x=>{let e=document.createElement('div');e.className='item';e.innerHTML=`<header><h3>${x.descricao}</h3><span class="badge">${x.tipo}</span></header><p>${x.unidade} • ${x.valor||'R$ 0,00'}</p><div class="mini"><button class="secondary">Adicionar</button><button class="ghost">Editar</button><button class="danger">Excluir</button></div>`;let [a,ed,del]=e.querySelectorAll('button');a.onclick=()=>addLibItem(x);ed.onclick=()=>fillL(x);del.onclick=()=>setLib(l.filter(y=>y.id!=x.id));list.appendChild(e)})}
+function fillL(x){selectedLib=x.id;$('#libTipo').value=x.tipo;$('#libDesc').value=x.descricao;$('#libUn').value=x.unidade;$('#libVal').value=x.valor;toast('Item carregado.')}function addLibItem(x){addRow({tipo:x.tipo,descricao:x.descricao,unidade:x.unidade,qtd:'1',valor:x.valor});saveDraft();tab('proposta');toast('Item adicionado.')}
+$('#saveLib').onclick=()=>{let d=$('#libDesc').value.trim();if(!d)return toast('Informe a descrição.');let l=lib(),o={id:selectedLib||id(),tipo:$('#libTipo').value,descricao:d,unidade:$('#libUn').value,valor:$('#libVal').value};let ix=l.findIndex(x=>x.id==o.id);if(ix>=0)l[ix]=o;else l.unshift(o);selectedLib=o.id;setLib(l);toast('Item salvo.')};$('#addLib').onclick=()=>{let x=lib().find(i=>i.id==selectedLib);x?addLibItem(x):toast('Selecione/salve um item.')};$('#libVal').onblur=e=>e.target.value=br(n(e.target.value));
+function renderTpls(){let list=$('#tplList');list.innerHTML='';tpls.forEach(t=>{let e=document.createElement('div');e.className='item';e.innerHTML=`<header><h3>${t.title}</h3><span class="badge ok">Template</span></header><p>${t.desc}</p><div class="mini"><button class="secondary">Aplicar Template</button></div>`;e.querySelector('button').onclick=()=>{ $('#tipoServico').value=t.type;$('#titulo').value=t.title;$('#descricao').value=t.desc;$('#etapas').value=t.etapas;saveDraft();validate();tab('proposta');toast('Template aplicado.')};list.appendChild(e)})}
+async function resizeImg(file){return new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>{let img=new Image();img.onload=()=>{let s=Math.min(1,1280/Math.max(img.width,img.height)),w=img.width*s,h=img.height*s,c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);res(c.toDataURL('image/jpeg',.82))};img.onerror=rej;img.src=r.result};r.onerror=rej;r.readAsDataURL(file)})}
+$('#photoInput').onchange=async e=>{for(let f of Array.from(e.target.files||[])){if(f.type.startsWith('image/'))photos.push({id:id(),dataUrl:await resizeImg(f),caption:''})}e.target.value='';renderPhotos();saveDraft();toast('Foto anexada.')};$('#clearPhotos').onclick=()=>{photos=[];renderPhotos();saveDraft()};
+function renderPhotos(){let g=$('#photos');g.innerHTML=photos.length?'':'<p class="hint">Nenhuma foto anexada.</p>';photos.forEach((p,i)=>{let e=document.createElement('div');e.className='photo';e.innerHTML=`<img src="${p.dataUrl}"><textarea placeholder="Descrição">${p.caption||''}</textarea><button class="danger" type="button">Remover</button>`;e.querySelector('textarea').oninput=x=>{p.caption=x.target.value;saveDraft()};e.querySelector('button').onclick=()=>{photos.splice(i,1);renderPhotos();saveDraft()};g.appendChild(e)})}
+$('#savePropBtn').onclick=()=>{if(!validate(true))return;let h=hist(),d=data();d.id=d.numero||id();d.updatedAt=new Date().toISOString();let ix=h.findIndex(p=>p.id==d.id);if(ix>=0)h[ix]=d;else h.unshift(d);setHist(h);toast('Proposta salva.')};
+function renderHist(){let list=$('#histList'),q=($('#histBusca').value||'').toLowerCase(),st=$('#histStatus').value,h=hist();if(q)h=h.filter(p=>[p.numero,p.cliente,p.titulo,p.tipoServico].some(v=>String(v||'').toLowerCase().includes(q)));if(st)h=h.filter(p=>p.status==st);list.innerHTML=h.length?'':'<p class="hint">Nenhuma proposta salva.</p>';h.forEach(p=>{let e=document.createElement('div');e.className='item';let cls=p.status=='Aprovada'?'ok':(p.status=='Enviada'||p.status=='Visualizada')?'warn':'';e.innerHTML=`<header><h3>${p.numero||'Sem número'} • ${p.cliente||'Cliente não informado'}</h3><span class="badge ${cls}">${p.status||'Rascunho'}</span></header><p>${p.titulo||p.tipoServico||'-'} • ${br(p.totals?.total||0)}</p><p>Atualizada em: ${p.updatedAt?new Date(p.updatedAt).toLocaleString('pt-BR'):'-'}</p><div class="mini"><button class="secondary">Abrir</button><button class="danger">Excluir</button></div>`;let [open,del]=e.querySelectorAll('button');open.onclick=()=>{setData(p);tab('proposta');toast('Proposta carregada.')};del.onclick=()=>setHist(hist().filter(x=>x.id!=p.id));list.appendChild(e)})}
+$('#histBusca').oninput=renderHist;$('#histStatus').onchange=renderHist;$('#histRefresh').onclick=renderHist;
+function pad(canvas){let ctx=canvas.getContext('2d'),draw=false,has=false,img=null;function resize(){if(has)img=canvas.toDataURL();let r=canvas.getBoundingClientRect(),ratio=Math.max(devicePixelRatio||1,1);canvas.width=r.width*ratio;canvas.height=r.height*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);ctx.lineWidth=2.2;ctx.lineCap='round';ctx.strokeStyle='#0f172a';if(img){let im=new Image();im.onload=()=>ctx.drawImage(im,0,0,r.width,r.height);im.src=img}}function pos(e){let r=canvas.getBoundingClientRect(),t=e.touches?e.touches[0]:e;return{x:t.clientX-r.left,y:t.clientY-r.top}}function st(e){e.preventDefault();draw=true;let p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)}function mv(e){if(!draw)return;e.preventDefault();let p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();has=true;saveDraft()}function en(e){if(!draw)return;e.preventDefault();draw=false;saveDraft()}['mousedown','touchstart'].forEach(ev=>canvas.addEventListener(ev,st,{passive:false}));['mousemove','touchmove'].forEach(ev=>canvas.addEventListener(ev,mv,{passive:false}));['mouseup','mouseleave','touchend'].forEach(ev=>canvas.addEventListener(ev,en,{passive:false}));addEventListener('resize',resize);setTimeout(resize,120);return{clear(){ctx.clearRect(0,0,canvas.width,canvas.height);has=false;img=null;saveDraft()},toDataURL(){return has?canvas.toDataURL('image/png'):''},resize}}
+const sigs={emp:pad($('#sigEmp')),cli:pad($('#sigCli'))};function resizeSigs(){setTimeout(()=>Object.values(sigs).forEach(s=>s.resize()),80)}$('#clearSigEmp').onclick=()=>sigs.emp.clear();$('#clearSigCli').onclick=()=>sigs.cli.clear();
+$('#clearBtn').onclick=()=>$('#confirmDialog').showModal();$('#cancelClear').onclick=()=>$('#confirmDialog').close();$('#confirmClear').onclick=()=>{form.reset();$('#items').innerHTML='';addRow({tipo:'Serviço',unidade:'serviço',qtd:'1'});photos=[];renderPhotos();sigs.emp.clear();sigs.cli.clear();localStorage.removeItem('ta_draft');$('#data').value=new Date().toISOString().slice(0,10);totals();progress();$('#confirmDialog').close();toast('Proposta limpa.')};
+async function loadImg(src){let r=await fetch(src),b=await r.blob();return await new Promise((res,rej)=>{let fr=new FileReader();fr.onloadend=()=>res(fr.result);fr.onerror=rej;fr.readAsDataURL(b)})}
+async function saveBlob(blob,name){if('showSaveFilePicker'in window){let h=await showSaveFilePicker({suggestedName:name,types:[{description:'PDF',accept:{'application/pdf':['.pdf']}}]});let w=await h.createWritable();await w.write(blob);await w.close();return true}return false}
+$('#pdfBtn').onclick=async()=>{if(!validate(true))return;await pdf();toast('PDF gerado.')};
+async function pdf(){const{jsPDF}=window.jspdf,doc=new jsPDF({unit:'mm',format:'a4'}),d=data(),margin=14,pageWidth=210,contentWidth=pageWidth-margin*2;let y=16;function newP(e=10){if(y+e>276){foot();doc.addPage();y=18}}function foot(){let p=doc.internal.getCurrentPageInfo().pageNumber;doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(120);doc.text('TECNO ACRE - Soluções em Tecnologia Sustentável',margin,290);doc.text(`Página ${p}`,pageWidth-margin-16,290)}function sec(t){newP(13);doc.setFont('helvetica','bold');doc.setFontSize(12.2);doc.setTextColor(15,23,42);doc.text(t,margin,y);y+=7}function kv(l,v,w=52){newP(10);doc.setFont('helvetica','bold');doc.setFontSize(9.7);doc.setTextColor(20);doc.text(doc.splitTextToSize(l+':',w-2),margin,y);doc.setFont('helvetica','normal');doc.setTextColor(35);let lines=doc.splitTextToSize(String(v||'-'),contentWidth-w);doc.text(lines,margin+w,y);y+=Math.max(5.2,lines.length*5.2)}function multi(l,v){newP(15);doc.setFont('helvetica','bold');doc.text(l+':',margin,y);y+=5.2;doc.setFont('helvetica','normal');let lines=doc.splitTextToSize(String(v||'-'),contentWidth);doc.text(lines,margin,y);y+=Math.max(7,lines.length*5.2)+2}function line(t){let lines=doc.splitTextToSize(t,contentWidth);newP(lines.length*5.2+2);doc.setFont('helvetica','normal');doc.setFontSize(9.5);doc.text(lines,margin,y);y+=Math.max(5.6,lines.length*5.2)}
+let logo=await loadImg('./brand-logo.png').catch(()=>null);if(logo)try{doc.addImage(logo,'PNG',margin,y,40,24)}catch(e){};doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(15,23,42);doc.text('ORÇAMENTO E PROPOSTA COMERCIAL',margin+48,y+5,{maxWidth:140});doc.setFontSize(10.2);doc.setTextColor(55,65,81);doc.text('TECNO ACRE - Soluções em Tecnologia Sustentável',margin+48,y+14,{maxWidth:140});doc.setDrawColor(255,138,0);doc.line(margin,y+32,pageWidth-margin,y+32);y=56;
+sec('1. Dados da Proposta');kv('Nº da proposta',d.numero);kv('Data',dateBR(d.data));kv('Status',d.status);kv('Validade',d.validade);kv('Responsável',d.respCom);kv('WhatsApp',d.telEmp);kv('E-mail',d.emailEmp);
+sec('2. Dados do Cliente');kv('Cliente / Empresa',d.cliente);kv('CPF / CNPJ',d.doc);kv('Responsável',d.contato);kv('WhatsApp',d.telCliente);kv('E-mail',d.emailCliente);kv('Local do serviço',d.endereco);
+sec('3. Dados do Serviço');kv('Tipo de serviço',d.tipoServico);kv('Título',d.titulo);kv('Prioridade',d.prioridade);multi('Descrição geral',d.descricao);
+sec('4. Itens de Material e Serviços');let widths=[22,70,18,18,28,28],heads=['Tipo','Descrição','Un.','Qtd.','Unitário','Total'],x=margin;doc.setFont('helvetica','bold');doc.setFontSize(8.8);doc.setDrawColor(255,138,0);heads.forEach((h,i)=>{doc.rect(x,y,widths[i],8);doc.text(h,x+1.5,y+5.3);x+=widths[i]});y+=8;doc.setFont('helvetica','normal');d.items.forEach(it=>{newP(14);x=margin;let row=[it.tipo,it.descricao,it.unidade,it.qtd,br(n(it.valorUnitario)),br(it.total)],rowH=Math.max(9,4+doc.splitTextToSize(it.descricao||'-',widths[1]-3).length*4.4);row.forEach((c,i)=>{doc.rect(x,y,widths[i],rowH);doc.text(doc.splitTextToSize(String(c||'-'),widths[i]-3),x+1.5,y+5);x+=widths[i]});y+=rowH});y+=5;kv('Subtotal',br(d.totals.sub));kv('Desconto',br(d.totals.desconto));kv('Acréscimo',br(d.totals.acrescimo));kv('Total geral',br(d.totals.total));kv('Forma de pagamento',d.pagamento);
+sec('5. Etapas dos Serviços');String(d.etapas||'-').split('\\n').forEach(line);sec('6. Fotos e Evidências');if(!d.photos.length)line('Nenhuma foto anexada.');else d.photos.forEach((p,i)=>{newP(78);doc.setFont('helvetica','bold');doc.text(`Foto ${i+1}`,margin,y);y+=5;try{doc.addImage(p.dataUrl,'JPEG',margin,y,78,58)}catch(e){}doc.setFont('helvetica','normal');doc.text(doc.splitTextToSize(p.caption||'Sem descrição.',94),margin+84,y+5);y+=64});sec('7. Condições Comerciais');kv('Prazo',d.prazo);kv('Garantia',d.garantia);multi('Condições',d.condicoes);
+sec('8. Assinaturas');newP(55);let lx=margin,rx=pageWidth-margin-78;if(d.sigEmp)try{doc.addImage(d.sigEmp,'PNG',lx,y,78,28)}catch(e){}if(d.sigCli)try{doc.addImage(d.sigCli,'PNG',rx,y,78,28)}catch(e){}doc.setDrawColor(60);doc.line(lx,y+33,lx+78,y+33);doc.line(rx,y+33,rx+78,y+33);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(35);doc.text(d.assEmpNome||'Responsável pela proposta',lx,y+39,{maxWidth:78});doc.text(d.assCliNome||'Cliente / Aprovador',rx,y+39,{maxWidth:78});for(let p=1;p<=doc.internal.getNumberOfPages();p++){doc.setPage(p);foot()}let file=`Proposta_Tecno_Acre_${(d.cliente||'Cliente').replace(/\\s+/g,'_')}.pdf`,blob=doc.output('blob');let saved=await saveBlob(blob,file).catch(()=>false);if(!saved)doc.save(file)}
+$('#zapBtn').onclick=()=>{if(!validate(true))return;let d=data(),phone=String(d.telCliente||'').replace(/\\D/g,''),msg=`Olá${d.contato?', '+d.contato:''}! Tudo bem?\\n\\nA TECNO ACRE - Soluções em Tecnologia Sustentável preparou uma proposta comercial para você.\\n\\n📄 Proposta: ${d.numero||'sem número informado'}\\n🔧 Serviço: ${d.titulo||d.tipoServico||'serviço solicitado'}\\n💰 Valor total: ${br(d.totals.total)}\\n⏳ Validade: ${d.validade||'conforme proposta'}\\n🛠️ Prazo de execução: ${d.prazo||'conforme alinhamento técnico'}\\n💳 Forma de pagamento: ${d.pagamento||'conforme proposta'}\\n\\nO PDF da proposta foi gerado pelo nosso aplicativo e será enviado nesta conversa para sua análise.\\n\\nQualquer dúvida, estamos à disposição.`;open(`https://wa.me/${phone?'55'+phone:''}?text=${encodeURIComponent(msg)}`,'_blank');toast('WhatsApp aberto. Anexe o PDF.')};
+if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./service-worker.js').catch(console.error);addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredPrompt=e;$('#installBtn').hidden=false});$('#installBtn').onclick=async()=>{if(!window.deferredPrompt)return;window.deferredPrompt.prompt();await window.deferredPrompt.userChoice;window.deferredPrompt=null;$('#installBtn').hidden=true};
+$('#data').value=new Date().toISOString().slice(0,10);loadDraft();if(!$('#items').children.length)addRow({tipo:'Serviço',unidade:'serviço',qtd:'1'});renderClients();renderLib();renderTpls();renderHist();renderPhotos();totals();validate();progress();dash();
+</script>
+</body></html>
