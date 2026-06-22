@@ -21,11 +21,9 @@
             --radius: 8px;
             --shadow: 0 4px 24px rgba(0, 0, 0, .4);
         }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             background: var(--bg);
             color: var(--text);
@@ -45,6 +43,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            flex-wrap: wrap;
         }
         .header .logo {
             font-size: 1.2rem;
@@ -72,9 +71,17 @@
             align-items: center;
             font-size: .85rem;
             color: var(--text2);
+            flex-wrap: wrap;
         }
-        .header .client-info strong {
+        .header .client-info strong { color: var(--text); }
+        .header .client-info input {
+            background: transparent;
+            border: 1px solid var(--border);
             color: var(--text);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: .8rem;
+            width: 200px;
         }
 
         /* MAIN LAYOUT */
@@ -137,9 +144,10 @@
             gap: 10px;
             user-select: none;
         }
-        .bay-card:hover {
+        .bay-card:hover, .bay-card:focus-visible {
             border-color: #f0b90b40;
             background: #1e2330;
+            outline: none;
         }
         .bay-card.selected {
             border-color: var(--accent);
@@ -199,9 +207,10 @@
             transition: all .15s;
             white-space: nowrap;
         }
-        .btn:hover {
+        .btn:hover, .btn:focus-visible {
             border-color: var(--text2);
             background: #2a3040;
+            outline: none;
         }
         .btn.accent {
             background: var(--accent);
@@ -209,21 +218,14 @@
             border-color: var(--accent);
             font-weight: 700;
         }
-        .btn.accent:hover {
-            background: #f5c400;
-        }
+        .btn.accent:hover { background: #f5c400; }
         .btn.danger {
             border-color: #ff525240;
             color: var(--red);
         }
-        .btn.danger:hover {
-            background: #ff525210;
-            border-color: var(--red);
-        }
-        .btn.sm {
-            padding: 4px 10px;
-            font-size: .7rem;
-        }
+        .btn.danger:hover { background: #ff525210; border-color: var(--red); }
+        .btn.sm { padding: 4px 10px; font-size: .7rem; }
+        .btn:disabled { opacity: .5; cursor: not-allowed; }
 
         /* TABLE */
         .table-wrap {
@@ -253,9 +255,7 @@
             padding: 7px 10px;
             border-bottom: 1px solid #2a2f3b20;
         }
-        tbody tr:hover td {
-            background: #ffffff04;
-        }
+        tbody tr:hover td { background: #ffffff04; }
         tbody tr.bay-header td {
             background: #f0b90b08;
             font-weight: 700;
@@ -264,26 +264,17 @@
             padding: 6px 10px;
             border-bottom: 1px solid #f0b90b30;
         }
-        .qty-input {
-            width: 55px;
+        .qty-input, .price-input, .search-input {
             background: #1a1d27;
             border: 1px solid var(--border);
             color: var(--text);
             padding: 4px 6px;
             border-radius: 4px;
-            text-align: center;
             font-size: .8rem;
         }
-        .price-input {
-            width: 100px;
-            background: #1a1d27;
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 4px 6px;
-            border-radius: 4px;
-            text-align: right;
-            font-size: .8rem;
-        }
+        .qty-input { width: 55px; text-align: center; }
+        .price-input { width: 100px; text-align: right; }
+        .search-input { width: 100%; max-width: 260px; }
         .delete-btn {
             background: none;
             border: none;
@@ -292,14 +283,10 @@
             font-size: .9rem;
             opacity: 0;
             transition: opacity .15s;
+            padding: 4px;
         }
-        tbody tr:hover .delete-btn {
-            opacity: 1;
-        }
-        .col-total {
-            font-weight: 600;
-            color: var(--green);
-        }
+        tbody tr:hover .delete-btn, .delete-btn:focus-visible { opacity: 1; }
+        .col-total { font-weight: 600; color: var(--green); }
         .dot {
             width: 8px;
             height: 8px;
@@ -309,27 +296,26 @@
 
         /* UNIFILAR SVG */
         .unifilar-container {
-            height: 200px;
+            min-height: 250px;
             background: var(--card);
             border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            flex: 1;
         }
-        .unifilar-container svg {
-            width: 100%;
-            height: 100%;
-        }
+        .unifilar-container svg { width: 100%; height: 100%; }
 
         /* GANTT */
         .gantt-container {
-            height: 160px;
+            min-height: 160px;
             position: relative;
             background: var(--card);
             border-radius: var(--radius);
             overflow: hidden;
             padding: 8px 0;
+            flex: 1;
         }
         .gantt-row {
             display: flex;
@@ -351,7 +337,7 @@
             background: #2a2f3b;
             border-radius: 7px;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
         .gantt-bar {
             height: 100%;
@@ -392,12 +378,8 @@
             font-weight: 700;
             margin-top: 4px;
         }
-        .summary-card .value.green {
-            color: var(--green);
-        }
-        .summary-card .value.accent {
-            color: var(--accent);
-        }
+        .summary-card .value.green { color: var(--green); }
+        .summary-card .value.accent { color: var(--accent); }
 
         /* TABS */
         .tabs {
@@ -413,138 +395,118 @@
             transition: all .15s;
             color: var(--text2);
             font-weight: 500;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
         }
-        .tab:hover {
-            color: var(--text);
-        }
-        .tab.active {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
+        .tab:hover, .tab:focus-visible { color: var(--text); outline: none; }
+        .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+        .tab-content { display: none; }
+        .tab-content.active { display: flex; }
 
         /* RESPONSIVE */
         @media (max-width: 1200px) {
-            .main {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-            .summary-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .main { grid-template-columns: 1fr; height: auto; }
+            .summary-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .header .client-info { margin-left: 0; width: 100%; }
+            .summary-grid { grid-template-columns: 1fr; }
         }
 
         /* TOAST */
-        .toast {
+        .toast-container {
             position: fixed;
             bottom: 24px;
             right: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 999;
+            pointer-events: none;
+        }
+        .toast {
             background: var(--green);
             color: #000;
             padding: 10px 20px;
             border-radius: 8px;
             font-weight: 600;
             font-size: .85rem;
-            z-index: 999;
-            animation: slideIn .3s ease, fadeOut .3s ease 1.7s;
-            opacity: 0;
-            pointer-events: none;
+            animation: slideIn .3s ease forwards;
+            max-width: 320px;
+            pointer-events: auto;
         }
+        .toast.error { background: var(--red); color: #fff; }
+        .toast.info { background: var(--blue); color: #fff; }
         @keyframes slideIn {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-            }
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         /* PRINT STYLES */
         @media print {
-            body {
-                background: #fff;
-                color: #000;
-            }
-            .header,
-            .bay-grid,
-            .quick-actions,
-            .tabs,
-            .summary-grid,
-            .gantt-container,
-            .unifilar-container,
-            #quickAdd,
-            .delete-btn,
-            .toast {
+            body { background: #fff; color: #000; }
+            .header, .bay-grid, .quick-actions, .tabs, .summary-grid, .gantt-container,
+            .unifilar-container, #quickAdd, .delete-btn, .toast-container, .search-bar {
                 display: none !important;
             }
-            .main {
-                display: block;
-                height: auto;
-                padding: 0;
-            }
+            .main { display: block; height: auto; padding: 0; }
             .panel {
                 border: 1px solid #ccc;
                 box-shadow: none;
                 break-inside: avoid;
                 background: #fff;
             }
-            table {
-                font-size: 9pt;
-                color: #000;
-            }
-            thead th {
-                background: #eee;
-                color: #000;
-                border-bottom: 1px solid #000;
-            }
-            tbody tr.bay-header td {
-                background: #f5f5f5;
-                color: #000;
-            }
-            .col-total {
-                color: #000;
-            }
-            .panel-header {
-                background: #eee;
-                color: #000;
-            }
+            table { font-size: 9pt; color: #000; }
+            thead th { background: #eee; color: #000; border-bottom: 1px solid #000; }
+            tbody tr.bay-header td { background: #f5f5f5; color: #000; }
+            .col-total { color: #000; }
+            .panel-header { background: #eee; color: #000; }
+            .tab-content { display: block !important; }
+            .tab-content:not(#tab-itens) { display: none !important; }
+        }
+
+        /* UTILS */
+        .search-bar {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            padding: 8px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text2);
+        }
+        .kbd {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1px 4px;
+            font-size: .7rem;
+            color: var(--text2);
         }
     </style>
 </head>
 <body>
 
-    <!-- ========== HEADER ========== -->
-    <div class="header">
+    <!-- HEADER -->
+    <header class="header">
         <div class="logo">⚡ TECNO <span>ACRE 360</span></div>
         <div class="badge">SUBESTAÇÃO</div>
         <div class="client-info">
-            Proposta: <strong id="propostaNum">#SUB-2026-0042</strong> &nbsp;|&nbsp;
-            Cliente: <input type="text" id="clienteNome" value="Construtora Norte Energia"
-        style="background:transparent;border:1px solid var(--border);color:var(--text);padding:2px 8px;border-radius:4px;font-size:.8rem;width:200px">
-            &nbsp;|&nbsp;
-            Data: <strong>22/06/2026</strong>
+            <label>Proposta: <strong id="propostaNum">#SUB-2026-0042</strong></label>
+            <label>Cliente: <input type="text" id="clienteNome" value="Construtora Norte Energia" aria-label="Nome do cliente"></label>
+            <label>Data: <strong id="dataProposta">22/06/2026</strong></label>
         </div>
-    </div>
+    </header>
 
-    <!-- ========== MAIN LAYOUT ========== -->
+    <!-- MAIN -->
     <div class="main">
 
-        <!-- ===== LEFT SIDEBAR ===== -->
+        <!-- LEFT SIDEBAR -->
         <div style="display:flex;flex-direction:column;gap:12px;overflow-y:auto;">
 
             <!-- BAY SELECTOR -->
@@ -554,7 +516,7 @@
                     ⚡ Configurador de Bays
                     <span style="margin-left:auto;font-size:.7rem;color:var(--text2)" id="bayCount">0 selecionados</span>
                 </div>
-                <div class="panel-body bay-grid" id="baySelector">
+                <div class="panel-body bay-grid" id="baySelector" role="listbox" aria-label="Bays disponíveis">
                     <!-- Populado dinamicamente -->
                 </div>
                 <div style="padding:8px 16px 12px" class="quick-actions">
@@ -594,28 +556,33 @@
                         <button class="btn accent sm" onclick="gerarPDF()">📄 Imprimir / PDF</button>
                         <button class="btn sm" onclick="enviarWhatsApp()">📱 WhatsApp</button>
                         <button class="btn sm" onclick="exportarCSV()">📊 CSV</button>
-                        <button class="btn sm" onclick="salvarProposta()">💾 Salvar</button>
+                        <button class="btn sm" onclick="exportarJSON()">📦 JSON</button>
+                        <button class="btn sm" onclick="salvarProposta()">💾 Salvar <span class="kbd">Ctrl+S</span></button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== RIGHT AREA ===== -->
+        <!-- RIGHT AREA -->
         <div style="display:flex;flex-direction:column;gap:12px;overflow:hidden;min-width:0;">
 
             <!-- TABS -->
             <div class="panel" style="flex:1;display:flex;flex-direction:column;min-height:0;">
-                <div class="tabs">
-                    <div class="tab active" onclick="switchTab('itens', this)">📋 Itens da Proposta</div>
-                    <div class="tab" onclick="switchTab('unifilar', this)">⚡ Diagrama Unifilar</div>
-                    <div class="tab" onclick="switchTab('cronograma', this)">📅 Cronograma</div>
+                <div class="tabs" role="tablist">
+                    <button class="tab active" onclick="switchTab('itens', this)" role="tab" aria-selected="true">📋 Itens da Proposta</button>
+                    <button class="tab" onclick="switchTab('unifilar', this)" role="tab" aria-selected="false">⚡ Diagrama Unifilar</button>
+                    <button class="tab" onclick="switchTab('cronograma', this)" role="tab" aria-selected="false">📅 Cronograma</button>
                 </div>
 
                 <!-- TAB: ITENS -->
-                <div class="tab-content active" id="tab-itens" style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
-                    <div class="panel-header" style="border-bottom:1px solid var(--border)">
-                        Itens orçados
-                        <span style="margin-left:auto;font-size:.7rem;color:var(--text2)" id="itemCount">0 itens</span>
+                <div class="tab-content active" id="tab-itens" style="flex:1;flex-direction:column;overflow:hidden;">
+                    <div class="panel-header" style="border-bottom:1px solid var(--border);justify-content:space-between">
+                        <span>Itens orçados</span>
+                        <span style="font-size:.7rem;color:var(--text2)" id="itemCount">0 itens</span>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="searchItems" class="search-input" placeholder="🔍 Buscar item..." oninput="renderItems()">
+                        <span style="font-size:.7rem;color:var(--text2)">Use <span class="kbd">Ctrl+Z</span> para desfazer</span>
                     </div>
                     <div class="table-wrap" style="flex:1;overflow:auto;">
                         <table>
@@ -632,7 +599,7 @@
                             </thead>
                             <tbody id="itemsBody">
                                 <tr>
-                                    <td colspan="7" style="text-align:center;padding:40px;color:var(--text2)">
+                                    <td colspan="7" class="empty-state">
                                         ⚡ Selecione os bays ao lado para começar a montar a proposta
                                     </td>
                                 </tr>
@@ -642,944 +609,1059 @@
                     <!-- QUICK ADD BAR -->
                     <div style="padding:8px 16px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:center;flex-wrap:wrap;" id="quickAdd">
                         <input type="text" id="quickItem" placeholder="+ Adicionar item rápido..."
-                    style="flex:1;min-width:200px;background:#1a1d27;border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:6px;font-size:.8rem"
-                    onkeydown="if(event.key==='Enter')addQuickItem()">
-                    <input type="number" id="quickQty" value="1" min="1"
-                style="width:60px;background:#1a1d27;border:1px solid var(--border);color:var(--text);padding:6px;border-radius:6px;font-size:.8rem;text-align:center">
-                <input type="number" id="quickPrice" placeholder="R$"
-            style="width:100px;background:#1a1d27;border:1px solid var(--border);color:var(--text);padding:6px;border-radius:6px;font-size:.8rem;text-align:right"
-            onkeydown="if(event.key==='Enter')addQuickItem()">
-            <select id="quickBay"
-        style="background:#1a1d27;border:1px solid var(--border);color:var(--text);padding:6px;border-radius:6px;font-size:.8rem">
-        <option value="">Geral</option>
-    </select>
-    <button class="btn sm accent" onclick="addQuickItem()">+ Adicionar</button>
-</div>
-</div>
+                        style="flex:1;min-width:200px;background:#1a1d27;border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:6px;font-size:.8rem"
+                        onkeydown="if(event.key==='Enter')addQuickItem()">
+                        <input type="number" id="quickQty" value="1" min="1"
+                        style="width:60px;background:#1a1d27;border:1px solid var(--border);color:var(--text);padding:6px;border-radius:6px;font-size:.8rem;text-align:center">
+                        <input type="number" id="quickPrice" placeholder="R$"
+                        style="width:100px;background:#1a1d27;border:1px solid var(--border);color:var(--text);padding:6px;border-radius:6px;font-size:.8rem;text-align:right"
+                        onkeydown="if(event.key==='Enter')addQuickItem()">
+                        <select id="quickBay"
+                        style="background:#1a1d27;border:1px solid var(--border);color:var(--text);padding:6px;border-radius:6px;font-size:.8rem">
+                        <option value="">Geral</option>
+                        </select>
+                        <button class="btn sm accent" onclick="addQuickItem()">+ Adicionar</button>
+                    </div>
+                </div>
 
-<!-- TAB: UNIFILAR -->
-<div class="tab-content" id="tab-unifilar" style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
-    <div class="unifilar-container" style="flex:1;min-height:250px">
-        <svg id="unifilarSVG" viewBox="0 0 1000 250"></svg>
-    </div>
-    <div style="padding:8px 16px;font-size:.7rem;color:var(--text2);text-align:center">
-        Diagrama unifilar automático — montado conforme os bays selecionados
-    </div>
-</div>
+                <!-- TAB: UNIFILAR -->
+                <div class="tab-content" id="tab-unifilar" style="flex:1;flex-direction:column;overflow:hidden;">
+                    <div class="unifilar-container">
+                        <svg id="unifilarSVG" viewBox="0 0 1000 250"></svg>
+                    </div>
+                    <div style="padding:8px 16px;font-size:.7rem;color:var(--text2);text-align:center">
+                        Diagrama unifilar automático — montado conforme os bays selecionados
+                    </div>
+                </div>
 
-<!-- TAB: CRONOGRAMA -->
-<div class="tab-content" id="tab-cronograma" style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
-    <div class="gantt-container" style="flex:1" id="ganttChart">
-        <!-- Populado dinamicamente -->
-    </div>
-    <div style="padding:8px 16px;font-size:.7rem;color:var(--text2);text-align:center">
-        Cronograma estimado — baseado nas horas de serviço de cada bay (1 semana ≈ 40h)
-    </div>
-</div>
-</div>
-
-<!-- BOTTOM CARDS -->
-<div class="summary-grid">
-    <div class="summary-card">
-        <div class="label">Total Equipamentos</div>
-        <div class="value green" id="cardEquip">R$ 0</div>
-    </div>
-    <div class="summary-card">
-        <div class="label">Total Serviços</div>
-        <div class="value green" id="cardServ">R$ 0</div>
-    </div>
-    <div class="summary-card">
-        <div class="label">Horas Estimadas</div>
-        <div class="value" id="cardHoras" style="color:#448aff">0h</div>
-    </div>
-    <div class="summary-card" style="border:1px solid #f0b90b30">
-        <div class="label">Valor Final</div>
-        <div class="value accent" id="cardTotal">R$ 0</div>
-    </div>
-</div>
-</div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
-
-<script>
-    // ============================================================
-    //  BIBLIOTECA DE BAYS DA SUBESTAÇÃO
-    // ============================================================
-    const bayLibrary = [{
-        id: 'entrada_69kv',
-        nome: 'Bay de Entrada 69 kV',
-        tensao: '69 kV',
-        cor: '#448aff',
-        equipamentos: [
-            { nome: 'Disjuntor 69 kV (Siemens 3AH4)', un: 'un', qtd: 1, valor: 85000 },
-            { nome: 'Seccionadora Tripolar 69 kV c/ CMT', un: 'un', qtd: 1, valor: 32000 },
-            { nome: 'Transformador de Corrente (TC) 69 kV', un: 'un', qtd: 3, valor: 12000 },
-            { nome: 'Transformador de Potencial (TP) 69 kV', un: 'un', qtd: 3, valor: 9500 },
-            { nome: 'Para-raios ZnO 69 kV', un: 'un', qtd: 3, valor: 4500 },
-            { nome: 'Barramento tubular Al 69 kV (m)', un: 'm', qtd: 12, valor: 850 },
-            { nome: 'Estrutura metálica galvanizada (kg)', un: 'kg', qtd: 450, valor: 28 },
-            { nome: 'Cabo XLPE 69 kV 185mm² (m)', un: 'm', qtd: 30, valor: 320 },
-        ],
-        servicos: [
-            { nome: 'Montagem eletromecânica do bay', un: 'h', qtd: 80, valor: 180 },
-            { nome: 'Comissionamento e testes', un: 'h', qtd: 24, valor: 220 },
-            { nome: 'Testes elétricos (tensão aplicada)', un: 'h', qtd: 16, valor: 250 },
-            { nome: 'Conexão de cabos de controle', un: 'h', qtd: 20, valor: 160 },
-        ],
-        gantt: { nome: 'Bay Entrada 69kV', semanas: 6, inicio: 0 },
-    }, {
-        id: 'entrada_138kv',
-        nome: 'Bay de Entrada 138 kV',
-        tensao: '138 kV',
-        cor: '#ff9100',
-        equipamentos: [
-            { nome: 'Disjuntor 138 kV (ABB LTB)', un: 'un', qtd: 1, valor: 145000 },
-            { nome: 'Seccionadora Tripolar 138 kV', un: 'un', qtd: 1, valor: 48000 },
-            { nome: 'Transformador de Corrente (TC) 138 kV', un: 'un', qtd: 3, valor: 16000 },
-            { nome: 'Transformador de Potencial (TP) 138 kV', un: 'un', qtd: 3, valor: 13500 },
-            { nome: 'Para-raios ZnO 138 kV', un: 'un', qtd: 3, valor: 6500 },
-            { nome: 'Barramento tubular Al 138 kV (m)', un: 'm', qtd: 14, valor: 1050 },
-            { nome: 'Estrutura metálica galvanizada (kg)', un: 'kg', qtd: 580, valor: 28 },
-            { nome: 'Cabo XLPE 138 kV 240mm² (m)', un: 'm', qtd: 35, valor: 420 },
-        ],
-        servicos: [
-            { nome: 'Montagem eletromecânica do bay', un: 'h', qtd: 100, valor: 190 },
-            { nome: 'Comissionamento e testes', un: 'h', qtd: 30, valor: 230 },
-            { nome: 'Testes elétricos', un: 'h', qtd: 20, valor: 260 },
-            { nome: 'Conexão de cabos de controle', un: 'h', qtd: 24, valor: 170 },
-        ],
-        gantt: { nome: 'Bay Entrada 138kV', semanas: 7, inicio: 0 },
-    }, {
-        id: 'transformador',
-        nome: 'Transformador de Potência',
-        tensao: '15/20 MVA',
-        cor: '#b388ff',
-        equipamentos: [
-            { nome: 'Transformador 15 MVA ONAN 69/13.8 kV', un: 'un', qtd: 1, valor: 480000 },
-            { nome: 'Base de concreto armado (m³)', un: 'm³', qtd: 18, valor: 1200 },
-            { nome: 'Bacia de contenção de óleo', un: 'un', qtd: 1, valor: 18000 },
-            { nome: 'Relé Buchholz + indicador de nível', un: 'cj', qtd: 1, valor: 8500 },
-            { nome: 'Válvula de alívio de pressão', un: 'un', qtd: 1, valor: 3200 },
-            { nome: 'Termômetro de óleo/enrolamento', un: 'cj', qtd: 1, valor: 4200 },
-            { nome: 'Secador de sílica gel', un: 'un', qtd: 1, valor: 1800 },
-        ],
-        servicos: [
-            { nome: 'Içamento e posicionamento do trafo', un: 'h', qtd: 40, valor: 250 },
-            { nome: 'Conexões elétricas AT/BT', un: 'h', qtd: 32, valor: 200 },
-            { nome: 'Ensaios de rotina (relação, isolação)', un: 'h', qtd: 20, valor: 280 },
-            { nome: 'Tratamento de óleo isolante', un: 'h', qtd: 24, valor: 220 },
-            { nome: 'Comissionamento completo', un: 'h', qtd: 16, valor: 300 },
-        ],
-        gantt: { nome: 'Transformador', semanas: 8, inicio: 2 },
-    }, {
-        id: 'saida_13kv',
-        nome: 'Bay de Saída 13.8 kV',
-        tensao: '13.8 kV',
-        cor: '#00c853',
-        equipamentos: [
-            { nome: 'Disjuntor extraível 13.8 kV 2000A', un: 'un', qtd: 5, valor: 28000 },
-            { nome: 'TC de proteção 13.8 kV', un: 'un', qtd: 15, valor: 3200 },
-            { nome: 'TP 13.8 kV', un: 'un', qtd: 3, valor: 2800 },
-            { nome: 'Cabo EPR 90°C 13.8 kV 240mm² (m)', un: 'm', qtd: 80, valor: 180 },
-            { nome: 'Cubículo blindado 13.8 kV', un: 'un', qtd: 5, valor: 18500 },
-            { nome: 'Barramento 13.8 kV 2000A (m)', un: 'm', qtd: 24, valor: 650 },
-        ],
-        servicos: [
-            { nome: 'Montagem de cubículos', un: 'h', qtd: 60, valor: 175 },
-            { nome: 'Lançamento e conexão de cabos', un: 'h', qtd: 48, valor: 160 },
-            { nome: 'Testes de isolação e continuidade', un: 'h', qtd: 24, valor: 200 },
-        ],
-        gantt: { nome: 'Bays Saída 13.8kV', semanas: 7, inicio: 4 },
-    }, {
-        id: 'servicos_aux',
-        nome: 'Serviços Auxiliares',
-        tensao: '380/220V',
-        cor: '#ff5252',
-        equipamentos: [
-            { nome: 'Transformador auxiliar 225 kVA', un: 'un', qtd: 1, valor: 32000 },
-            { nome: 'QGBT 380V (painel metálico)', un: 'un', qtd: 1, valor: 15000 },
-            { nome: 'Retificador/carregador 125 Vcc 100A', un: 'un', qtd: 1, valor: 22000 },
-            { nome: 'Banco de baterias 125 Vcc 200Ah', un: 'cj', qtd: 1, valor: 28000 },
-            { nome: 'No-break 10 kVA', un: 'un', qtd: 1, valor: 18500 },
-            { nome: 'Circuito de iluminação e tomadas', un: 'vb', qtd: 1, valor: 8500 },
-        ],
-        servicos: [
-            { nome: 'Montagem de painéis auxiliares', un: 'h', qtd: 40, valor: 170 },
-            { nome: 'Instalação elétrica predial', un: 'h', qtd: 48, valor: 150 },
-            { nome: 'Testes de comissionamento', un: 'h', qtd: 16, valor: 190 },
-        ],
-        gantt: { nome: 'Serviços Auxiliares', semanas: 4, inicio: 1 },
-    }, {
-        id: 'spda_malha',
-        nome: 'SPDA e Malha de Terra',
-        tensao: 'Aterramento',
-        cor: '#00bcd4',
-        equipamentos: [
-            { nome: 'Cabo cobre nu 50 mm² (malha)', un: 'm', qtd: 250, valor: 95 },
-            { nome: 'Cabo cobre nu 35 mm² (SPDA)', un: 'm', qtd: 80, valor: 68 },
-            { nome: 'Haste de aterramento 5/8" x 3m', un: 'un', qtd: 20, valor: 120 },
-            { nome: 'Caixa de inspeção de aterramento', un: 'un', qtd: 8, valor: 250 },
-            { nome: 'Solda exotérmica (cartucho)', un: 'un', qtd: 35, valor: 45 },
-            { nome: 'Terminal de compressão', un: 'un', qtd: 40, valor: 18 },
-        ],
-        servicos: [
-            { nome: 'Escavação para malha de terra', un: 'h', qtd: 80, valor: 120 },
-            { nome: 'Lançamento de cabos e soldas', un: 'h', qtd: 120, valor: 140 },
-            { nome: 'Medição de resistência de terra', un: 'h', qtd: 16, valor: 200 },
-        ],
-        gantt: { nome: 'SPDA/Malha de Terra', semanas: 5, inicio: 0 },
-    }, {
-        id: 'medicao',
-        nome: 'Medição e Faturamento',
-        tensao: 'Medição',
-        cor: '#e040fb',
-        equipamentos: [
-            { nome: 'TC de medição 69 kV 0.3P', un: 'un', qtd: 3, valor: 14000 },
-            { nome: 'TP de medição 69 kV 0.3P', un: 'un', qtd: 3, valor: 11000 },
-            { nome: 'Medidor eletrônico multigrandezas', un: 'un', qtd: 1, valor: 8500 },
-            { nome: 'Caixa de medição selável', un: 'un', qtd: 1, valor: 1800 },
-        ],
-        servicos: [
-            { nome: 'Instalação de TP/TC de medição', un: 'h', qtd: 24, valor: 200 },
-            { nome: 'Parametrização do medidor', un: 'h', qtd: 8, valor: 220 },
-            { nome: 'Testes de exatidão', un: 'h', qtd: 8, valor: 250 },
-        ],
-        gantt: { nome: 'Medição', semanas: 3, inicio: 5 },
-    }, {
-        id: 'protecao',
-        nome: 'Proteção e Controle',
-        tensao: 'Relés',
-        cor: '#76ff03',
-        equipamentos: [
-            { nome: 'Relé de proteção SEL-751A (alimentador)', un: 'un', qtd: 5, valor: 18500 },
-            { nome: 'Relé diferencial SEL-787 (transformador)', un: 'un', qtd: 1, valor: 32000 },
-            { nome: 'Relé de proteção SEL-311L (linha 69kV)', un: 'un', qtd: 1, valor: 28000 },
-            { nome: 'Painel de proteção e controle', un: 'un', qtd: 2, valor: 15000 },
-            { nome: 'Switch Ethernet industrial', un: 'un', qtd: 2, valor: 4500 },
-            { nome: 'Fibra óptica monomodo (m)', un: 'm', qtd: 150, valor: 8 },
-            { nome: 'Conversor de mídia Ethernet/FO', un: 'un', qtd: 4, valor: 1200 },
-        ],
-        servicos: [
-            { nome: 'Montagem painéis de proteção', un: 'h', qtd: 48, valor: 190 },
-            { nome: 'Parametrização de relés', un: 'h', qtd: 80, valor: 240 },
-            { nome: 'Testes de injeção secundária', un: 'h', qtd: 40, valor: 260 },
-            { nome: 'Configuração rede ethernet', un: 'h', qtd: 16, valor: 200 },
-        ],
-        gantt: { nome: 'Proteção/Controle', semanas: 6, inicio: 3 },
-    }, {
-        id: 'capacitores',
-        nome: 'Banco de Capacitores',
-        tensao: '13.8 kV',
-        cor: '#ffc107',
-        equipamentos: [
-            { nome: 'Banco de capacitores 2 MVAr 13.8 kV', un: 'un', qtd: 1, valor: 85000 },
-            { nome: 'Reator de descarga', un: 'un', qtd: 1, valor: 12000 },
-            { nome: 'Disjuntor de manobra do banco', un: 'un', qtd: 1, valor: 32000 },
-            { nome: 'Estrutura de suporte (kg)', un: 'kg', qtd: 200, valor: 30 },
-        ],
-        servicos: [
-            { nome: 'Montagem do banco de capacitores', un: 'h', qtd: 32, valor: 190 },
-            { nome: 'Conexões e testes', un: 'h', qtd: 16, valor: 220 },
-        ],
-        gantt: { nome: 'Banco Capacitores', semanas: 4, inicio: 6 },
-    }, {
-        id: 'obra_civil',
-        nome: 'Obra Civil',
-        tensao: 'Infra',
-        cor: '#795548',
-        equipamentos: [
-            { nome: 'Terraplanagem e compactação', un: 'm²', qtd: 400, valor: 35 },
-            { nome: 'Concreto usinado FCK 30MPa', un: 'm³', qtd: 35, valor: 480 },
-            { nome: 'Armadura CA-50 (kg)', un: 'kg', qtd: 2800, valor: 12 },
-            { nome: 'Brita graduada para base', un: 'm³', qtd: 25, valor: 180 },
-            { nome: 'Canaletas para cabos', un: 'm', qtd: 60, valor: 220 },
-            { nome: 'Cerca de proteção (tela + mourão)', un: 'm', qtd: 80, valor: 150 },
-            { nome: 'Portão de acesso 2 folhas', un: 'un', qtd: 1, valor: 8500 },
-        ],
-        servicos: [
-            { nome: 'Mobilização e canteiro', un: 'h', qtd: 80, valor: 110 },
-            { nome: 'Escavação e concretagem', un: 'h', qtd: 160, valor: 100 },
-            { nome: 'Acabamento e limpeza', un: 'h', qtd: 40, valor: 90 },
-        ],
-        gantt: { nome: 'Obra Civil', semanas: 5, inicio: 0 },
-    }];
-
-    // ============================================================
-    //  STATE
-    // ============================================================
-    let selectedBays = new Set();
-    let customItems = [];
-
-    // ============================================================
-    //  RENDER BAY SELECTOR
-    // ============================================================
-    function renderBaySelector() {
-        const container = document.getElementById('baySelector');
-        container.innerHTML = bayLibrary.map(bay => `
-            <div class="bay-card ${selectedBays.has(bay.id) ? 'selected' : ''}" 
-                 onclick="toggleBay('${bay.id}')" id="bayCard_${bay.id}">
-              <div class="checkbox">${selectedBays.has(bay.id) ? '✓' : ''}</div>
-              <div style="width:3px;height:28px;background:${bay.cor};border-radius:2px;flex-shrink:0"></div>
-              <div>
-                <div class="bay-kv">${bay.tensao}</div>
-                <div class="bay-name">${bay.nome}</div>
-              </div>
-              <div class="bay-count">${bay.equipamentos.length + bay.servicos.length} itens</div>
+                <!-- TAB: CRONOGRAMA -->
+                <div class="tab-content" id="tab-cronograma" style="flex:1;flex-direction:column;overflow:hidden;">
+                    <div class="gantt-container" id="ganttChart">
+                        <!-- Populado dinamicamente -->
+                    </div>
+                    <div style="padding:8px 16px;font-size:.7rem;color:var(--text2);text-align:center">
+                        Cronograma estimado — baseado nas horas de serviço de cada bay (1 semana ≈ 40h)
+                    </div>
+                </div>
             </div>
-          `).join('');
-        document.getElementById('bayCount').textContent = `${selectedBays.size} selecionados`;
-        updateQuickBaySelect();
-    }
 
-    function toggleBay(bayId) {
-        if (selectedBays.has(bayId)) {
-            selectedBays.delete(bayId);
-        } else {
-            selectedBays.add(bayId);
+            <!-- BOTTOM CARDS -->
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="label">Total Equipamentos</div>
+                    <div class="value green" id="cardEquip">R$ 0</div>
+                </div>
+                <div class="summary-card">
+                    <div class="label">Total Serviços</div>
+                    <div class="value green" id="cardServ">R$ 0</div>
+                </div>
+                <div class="summary-card">
+                    <div class="label">Horas Estimadas</div>
+                    <div class="value" id="cardHoras" style="color:#448aff">0h</div>
+                </div>
+                <div class="summary-card" style="border:1px solid #f0b90b30">
+                    <div class="label">Valor Final</div>
+                    <div class="value accent" id="cardTotal">R$ 0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // ============================================================
+        //  BIBLIOTECA BASE DE BAYS (IMUTÁVEL)
+        // ============================================================
+        const baseBayLibrary = [
+            {
+                id: 'entrada_69kv',
+                nome: 'Bay de Entrada 69 kV',
+                tensao: '69 kV',
+                cor: '#448aff',
+                equipamentos: [
+                    { nome: 'Disjuntor 69 kV (Siemens 3AH4)', un: 'un', qtd: 1, valor: 85000 },
+                    { nome: 'Seccionadora Tripolar 69 kV c/ CMT', un: 'un', qtd: 1, valor: 32000 },
+                    { nome: 'Transformador de Corrente (TC) 69 kV', un: 'un', qtd: 3, valor: 12000 },
+                    { nome: 'Transformador de Potencial (TP) 69 kV', un: 'un', qtd: 3, valor: 9500 },
+                    { nome: 'Para-raios ZnO 69 kV', un: 'un', qtd: 3, valor: 4500 },
+                    { nome: 'Barramento tubular Al 69 kV (m)', un: 'm', qtd: 12, valor: 850 },
+                    { nome: 'Estrutura metálica galvanizada (kg)', un: 'kg', qtd: 450, valor: 28 },
+                    { nome: 'Cabo XLPE 69 kV 185mm² (m)', un: 'm', qtd: 30, valor: 320 },
+                ],
+                servicos: [
+                    { nome: 'Montagem eletromecânica do bay', un: 'h', qtd: 80, valor: 180 },
+                    { nome: 'Comissionamento e testes', un: 'h', qtd: 24, valor: 220 },
+                    { nome: 'Testes elétricos (tensão aplicada)', un: 'h', qtd: 16, valor: 250 },
+                    { nome: 'Conexão de cabos de controle', un: 'h', qtd: 20, valor: 160 },
+                ],
+                gantt: { nome: 'Bay Entrada 69kV', semanas: 6, inicio: 0 },
+            },
+            {
+                id: 'entrada_138kv',
+                nome: 'Bay de Entrada 138 kV',
+                tensao: '138 kV',
+                cor: '#ff9100',
+                equipamentos: [
+                    { nome: 'Disjuntor 138 kV (ABB LTB)', un: 'un', qtd: 1, valor: 145000 },
+                    { nome: 'Seccionadora Tripolar 138 kV', un: 'un', qtd: 1, valor: 48000 },
+                    { nome: 'Transformador de Corrente (TC) 138 kV', un: 'un', qtd: 3, valor: 16000 },
+                    { nome: 'Transformador de Potencial (TP) 138 kV', un: 'un', qtd: 3, valor: 13500 },
+                    { nome: 'Para-raios ZnO 138 kV', un: 'un', qtd: 3, valor: 6500 },
+                    { nome: 'Barramento tubular Al 138 kV (m)', un: 'm', qtd: 14, valor: 1050 },
+                    { nome: 'Estrutura metálica galvanizada (kg)', un: 'kg', qtd: 580, valor: 28 },
+                    { nome: 'Cabo XLPE 138 kV 240mm² (m)', un: 'm', qtd: 35, valor: 420 },
+                ],
+                servicos: [
+                    { nome: 'Montagem eletromecânica do bay', un: 'h', qtd: 100, valor: 190 },
+                    { nome: 'Comissionamento e testes', un: 'h', qtd: 30, valor: 230 },
+                    { nome: 'Testes elétricos', un: 'h', qtd: 20, valor: 260 },
+                    { nome: 'Conexão de cabos de controle', un: 'h', qtd: 24, valor: 170 },
+                ],
+                gantt: { nome: 'Bay Entrada 138kV', semanas: 7, inicio: 0 },
+            },
+            {
+                id: 'transformador',
+                nome: 'Transformador de Potência',
+                tensao: '15/20 MVA',
+                cor: '#b388ff',
+                equipamentos: [
+                    { nome: 'Transformador 15 MVA ONAN 69/13.8 kV', un: 'un', qtd: 1, valor: 480000 },
+                    { nome: 'Base de concreto armado (m³)', un: 'm³', qtd: 18, valor: 1200 },
+                    { nome: 'Bacia de contenção de óleo', un: 'un', qtd: 1, valor: 18000 },
+                    { nome: 'Relé Buchholz + indicador de nível', un: 'cj', qtd: 1, valor: 8500 },
+                    { nome: 'Válvula de alívio de pressão', un: 'un', qtd: 1, valor: 3200 },
+                    { nome: 'Termômetro de óleo/enrolamento', un: 'cj', qtd: 1, valor: 4200 },
+                    { nome: 'Secador de sílica gel', un: 'un', qtd: 1, valor: 1800 },
+                ],
+                servicos: [
+                    { nome: 'Içamento e posicionamento do trafo', un: 'h', qtd: 40, valor: 250 },
+                    { nome: 'Conexões elétricas AT/BT', un: 'h', qtd: 32, valor: 200 },
+                    { nome: 'Ensaios de rotina (relação, isolação)', un: 'h', qtd: 20, valor: 280 },
+                    { nome: 'Tratamento de óleo isolante', un: 'h', qtd: 24, valor: 220 },
+                    { nome: 'Comissionamento completo', un: 'h', qtd: 16, valor: 300 },
+                ],
+                gantt: { nome: 'Transformador', semanas: 8, inicio: 2 },
+            },
+            {
+                id: 'saida_13kv',
+                nome: 'Bay de Saída 13.8 kV',
+                tensao: '13.8 kV',
+                cor: '#00c853',
+                equipamentos: [
+                    { nome: 'Disjuntor extraível 13.8 kV 2000A', un: 'un', qtd: 5, valor: 28000 },
+                    { nome: 'TC de proteção 13.8 kV', un: 'un', qtd: 15, valor: 3200 },
+                    { nome: 'TP 13.8 kV', un: 'un', qtd: 3, valor: 2800 },
+                    { nome: 'Cabo EPR 90°C 13.8 kV 240mm² (m)', un: 'm', qtd: 80, valor: 180 },
+                    { nome: 'Cubículo blindado 13.8 kV', un: 'un', qtd: 5, valor: 18500 },
+                    { nome: 'Barramento 13.8 kV 2000A (m)', un: 'm', qtd: 24, valor: 650 },
+                ],
+                servicos: [
+                    { nome: 'Montagem de cubículos', un: 'h', qtd: 60, valor: 175 },
+                    { nome: 'Lançamento e conexão de cabos', un: 'h', qtd: 48, valor: 160 },
+                    { nome: 'Testes de isolação e continuidade', un: 'h', qtd: 24, valor: 200 },
+                ],
+                gantt: { nome: 'Bays Saída 13.8kV', semanas: 7, inicio: 4 },
+            },
+            {
+                id: 'servicos_aux',
+                nome: 'Serviços Auxiliares',
+                tensao: '380/220V',
+                cor: '#ff5252',
+                equipamentos: [
+                    { nome: 'Transformador auxiliar 225 kVA', un: 'un', qtd: 1, valor: 32000 },
+                    { nome: 'QGBT 380V (painel metálico)', un: 'un', qtd: 1, valor: 15000 },
+                    { nome: 'Retificador/carregador 125 Vcc 100A', un: 'un', qtd: 1, valor: 22000 },
+                    { nome: 'Banco de baterias 125 Vcc 200Ah', un: 'cj', qtd: 1, valor: 28000 },
+                    { nome: 'No-break 10 kVA', un: 'un', qtd: 1, valor: 18500 },
+                    { nome: 'Circuito de iluminação e tomadas', un: 'vb', qtd: 1, valor: 8500 },
+                ],
+                servicos: [
+                    { nome: 'Montagem de painéis auxiliares', un: 'h', qtd: 40, valor: 170 },
+                    { nome: 'Instalação elétrica predial', un: 'h', qtd: 48, valor: 150 },
+                    { nome: 'Testes de comissionamento', un: 'h', qtd: 16, valor: 190 },
+                ],
+                gantt: { nome: 'Serviços Auxiliares', semanas: 4, inicio: 1 },
+            },
+            {
+                id: 'spda_malha',
+                nome: 'SPDA e Malha de Terra',
+                tensao: 'Aterramento',
+                cor: '#00bcd4',
+                equipamentos: [
+                    { nome: 'Cabo cobre nu 50 mm² (malha)', un: 'm', qtd: 250, valor: 95 },
+                    { nome: 'Cabo cobre nu 35 mm² (SPDA)', un: 'm', qtd: 80, valor: 68 },
+                    { nome: 'Haste de aterramento 5/8" x 3m', un: 'un', qtd: 20, valor: 120 },
+                    { nome: 'Caixa de inspeção de aterramento', un: 'un', qtd: 8, valor: 250 },
+                    { nome: 'Solda exotérmica (cartucho)', un: 'un', qtd: 35, valor: 45 },
+                    { nome: 'Terminal de compressão', un: 'un', qtd: 40, valor: 18 },
+                ],
+                servicos: [
+                    { nome: 'Escavação para malha de terra', un: 'h', qtd: 80, valor: 120 },
+                    { nome: 'Lançamento de cabos e soldas', un: 'h', qtd: 120, valor: 140 },
+                    { nome: 'Medição de resistência de terra', un: 'h', qtd: 16, valor: 200 },
+                ],
+                gantt: { nome: 'SPDA/Malha de Terra', semanas: 5, inicio: 0 },
+            },
+            {
+                id: 'medicao',
+                nome: 'Medição e Faturamento',
+                tensao: 'Medição',
+                cor: '#e040fb',
+                equipamentos: [
+                    { nome: 'TC de medição 69 kV 0.3P', un: 'un', qtd: 3, valor: 14000 },
+                    { nome: 'TP de medição 69 kV 0.3P', un: 'un', qtd: 3, valor: 11000 },
+                    { nome: 'Medidor eletrônico multigrandezas', un: 'un', qtd: 1, valor: 8500 },
+                    { nome: 'Caixa de medição selável', un: 'un', qtd: 1, valor: 1800 },
+                ],
+                servicos: [
+                    { nome: 'Instalação de TP/TC de medição', un: 'h', qtd: 24, valor: 200 },
+                    { nome: 'Parametrização do medidor', un: 'h', qtd: 8, valor: 220 },
+                    { nome: 'Testes de exatidão', un: 'h', qtd: 8, valor: 250 },
+                ],
+                gantt: { nome: 'Medição', semanas: 3, inicio: 5 },
+            },
+            {
+                id: 'protecao',
+                nome: 'Proteção e Controle',
+                tensao: 'Relés',
+                cor: '#76ff03',
+                equipamentos: [
+                    { nome: 'Relé de proteção SEL-751A (alimentador)', un: 'un', qtd: 5, valor: 18500 },
+                    { nome: 'Relé diferencial SEL-787 (transformador)', un: 'un', qtd: 1, valor: 32000 },
+                    { nome: 'Relé de proteção SEL-311L (linha 69kV)', un: 'un', qtd: 1, valor: 28000 },
+                    { nome: 'Painel de proteção e controle', un: 'un', qtd: 2, valor: 15000 },
+                    { nome: 'Switch Ethernet industrial', un: 'un', qtd: 2, valor: 4500 },
+                    { nome: 'Fibra óptica monomodo (m)', un: 'm', qtd: 150, valor: 8 },
+                    { nome: 'Conversor de mídia Ethernet/FO', un: 'un', qtd: 4, valor: 1200 },
+                ],
+                servicos: [
+                    { nome: 'Montagem painéis de proteção', un: 'h', qtd: 48, valor: 190 },
+                    { nome: 'Parametrização de relés', un: 'h', qtd: 80, valor: 240 },
+                    { nome: 'Testes de injeção secundária', un: 'h', qtd: 40, valor: 260 },
+                    { nome: 'Configuração rede ethernet', un: 'h', qtd: 16, valor: 200 },
+                ],
+                gantt: { nome: 'Proteção/Controle', semanas: 6, inicio: 3 },
+            },
+            {
+                id: 'capacitores',
+                nome: 'Banco de Capacitores',
+                tensao: '13.8 kV',
+                cor: '#ffc107',
+                equipamentos: [
+                    { nome: 'Banco de capacitores 2 MVAr 13.8 kV', un: 'un', qtd: 1, valor: 85000 },
+                    { nome: 'Reator de descarga', un: 'un', qtd: 1, valor: 12000 },
+                    { nome: 'Disjuntor de manobra do banco', un: 'un', qtd: 1, valor: 32000 },
+                    { nome: 'Estrutura de suporte (kg)', un: 'kg', qtd: 200, valor: 30 },
+                ],
+                servicos: [
+                    { nome: 'Montagem do banco de capacitores', un: 'h', qtd: 32, valor: 190 },
+                    { nome: 'Conexões e testes', un: 'h', qtd: 16, valor: 220 },
+                ],
+                gantt: { nome: 'Banco Capacitores', semanas: 4, inicio: 6 },
+            },
+            {
+                id: 'obra_civil',
+                nome: 'Obra Civil',
+                tensao: 'Infra',
+                cor: '#795548',
+                equipamentos: [
+                    { nome: 'Terraplanagem e compactação', un: 'm²', qtd: 400, valor: 35 },
+                    { nome: 'Concreto usinado FCK 30MPa', un: 'm³', qtd: 35, valor: 480 },
+                    { nome: 'Armadura CA-50 (kg)', un: 'kg', qtd: 2800, valor: 12 },
+                    { nome: 'Brita graduada para base', un: 'm³', qtd: 25, valor: 180 },
+                    { nome: 'Canaletas para cabos', un: 'm', qtd: 60, valor: 220 },
+                    { nome: 'Cerca de proteção (tela + mourão)', un: 'm', qtd: 80, valor: 150 },
+                    { nome: 'Portão de acesso 2 folhas', un: 'un', qtd: 1, valor: 8500 },
+                ],
+                servicos: [
+                    { nome: 'Mobilização e canteiro', un: 'h', qtd: 80, valor: 110 },
+                    { nome: 'Escavação e concretagem', un: 'h', qtd: 160, valor: 100 },
+                    { nome: 'Acabamento e limpeza', un: 'h', qtd: 40, valor: 90 },
+                ],
+                gantt: { nome: 'Obra Civil', semanas: 5, inicio: 0 },
+            }
+        ];
+
+        // ============================================================
+        //  STATE
+        // ============================================================
+        let selectedBays = new Set();
+        let customItems = [];
+        let bayOverrides = {}; // { bayId: { equipamentos: [], servicos: [] } }
+        let savedState = null;
+        let undoStack = [];
+        let redoStack = [];
+
+        const MARKUP = 0.15;
+        const ISS = 0.05;
+
+        // ============================================================
+        //  UTILS
+        // ============================================================
+        function clone(obj) { return JSON.parse(JSON.stringify(obj)); }
+        function money(v) { return 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2 }); }
+        function today() {
+            return new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
         }
-        refreshAll();
-        const bay = bayLibrary.find(b => b.id === bayId);
-        showToast(selectedBays.has(bayId) ?
-            `✅ "${bay.nome}" adicionado` :
-            `❌ "${bay.nome}" removido`);
-    }
 
-    function selecionarTodos() {
-        bayLibrary.forEach(b => selectedBays.add(b.id));
-        refreshAll();
-        showToast('✅ Todos os bays selecionados');
-    }
+        function getStateSnapshot() {
+            return {
+                selectedBays: [...selectedBays],
+                bayOverrides: clone(bayOverrides),
+                customItems: clone(customItems),
+                clienteNome: document.getElementById('clienteNome').value,
+                descPct: document.getElementById('descPct').value,
+            };
+        }
 
-    function limparTudo() {
-        if (selectedBays.size > 0 && !confirm('Tem certeza? Isso removerá todos os bays e itens da proposta.'))
-        return;
-        selectedBays.clear();
-        customItems = [];
-        refreshAll();
-        showToast('🗑 Proposta limpa');
-    }
+        function setStateFromSnapshot(snapshot) {
+            selectedBays = new Set(snapshot.selectedBays);
+            bayOverrides = clone(snapshot.bayOverrides || {});
+            customItems = clone(snapshot.customItems || []);
+            document.getElementById('clienteNome').value = snapshot.clienteNome || '';
+            document.getElementById('descPct').value = snapshot.descPct || 0;
+        }
 
-    function refreshAll() {
+        function pushUndo() {
+            undoStack.push(getStateSnapshot());
+            if (undoStack.length > 30) undoStack.shift();
+            redoStack = [];
+            updateSavedFlag();
+        }
+
+        function undo() {
+            if (undoStack.length === 0) return;
+            redoStack.push(getStateSnapshot());
+            const prev = undoStack.pop();
+            setStateFromSnapshot(prev);
+            refreshAll();
+            showToast('↩ Desfeito', 'info');
+        }
+
+        function redo() {
+            if (redoStack.length === 0) return;
+            undoStack.push(getStateSnapshot());
+            const next = redoStack.pop();
+            setStateFromSnapshot(next);
+            refreshAll();
+            showToast('↪ Refeito', 'info');
+        }
+
+        function getBay(bayId) {
+            const base = baseBayLibrary.find(b => b.id === bayId);
+            if (!base) return null;
+            const override = bayOverrides[bayId] || {};
+            return {
+                ...base,
+                equipamentos: clone(override.equipamentos || base.equipamentos),
+                servicos: clone(override.servicos || base.servicos),
+            };
+        }
+
+        function getBayList() {
+            return baseBayLibrary.map(b => getBay(b.id));
+        }
+
+        function setBayOverride(bayId, type, arr) {
+            if (!bayOverrides[bayId]) bayOverrides[bayId] = {};
+            bayOverrides[bayId][type] = clone(arr);
+        }
+
+        function getBayArray(bayId, type) {
+            const bay = getBay(bayId);
+            return bay ? bay[type === 'serviço' ? 'servicos' : 'equipamentos'] : null;
+        }
+
+        function getBayBaseArray(bayId, type) {
+            const bay = baseBayLibrary.find(b => b.id === bayId);
+            return bay ? bay[type === 'serviço' ? 'servicos' : 'equipamentos'] : null;
+        }
+
+        // ============================================================
+        //  RENDER BAY SELECTOR
+        // ============================================================
+        function renderBaySelector() {
+            const container = document.getElementById('baySelector');
+            container.innerHTML = baseBayLibrary.map(bay => {
+                const selected = selectedBays.has(bay.id);
+                const live = getBay(bay.id);
+                const count = live.equipamentos.length + live.servicos.length;
+                return `
+                    <div class="bay-card ${selected ? 'selected' : ''}" 
+                         onclick="toggleBay('${bay.id}')" 
+                         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleBay('${bay.id}')}"
+                         id="bayCard_${bay.id}"
+                         role="option"
+                         aria-selected="${selected}"
+                         tabindex="0">
+                      <div class="checkbox">${selected ? '✓' : ''}</div>
+                      <div style="width:3px;height:28px;background:${bay.cor};border-radius:2px;flex-shrink:0"></div>
+                      <div>
+                        <div class="bay-kv">${bay.tensao}</div>
+                        <div class="bay-name">${bay.nome}</div>
+                      </div>
+                      <div class="bay-count">${count} itens</div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('bayCount').textContent = `${selectedBays.size} selecionados`;
+            updateQuickBaySelect();
+        }
+
+        function toggleBay(bayId) {
+            pushUndo();
+            const wasSelected = selectedBays.has(bayId);
+            if (wasSelected) selectedBays.delete(bayId);
+            else selectedBays.add(bayId);
+            refreshAll();
+            const bay = baseBayLibrary.find(b => b.id === bayId);
+            showToast(wasSelected ? `❌ "${bay.nome}" removido` : `✅ "${bay.nome}" adicionado`);
+        }
+
+        function selecionarTodos() {
+            pushUndo();
+            baseBayLibrary.forEach(b => selectedBays.add(b.id));
+            refreshAll();
+            showToast('✅ Todos os bays selecionados');
+        }
+
+        function limparTudo() {
+            if (selectedBays.size === 0 && customItems.length === 0) return;
+            if (!confirm('Tem certeza? Isso removerá todos os bays e itens da proposta.')) return;
+            pushUndo();
+            selectedBays.clear();
+            customItems = [];
+            bayOverrides = {};
+            refreshAll();
+            showToast('🗑 Proposta limpa');
+        }
+
+        function refreshAll() {
+            renderBaySelector();
+            renderItems();
+            renderUnifilar();
+            renderGantt();
+            updateSummary();
+            updateSavedFlag();
+        }
+
+        // ============================================================
+        //  ITEMS TABLE
+        // ============================================================
+        function getAllItems() {
+            const items = [];
+            getBayList().forEach(bay => {
+                if (!selectedBays.has(bay.id)) return;
+                bay.equipamentos.forEach(e => items.push({
+                    bayId: bay.id,
+                    bayNome: bay.nome,
+                    bayCor: bay.cor,
+                    tipo: 'equipamento',
+                    nome: e.nome,
+                    un: e.un,
+                    qtd: e.qtd,
+                    valor: e.valor,
+                }));
+                bay.servicos.forEach(s => items.push({
+                    bayId: bay.id,
+                    bayNome: bay.nome,
+                    bayCor: bay.cor,
+                    tipo: 'serviço',
+                    nome: s.nome,
+                    un: s.un,
+                    qtd: s.qtd,
+                    valor: s.valor,
+                }));
+            });
+            customItems.forEach((ci, idx) => items.push({
+                ...ci,
+                bayId: ci.bayId || '_custom',
+                bayNome: ci.bayNome || 'Itens adicionais',
+                bayCor: ci.bayCor || '#888',
+                tipo: 'custom',
+                customIdx: idx,
+            }));
+            return items;
+        }
+
+        function renderItems() {
+            const search = (document.getElementById('searchItems').value || '').toLowerCase();
+            const items = getAllItems().filter(item => 
+                item.nome.toLowerCase().includes(search) || 
+                item.bayNome.toLowerCase().includes(search)
+            );
+            const tbody = document.getElementById('itemsBody');
+            document.getElementById('itemCount').textContent = `${items.length} itens`;
+
+            if (items.length === 0) {
+                const msg = getAllItems().length === 0
+                    ? '⚡ Selecione os bays ao lado para começar a montar a proposta'
+                    : '🔍 Nenhum item encontrado para esta busca';
+                tbody.innerHTML = `<tr><td colspan="7" class="empty-state">${msg}</td></tr>`;
+                return;
+            }
+
+            let lastBay = '';
+            let html = '';
+            items.forEach((item) => {
+                if (item.bayNome !== lastBay) {
+                    html += `
+                        <tr class="bay-header">
+                            <td><span class="dot" style="background:${item.bayCor}"></span></td>
+                            <td colspan="6"><strong>${item.bayNome}</strong> (${item.tipo === 'custom' ? 'adicional' : item.tipo + 's'})</td>
+                        </tr>`;
+                    lastBay = item.bayNome;
+                }
+                const total = item.qtd * item.valor;
+                const rowId = item.tipo === 'custom' ? `custom_${item.customIdx}` : `${item.bayId}_${item.tipo}_${item.nome}`;
+                html += `
+                    <tr id="row_${rowId}">
+                        <td></td>
+                        <td>${item.nome}</td>
+                        <td>${item.un}</td>
+                        <td><input type="number" class="qty-input" value="${item.qtd}" min="1" 
+                             onchange="updateQty('${item.bayId}', '${item.tipo}', '${item.nome}', this.value, ${item.customIdx ?? -1})"
+                             aria-label="Quantidade de ${item.nome}"></td>
+                        <td><input type="number" class="price-input" value="${item.valor.toFixed(2)}" step="0.01"
+                             onchange="updatePrice('${item.bayId}', '${item.tipo}', '${item.nome}', this.value, ${item.customIdx ?? -1})"
+                             aria-label="Valor unitário de ${item.nome}"></td>
+                        <td class="col-total">${money(total)}</td>
+                        <td><button class="delete-btn" onclick="removeItem('${item.bayId}', '${item.tipo}', '${item.nome}', ${item.customIdx ?? -1})" title="Remover" aria-label="Remover ${item.nome}">✕</button></td>
+                    </tr>`;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function findItemIndex(bayId, tipo, nome, customIdx) {
+            if (tipo === 'custom') return customIdx;
+            const arr = getBayArray(bayId, tipo);
+            if (!arr) return -1;
+            return arr.findIndex(it => it.nome === nome);
+        }
+
+        function updateQty(bayId, tipo, nome, newQty, customIdx) {
+            const qty = Math.max(1, parseInt(newQty) || 1);
+            pushUndo();
+            if (tipo === 'custom') {
+                if (customIdx >= 0 && customIdx < customItems.length) customItems[customIdx].qtd = qty;
+            } else {
+                const arr = getBayArray(bayId, tipo);
+                const idx = arr.findIndex(it => it.nome === nome);
+                if (idx >= 0) {
+                    arr[idx].qtd = qty;
+                    setBayOverride(bayId, tipo === 'serviço' ? 'servicos' : 'equipamentos', arr);
+                }
+            }
+            renderItems();
+            updateSummary();
+            renderGantt();
+        }
+
+        function updatePrice(bayId, tipo, nome, newPrice, customIdx) {
+            const price = Math.max(0, parseFloat(newPrice) || 0);
+            pushUndo();
+            if (tipo === 'custom') {
+                if (customIdx >= 0 && customIdx < customItems.length) customItems[customIdx].valor = price;
+            } else {
+                const arr = getBayArray(bayId, tipo);
+                const idx = arr.findIndex(it => it.nome === nome);
+                if (idx >= 0) {
+                    arr[idx].valor = price;
+                    setBayOverride(bayId, tipo === 'serviço' ? 'servicos' : 'equipamentos', arr);
+                }
+            }
+            renderItems();
+            updateSummary();
+        }
+
+        function removeItem(bayId, tipo, nome, customIdx) {
+            const arr = tipo === 'custom' ? customItems : getBayArray(bayId, tipo);
+            const idx = tipo === 'custom' ? customIdx : arr.findIndex(it => it.nome === nome);
+            if (!arr || idx < 0) return;
+            const item = arr[idx];
+            if (!confirm(`Remover "${item.nome}"?`)) return;
+            pushUndo();
+            if (tipo === 'custom') {
+                customItems.splice(idx, 1);
+            } else {
+                arr.splice(idx, 1);
+                setBayOverride(bayId, tipo === 'serviço' ? 'servicos' : 'equipamentos', arr);
+            }
+            refreshAll();
+            showToast('Item removido');
+        }
+
+        // ============================================================
+        //  QUICK ADD
+        // ============================================================
+        function updateQuickBaySelect() {
+            const select = document.getElementById('quickBay');
+            let html = '<option value="">Geral (sem bay)</option>';
+            getBayList().filter(b => selectedBays.has(b.id)).forEach(b => {
+                html += `<option value="${b.id}">${b.nome}</option>`;
+            });
+            select.innerHTML = html;
+        }
+
+        function addQuickItem() {
+            const nome = document.getElementById('quickItem').value.trim();
+            const qtd = Math.max(1, parseInt(document.getElementById('quickQty').value) || 1);
+            const valor = Math.max(0, parseFloat(document.getElementById('quickPrice').value) || 0);
+            const bayId = document.getElementById('quickBay').value;
+
+            if (!nome) { showToast('Digite o nome do item.', 'error'); return; }
+            if (valor <= 0) { showToast('Informe um valor unitário.', 'error'); return; }
+
+            let bayNome = 'Itens adicionais';
+            let bayCor = '#888';
+            if (bayId) {
+                const bay = baseBayLibrary.find(b => b.id === bayId);
+                if (bay) { bayNome = bay.nome; bayCor = bay.cor; }
+            }
+
+            pushUndo();
+            customItems.push({ nome, un: 'un', qtd, valor, bayId, bayNome, bayCor, tipo: 'custom' });
+
+            document.getElementById('quickItem').value = '';
+            document.getElementById('quickPrice').value = '';
+            document.getElementById('quickQty').value = '1';
+            document.getElementById('quickItem').focus();
+            renderItems();
+            updateSummary();
+            showToast(`✅ "${nome}" adicionado!`);
+        }
+
+        // ============================================================
+        //  UNIFILAR DIAGRAM (SVG) — CORRIGIDO
+        // ============================================================
+        function renderUnifilar() {
+            const svg = document.getElementById('unifilarSVG');
+            const has69 = selectedBays.has('entrada_69kv');
+            const has138 = selectedBays.has('entrada_138kv');
+            const hasTrafo = selectedBays.has('transformador');
+            const hasSaida = selectedBays.has('saida_13kv');
+            const hasCap = selectedBays.has('capacitores');
+            const hasMed = selectedBays.has('medicao');
+            const hasProt = selectedBays.has('protecao');
+            const hasAux = selectedBays.has('servicos_aux');
+            const hasSpda = selectedBays.has('spda_malha');
+            const hasObra = selectedBays.has('obra_civil');
+
+            let html = '<rect width="1000" height="250" fill="#1a1d27" rx="8"/>';
+            const anyBay = selectedBays.size > 0;
+
+            if (!anyBay) {
+                html += '<text x="500" y="130" text-anchor="middle" fill="#9ba3b0" font-size="14">Selecione os bays para visualizar o diagrama unifilar</text>';
+            } else {
+                if (has69 || has138) {
+                    html += '<rect x="30" y="40" width="940" height="4" rx="2" fill="#f0b90b" opacity="0.6"/>';
+                    html += '<text x="975" y="36" text-anchor="end" fill="#f0b90b" font-size="10" font-weight="bold">69/138 kV</text>';
+                }
+
+                if (has69) html += drawBay(150, '#448aff', 'ENT 69kV', hasMed ? 210 : null);
+                if (has138) html += drawBay(280, '#ff9100', 'ENT 138kV', null);
+
+                if (hasMed && has69) {
+                    html += `<circle cx="210" cy="60" r="12" fill="none" stroke="#e040fb" stroke-width="2" stroke-dasharray="3"/>`;
+                    html += `<text x="210" y="64" text-anchor="middle" fill="#e040fb" font-size="7">MED</text>`;
+                }
+
+                if (hasTrafo) {
+                    const tx = 440;
+                    if (has69) html += `<line x1="150" y1="155" x2="${tx-10}" y2="155" stroke="#448aff" stroke-width="2"/>`;
+                    if (has138) html += `<line x1="280" y1="155" x2="${tx-10}" y2="155" stroke="#ff9100" stroke-width="2"/>`;
+                    html += `<circle cx="${tx}" cy="155" r="24" fill="none" stroke="#b388ff" stroke-width="3"/>`;
+                    html += `<circle cx="${tx}" cy="155" r="12" fill="none" stroke="#b388ff" stroke-width="1.5"/>`;
+                    html += `<text x="${tx}" y="195" text-anchor="middle" fill="#b388ff" font-size="9" font-weight="bold">TRAFO 15 MVA</text>`;
+                    html += `<text x="${tx}" y="206" text-anchor="middle" fill="#b388ff" font-size="7">69/13.8 kV</text>`;
+                    html += '<rect x="390" y="215" width="400" height="3" rx="2" fill="#00c853" opacity="0.6"/>';
+                    html += '<text x="800" y="225" fill="#00c853" font-size="9" font-weight="bold">13.8 kV</text>';
+                    html += `<line x1="${tx}" y1="179" x2="${tx}" y2="216" stroke="#b388ff" stroke-width="2"/>`;
+                    if (hasProt) {
+                        html += `<rect x="${tx-20}" y="196" width="40" height="16" rx="3" fill="#76ff03" opacity="0.3" stroke="#76ff03" stroke-width="1"/>`;
+                        html += `<text x="${tx}" y="208" text-anchor="middle" fill="#76ff03" font-size="6">SEL-787</text>`;
+                    }
+                }
+
+                if (hasSaida && hasTrafo) {
+                    for (let i = 0; i < 5; i++) {
+                        const sx = 480 + i * 60;
+                        html += `<line x1="${sx}" y1="216" x2="${sx}" y2="165" stroke="#00c853" stroke-width="2"/>`;
+                        html += `<rect x="${sx-16}" y="150" width="32" height="18" rx="3" fill="#00c853" opacity="0.2" stroke="#00c853" stroke-width="1"/>`;
+                        html += `<text x="${sx}" y="163" text-anchor="middle" fill="#00c853" font-size="6">ALIM${i+1}</text>`;
+                    }
+                }
+
+                if (hasCap && hasTrafo) {
+                    const cx = 800;
+                    html += `<line x1="${cx}" y1="216" x2="${cx}" y2="175" stroke="#ffc107" stroke-width="2"/>`;
+                    html += `<rect x="${cx-22}" y="158" width="44" height="20" rx="4" fill="#ffc107" opacity="0.2" stroke="#ffc107" stroke-width="1"/>`;
+                    html += `<text x="${cx}" y="172" text-anchor="middle" fill="#ffc107" font-size="7" font-weight="bold">CAP 2MVAr</text>`;
+                }
+
+                if (hasAux && hasTrafo) {
+                    const ax = 890;
+                    html += `<line x1="${ax}" y1="216" x2="${ax}" y2="180" stroke="#ff5252" stroke-width="1.5" stroke-dasharray="4"/>`;
+                    html += `<rect x="${ax-20}" y="165" width="40" height="18" rx="3" fill="#ff5252" opacity="0.2" stroke="#ff5252" stroke-width="1"/>`;
+                    html += `<text x="${ax}" y="178" text-anchor="middle" fill="#ff5252" font-size="6">AUX 380V</text>`;
+                }
+
+                if (hasSpda) {
+                    html += '<rect x="30" y="238" width="940" height="3" rx="1.5" fill="#00bcd4" opacity="0.5"/>';
+                    html += '<text x="975" y="243" text-anchor="end" fill="#00bcd4" font-size="8" font-weight="bold">SPDA/MALHA</text>';
+                    if (has69) html += '<line x1="150" y1="145" x2="150" y2="239" stroke="#00bcd4" stroke-width="1" stroke-dasharray="3"/>';
+                    if (has138) html += '<line x1="280" y1="145" x2="280" y2="239" stroke="#00bcd4" stroke-width="1" stroke-dasharray="3"/>';
+                    if (hasTrafo) html += '<line x1="440" y1="185" x2="440" y2="239" stroke="#00bcd4" stroke-width="1.5" stroke-dasharray="3"/>';
+                }
+
+                if (hasObra) {
+                    html += '<text x="500" y="20" text-anchor="middle" fill="#795548" font-size="8">🏗 Obra Civil Incluída</text>';
+                }
+            }
+
+            svg.innerHTML = html;
+        }
+
+        function drawBay(x, color, label, medX) {
+            let h = '';
+            h += `<line x1="${x}" y1="42" x2="${x}" y2="100" stroke="${color}" stroke-width="3"/>`;
+            h += `<rect x="${x-35}" y="100" width="70" height="25" rx="4" fill="${color}" opacity="0.2" stroke="${color}" stroke-width="1"/>`;
+            h += `<text x="${x}" y="117" text-anchor="middle" fill="${color}" font-size="9" font-weight="bold">${label}</text>`;
+            h += `<rect x="${x-14}" y="125" width="28" height="18" rx="3" fill="none" stroke="${color}" stroke-width="1.5"/>`;
+            h += `<line x1="${x}" y1="143" x2="${x}" y2="155" stroke="${color}" stroke-width="2"/>`;
+            if (medX) {
+                h += `<line x1="${x}" y1="60" x2="${medX}" y2="60" stroke="#e040fb" stroke-width="1.5" stroke-dasharray="3"/>`;
+            }
+            return h;
+        }
+
+        // ============================================================
+        //  GANTT CHART
+        // ============================================================
+        function renderGantt() {
+            const container = document.getElementById('ganttChart');
+            const ganttData = [];
+            getBayList().forEach(bay => {
+                if (selectedBays.has(bay.id) && bay.gantt) {
+                    const totalHoras = bay.servicos.reduce((s, sv) => s + sv.qtd, 0);
+                    const semanas = Math.max(1, Math.ceil(totalHoras / 40));
+                    ganttData.push({
+                        nome: bay.gantt.nome,
+                        semanas,
+                        inicio: bay.gantt.inicio,
+                        cor: bay.cor,
+                    });
+                }
+            });
+
+            ganttData.sort((a, b) => a.inicio - b.inicio);
+
+            const totalSemanas = ganttData.length > 0
+                ? Math.max(...ganttData.map(g => g.inicio + g.semanas), 8)
+                : 8;
+
+            let html = '';
+            if (ganttData.length === 0) {
+                html = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text2);font-size:.85rem">Selecione os bays para visualizar o cronograma</div>';
+            } else {
+                ganttData.forEach(g => {
+                    const leftPct = (g.inicio / totalSemanas) * 100;
+                    const widthPct = (g.semanas / totalSemanas) * 100;
+                    html += `
+                        <div class="gantt-row">
+                            <div class="gantt-label">${g.nome}</div>
+                            <div class="gantt-track">
+                                <div class="gantt-bar" style="left:${leftPct}%;width:${widthPct}%;background:${g.cor}dd;">${g.semanas}s</div>
+                            </div>
+                        </div>`;
+                });
+                html += '<div class="gantt-row" style="height:16px;margin-top:6px">';
+                html += '<div class="gantt-label" style="font-size:.55rem">Semanas</div>';
+                html += '<div class="gantt-track" style="background:transparent;height:12px">';
+                for (let w = 0; w <= totalSemanas; w++) {
+                    const pct = (w / totalSemanas) * 100;
+                    html += `<span style="position:absolute;left:${pct}%;font-size:.5rem;color:var(--text2);transform:translateX(-50%)">${w}</span>`;
+                }
+                html += '</div></div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        //  FINANCIAL SUMMARY
+        // ============================================================
+        function updateSummary() {
+            const items = getAllItems();
+            let totalEquip = 0;
+            let totalServ = 0;
+            let totalHoras = 0;
+            let subtotal = 0;
+
+            items.forEach(item => {
+                const total = item.qtd * item.valor;
+                subtotal += total;
+                if (item.tipo === 'equipamento') totalEquip += total;
+                if (item.tipo === 'serviço') {
+                    totalServ += total;
+                    if (item.un === 'h') totalHoras += item.qtd;
+                }
+                if (item.tipo === 'custom') totalEquip += total;
+            });
+
+            const descPct = Math.max(0, Math.min(50, parseFloat(document.getElementById('descPct').value) || 0));
+            document.getElementById('descPct').value = descPct;
+            const desconto = subtotal * (descPct / 100);
+            const base = subtotal - desconto;
+            const markup = base * MARKUP;
+            const iss = base * ISS;
+            const totalFinal = base + markup + iss;
+
+            document.getElementById('sumEquip').textContent = money(totalEquip);
+            document.getElementById('sumServ').textContent = money(totalServ);
+            document.getElementById('sumSub').textContent = money(subtotal);
+            document.getElementById('sumDesc').textContent = descPct > 0 ? '-' + money(desconto) : 'R$ 0,00';
+            document.getElementById('sumMarkup').textContent = money(markup);
+            document.getElementById('sumISS').textContent = money(iss);
+            document.getElementById('sumTotal').textContent = money(totalFinal);
+
+            document.getElementById('cardEquip').textContent = money(totalEquip);
+            document.getElementById('cardServ').textContent = money(totalServ);
+            document.getElementById('cardHoras').textContent = totalHoras + 'h';
+            document.getElementById('cardTotal').textContent = money(totalFinal);
+        }
+
+        // ============================================================
+        //  TABS
+        // ============================================================
+        function switchTab(tabId, el) {
+            document.querySelectorAll('.tab').forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            el.setAttribute('aria-selected', 'true');
+            const target = document.getElementById('tab-' + tabId);
+            if (target) target.classList.add('active');
+
+            if (tabId === 'unifilar') renderUnifilar();
+            if (tabId === 'cronograma') renderGantt();
+        }
+
+        // ============================================================
+        //  ACTIONS
+        // ============================================================
+        function getProposalTotals() {
+            const items = getAllItems();
+            const subtotal = items.reduce((s, i) => s + i.qtd * i.valor, 0);
+            const descPct = Math.max(0, Math.min(50, parseFloat(document.getElementById('descPct').value) || 0));
+            const desconto = subtotal * (descPct / 100);
+            const base = subtotal - desconto;
+            const markup = base * MARKUP;
+            const iss = base * ISS;
+            return { subtotal, desconto, markup, iss, total: base + markup + iss };
+        }
+
+        function gerarPDF() {
+            if (selectedBays.size === 0 && customItems.length === 0) {
+                showToast('Selecione pelo menos um bay ou adicione itens.', 'error');
+                return;
+            }
+            window.print();
+            showToast('📄 Proposta enviada para impressão/PDF');
+        }
+
+        function enviarWhatsApp() {
+            const items = getAllItems();
+            if (items.length === 0) {
+                showToast('Adicione itens à proposta primeiro.', 'error');
+                return;
+            }
+            const clienteNome = document.getElementById('clienteNome').value || 'Cliente';
+            const propostaNum = document.getElementById('propostaNum').textContent;
+            const totals = getProposalTotals();
+
+            let msg = `*TECNO ACRE 360 — Proposta ${propostaNum}*\n\n`;
+            msg += `*Cliente:* ${clienteNome}\n`;
+            msg += `*Data:* ${today()}\n\n`;
+            msg += '*Itens da Subestação:*\n';
+
+            let lastBay = '';
+            items.forEach(item => {
+                if (item.bayNome !== lastBay) {
+                    msg += `\n▸ *${item.bayNome}*\n`;
+                    lastBay = item.bayNome;
+                }
+                const totalItem = item.qtd * item.valor;
+                msg += `  • ${item.nome} — ${item.qtd} ${item.un} x R$${item.valor.toLocaleString('pt-BR',{minimumFractionDigits:2})} = R$${totalItem.toLocaleString('pt-BR',{minimumFractionDigits:2})}\n`;
+            });
+
+            msg += `\n*Subtotal:* R$ ${totals.subtotal.toLocaleString('pt-BR',{minimumFractionDigits:2})}`;
+            if (totals.desconto > 0) msg += `\n*Desconto:* -R$ ${totals.desconto.toLocaleString('pt-BR',{minimumFractionDigits:2})}`;
+            msg += `\n*Markup (15%):* R$ ${totals.markup.toLocaleString('pt-BR',{minimumFractionDigits:2})}`;
+            msg += `\n*ISS (5%):* R$ ${totals.iss.toLocaleString('pt-BR',{minimumFractionDigits:2})}`;
+            msg += `\n*TOTAL FINAL: R$ ${totals.total.toLocaleString('pt-BR',{minimumFractionDigits:2})}*`;
+            msg += `\n\n_Proposta gerada via TECNO ACRE 360_`;
+
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+            showToast('📱 Abrindo WhatsApp...');
+        }
+
+        function exportarCSV() {
+            const items = getAllItems();
+            if (items.length === 0) {
+                showToast('Adicione itens à proposta primeiro.', 'error');
+                return;
+            }
+
+            let csv = 'Bay;Tipo;Item;Unidade;Quantidade;Valor Unitário;Total\n';
+            items.forEach(item => {
+                const total = item.qtd * item.valor;
+                csv += `"${item.bayNome}";"${item.tipo}";"${item.nome}";"${item.un}";${item.qtd};${item.valor.toFixed(2)};${total.toFixed(2)}\n`;
+            });
+
+            const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'proposta_subestacao.csv';
+            link.click();
+            URL.revokeObjectURL(url);
+            showToast('📊 CSV exportado!');
+        }
+
+        function exportarJSON() {
+            const data = buildSaveData();
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `proposta_${data.propostaNum.replace('#','')}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+            showToast('📦 JSON exportado!');
+        }
+
+        function buildSaveData() {
+            return {
+                propostaNum: document.getElementById('propostaNum').textContent,
+                clienteNome: document.getElementById('clienteNome').value,
+                data: today(),
+                selectedBays: [...selectedBays],
+                bayOverrides: clone(bayOverrides),
+                customItems: clone(customItems),
+                descPct: document.getElementById('descPct').value,
+                totals: getProposalTotals(),
+                version: 3,
+                app: 'TECNO ACRE 360',
+                timestamp: new Date().toISOString(),
+            };
+        }
+
+        function salvarProposta() {
+            const data = buildSaveData();
+            localStorage.setItem('tecnocre_proposta_sub_v3', JSON.stringify(data));
+            savedState = JSON.stringify(data);
+            updateSavedFlag();
+            showToast('💾 Proposta salva! (Ctrl+S)');
+        }
+
+        function carregarProposta() {
+            const saved = localStorage.getItem('tecnocre_proposta_sub_v3');
+            if (!saved) return;
+            try {
+                const data = JSON.parse(saved);
+                if (data.version !== 3) {
+                    showToast('⚠ Versão de dados incompatível', 'error');
+                    return;
+                }
+                selectedBays = new Set(data.selectedBays);
+                bayOverrides = clone(data.bayOverrides || {});
+                customItems = clone(data.customItems || []);
+                if (data.clienteNome) document.getElementById('clienteNome').value = data.clienteNome;
+                if (data.descPct) document.getElementById('descPct').value = data.descPct;
+                savedState = JSON.stringify(buildSaveData());
+                refreshAll();
+                showToast('📂 Proposta carregada!');
+            } catch (e) {
+                console.error('Erro ao carregar:', e);
+                showToast('⚠ Erro ao carregar proposta', 'error');
+            }
+        }
+
+        function updateSavedFlag() {
+            const current = JSON.stringify(buildSaveData());
+            const hasChanges = current !== savedState;
+            const total = document.getElementById('sumTotal');
+            total.style.opacity = hasChanges ? '1' : '1';
+            document.title = hasChanges ? '⚠ TECNO ACRE 360 — Proposta (alterações)' : 'TECNO ACRE 360 — Proposta para Subestação';
+        }
+
+        // ============================================================
+        //  TOAST NOTIFICATION
+        // ============================================================
+        function showToast(msg, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(20px)';
+                toast.style.transition = 'all .3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        // ============================================================
+        //  KEYBOARD SHORTCUTS & BEFOREUNLOAD
+        // ============================================================
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                salvarProposta();
+            }
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                gerarPDF();
+            }
+            if (e.ctrlKey && e.key === 'z' && !e.shiftKey) {
+                e.preventDefault();
+                undo();
+            }
+            if ((e.ctrlKey && e.key === 'y') || (e.ctrlKey && e.shiftKey && e.key === 'z')) {
+                e.preventDefault();
+                redo();
+            }
+        });
+
+        window.addEventListener('beforeunload', (e) => {
+            const current = JSON.stringify(buildSaveData());
+            if (current !== savedState) {
+                e.preventDefault();
+                e.returnValue = 'Há alterações não salvas na proposta. Deseja realmente sair?';
+                return e.returnValue;
+            }
+        });
+
+        // ============================================================
+        //  INIT
+        // ============================================================
+        document.getElementById('dataProposta').textContent = today();
         renderBaySelector();
         renderItems();
         renderUnifilar();
         renderGantt();
         updateSummary();
-    }
+        carregarProposta();
 
-    // ============================================================
-    //  ITEMS TABLE
-    // ============================================================
-    function getAllItems() {
-        const items = [];
-        bayLibrary.forEach(bay => {
-            if (!selectedBays.has(bay.id)) return;
-            bay.equipamentos.forEach(e => items.push({
-                bayId: bay.id,
-                bayNome: bay.nome,
-                bayCor: bay.cor,
-                tipo: 'equipamento',
-                nome: e.nome,
-                un: e.un,
-                qtd: e.qtd,
-                valor: e.valor,
-            }));
-            bay.servicos.forEach(s => items.push({
-                bayId: bay.id,
-                bayNome: bay.nome,
-                bayCor: bay.cor,
-                tipo: 'serviço',
-                nome: s.nome,
-                un: s.un,
-                qtd: s.qtd,
-                valor: s.valor,
-            }));
-        });
-        customItems.forEach(ci => items.push({
-            ...ci,
-            bayId: ci.bayId || '_custom',
-            bayNome: ci.bayNome || 'Itens adicionais',
-            bayCor: ci.bayCor || '#888',
-            tipo: 'custom'
-        }));
-        return items;
-    }
-
-    function renderItems() {
-        const items = getAllItems();
-        const tbody = document.getElementById('itemsBody');
-        document.getElementById('itemCount').textContent = `${items.length} itens`;
-
-        if (items.length === 0) {
-            tbody.innerHTML = `
-              <tr>
-                <td colspan="7" style="text-align:center;padding:40px;color:var(--text2)">
-                  ⚡ Selecione os bays ao lado para começar a montar a proposta
-                </td>
-              </tr>`;
-            return;
-        }
-
-        let lastBay = '';
-        let html = '';
-        let itemCounter = 0;
-        items.forEach((item, idx) => {
-            if (item.bayNome !== lastBay) {
-                html += `
-                <tr class="bay-header">
-                  <td><span class="dot" style="background:${item.bayCor}"></span></td>
-                  <td colspan="6"><strong>${item.bayNome}</strong> (${item.tipo}s)</td>
-                </tr>`;
-                lastBay = item.bayNome;
-                itemCounter = 0;
-            }
-            const total = item.qtd * item.valor;
-            const rowId = `${item.bayId}_${itemCounter}`;
-            html += `
-              <tr id="row_${rowId}">
-                <td></td>
-                <td>${item.nome}</td>
-                <td>${item.un}</td>
-                <td><input type="number" class="qty-input" value="${item.qtd}" min="1" 
-                     onchange="updateQty('${item.bayId}', ${itemCounter}, this.value, '${item.tipo}')"></td>
-                <td><input type="number" class="price-input" value="${item.valor.toFixed(2)}" step="0.01"
-                     onchange="updatePrice('${item.bayId}', ${itemCounter}, this.value, '${item.tipo}')"></td>
-                <td class="col-total">R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
-                <td><button class="delete-btn" onclick="removeItem('${item.bayId}', ${itemCounter}, '${item.tipo}')" title="Remover">✕</button></td>
-              </tr>`;
-            itemCounter++;
-        });
-        tbody.innerHTML = html;
-    }
-
-    function updateQty(bayId, idx, newQty, tipo) {
-        const qty = Math.max(1, parseInt(newQty) || 1);
-        if (tipo === 'custom') {
-            if (idx < customItems.length) customItems[idx].qtd = qty;
-        } else {
-            const bay = bayLibrary.find(b => b.id === bayId);
-            if (!bay) return;
-            const arr = tipo === 'serviço' ? bay.servicos : bay.equipamentos;
-            if (idx < arr.length) arr[idx].qtd = qty;
-        }
-        renderItems();
-        updateSummary();
-        renderGantt();
-    }
-
-    function updatePrice(bayId, idx, newPrice, tipo) {
-        const price = Math.max(0, parseFloat(newPrice) || 0);
-        if (tipo === 'custom') {
-            if (idx < customItems.length) customItems[idx].valor = price;
-        } else {
-            const bay = bayLibrary.find(b => b.id === bayId);
-            if (!bay) return;
-            const arr = tipo === 'serviço' ? bay.servicos : bay.equipamentos;
-            if (idx < arr.length) arr[idx].valor = price;
-        }
-        renderItems();
-        updateSummary();
-    }
-
-    function removeItem(bayId, idx, tipo) {
-        if (tipo === 'custom') {
-            if (confirm(`Remover "${customItems[idx]?.nome || 'item'}"?`)) {
-                customItems.splice(idx, 1);
-                refreshAll();
-                showToast('Item removido');
-            }
-            return;
-        }
-        const bay = bayLibrary.find(b => b.id === bayId);
-        if (!bay) return;
-        const arr = tipo === 'serviço' ? bay.servicos : bay.equipamentos;
-        if (idx < arr.length) {
-            const item = arr[idx];
-            if (confirm(`Remover "${item.nome}" deste bay?`)) {
-                if (tipo === 'serviço') bay.servicos.splice(idx, 1);
-                else bay.equipamentos.splice(idx, 1);
-                refreshAll();
-                showToast('Item removido');
-            }
-        }
-    }
-
-    // ============================================================
-    //  QUICK ADD
-    // ============================================================
-    function updateQuickBaySelect() {
-        const select = document.getElementById('quickBay');
-        let html = '<option value="">Geral (sem bay)</option>';
-        bayLibrary.filter(b => selectedBays.has(b.id)).forEach(b => {
-            html += `<option value="${b.id}">${b.nome}</option>`;
-        });
-        select.innerHTML = html;
-    }
-
-    function addQuickItem() {
-        const nome = document.getElementById('quickItem').value.trim();
-        const qtd = parseInt(document.getElementById('quickQty').value) || 1;
-        const valor = parseFloat(document.getElementById('quickPrice').value) || 0;
-        const bayId = document.getElementById('quickBay').value;
-
-        if (!nome) {
-            alert('Digite o nome do item.');
-            return;
-        }
-        if (valor <= 0) {
-            alert('Informe um valor unitário.');
-            return;
-        }
-
-        let bayNome = 'Itens adicionais';
-        let bayCor = '#888';
-        if (bayId) {
-            const bay = bayLibrary.find(b => b.id === bayId);
-            if (bay) { bayNome = bay.nome;
-                bayCor = bay.cor; }
-        }
-
-        customItems.push({ nome, un: 'un', qtd, valor, bayId, bayNome, bayCor, tipo: 'custom' });
-
-        document.getElementById('quickItem').value = '';
-        document.getElementById('quickPrice').value = '';
-        document.getElementById('quickQty').value = '1';
-        document.getElementById('quickItem').focus();
-        renderItems();
-        updateSummary();
-        showToast(`✅ "${nome}" adicionado!`);
-    }
-
-    // ============================================================
-    //  UNIFILAR DIAGRAM (SVG)
-    // ============================================================
-    function renderUnifilar() {
-        const svg = document.getElementById('unifilarSVG');
-        const has69 = selectedBays.has('entrada_69kv');
-        const has138 = selectedBays.has('entrada_138kv');
-        const hasTrafo = selectedBays.has('transformador');
-        const hasSaida = selectedBays.has('saida_13kv');
-        const hasCap = selectedBays.has('capacitores');
-        const hasMed = selectedBays.has('medicao');
-        const hasProt = selectedBays.has('protecao');
-        const hasAux = selectedBays.has('servicos_aux');
-        const hasSpda = selectedBays.has('spda_malha');
-        const hasObra = selectedBays.has('obra_civil');
-
-        let html = '<rect width="1000" height="250" fill="#1a1d27" rx="8"/>';
-        const anyBay = selectedBays.size > 0;
-
-        if (!anyBay) {
-            html +=
-                '<text x="500" y="130" text-anchor="middle" fill="#9ba3b0" font-size="14">Selecione os bays para visualizar o diagrama unifilar</text>';
-        } else {
-            // High voltage bus bar
-            if (has69 || has138) {
-                html += '<rect x="30" y="40" width="940" height="4" rx="2" fill="#f0b90b" opacity="0.6"/>';
-                html +=
-                '<text x="975" y="36" text-anchor="end" fill="#f0b90b" font-size="10" font-weight="bold">69/138 kV</text>';
-            }
-
-            // 69kV bay
-            if (has69) drawBay(html, 150, '#448aff', 'ENT 69kV', hasMed ? 210 : null);
-
-            // 138kV bay
-            if (has138) drawBay(html, 280, '#ff9100', 'ENT 138kV', null);
-
-            // Medição
-            if (hasMed && has69) {
-                const mx = 210;
-                html +=
-                    `<circle cx="${mx}" cy="60" r="12" fill="none" stroke="#e040fb" stroke-width="2" stroke-dasharray="3"/>`;
-                html += `<text x="${mx}" y="64" text-anchor="middle" fill="#e040fb" font-size="7">MED</text>`;
-            }
-
-            // Trafo connections and symbol
-            if (hasTrafo) {
-                const tx = 440;
-                if (has69) html +=
-                    `<line x1="154" y1="155" x2="${tx-10}" y2="155" stroke="#448aff" stroke-width="2"/>`;
-                if (has138) html +=
-                    `<line x1="284" y1="155" x2="${tx-10}" y2="155" stroke="#ff9100" stroke-width="2"/>`;
-                html += `<circle cx="${tx}" cy="155" r="24" fill="none" stroke="#b388ff" stroke-width="3"/>`;
-                html += `<circle cx="${tx}" cy="155" r="12" fill="none" stroke="#b388ff" stroke-width="1.5"/>`;
-                html +=
-                    `<text x="${tx}" y="195" text-anchor="middle" fill="#b388ff" font-size="9" font-weight="bold">TRAFO 15 MVA</text>`;
-                html += `<text x="${tx}" y="206" text-anchor="middle" fill="#b388ff" font-size="7">69/13.8 kV</text>`;
-                // Secondary bus
-                html += '<rect x="390" y="215" width="400" height="3" rx="2" fill="#00c853" opacity="0.6"/>';
-                html += '<text x="800" y="225" fill="#00c853" font-size="9" font-weight="bold">13.8 kV</text>';
-                html += `<line x1="${tx}" y1="179" x2="${tx}" y2="216" stroke="#b388ff" stroke-width="2"/>`;
-                // Protection relay
-                if (hasProt) {
-                    html +=
-                        `<rect x="${tx-20}" y="196" width="40" height="16" rx="3" fill="#76ff03" opacity="0.3" stroke="#76ff03" stroke-width="1"/>`;
-                    html +=
-                        `<text x="${tx}" y="208" text-anchor="middle" fill="#76ff03" font-size="6">SEL-787</text>`;
-                }
-            }
-
-            // Saída 13.8kV
-            if (hasSaida && hasTrafo) {
-                for (let i = 0; i < 5; i++) {
-                    const sx = 480 + i * 60;
-                    html += `<line x1="${sx}" y1="216" x2="${sx}" y2="165" stroke="#00c853" stroke-width="2"/>`;
-                    html +=
-                        `<rect x="${sx-16}" y="150" width="32" height="18" rx="3" fill="#00c853" opacity="0.2" stroke="#00c853" stroke-width="1"/>`;
-                    html +=
-                        `<text x="${sx}" y="163" text-anchor="middle" fill="#00c853" font-size="6">ALIM${i+1}</text>`;
-                }
-            }
-
-            // Banco Capacitores
-            if (hasCap && hasTrafo) {
-                const cx = 800;
-                html += `<line x1="${cx}" y1="216" x2="${cx}" y2="175" stroke="#ffc107" stroke-width="2"/>`;
-                html +=
-                    `<rect x="${cx-22}" y="158" width="44" height="20" rx="4" fill="#ffc107" opacity="0.2" stroke="#ffc107" stroke-width="1"/>`;
-                html +=
-                    `<text x="${cx}" y="172" text-anchor="middle" fill="#ffc107" font-size="7" font-weight="bold">CAP 2MVAr</text>`;
-            }
-
-            // Serviços Auxiliares
-            if (hasAux && hasTrafo) {
-                const ax = 890;
-                html +=
-                    `<line x1="${ax}" y1="216" x2="${ax}" y2="180" stroke="#ff5252" stroke-width="1.5" stroke-dasharray="4"/>`;
-                html +=
-                    `<rect x="${ax-20}" y="165" width="40" height="18" rx="3" fill="#ff5252" opacity="0.2" stroke="#ff5252" stroke-width="1"/>`;
-                html +=
-                    `<text x="${ax}" y="178" text-anchor="middle" fill="#ff5252" font-size="6">AUX 380V</text>`;
-            }
-
-            // SPDA / Malha
-            if (hasSpda) {
-                html += '<rect x="30" y="238" width="940" height="3" rx="1.5" fill="#00bcd4" opacity="0.5"/>';
-                html += '<text x="975" y="243" text-anchor="end" fill="#00bcd4" font-size="8" font-weight="bold">SPDA/MALHA</text>';
-                if (has69)
-                html += '<line x1="150" y1="145" x2="150" y2="239" stroke="#00bcd4" stroke-width="1" stroke-dasharray="3"/>';
-                if (has138)
-                html += '<line x1="280" y1="145" x2="280" y2="239" stroke="#00bcd4" stroke-width="1" stroke-dasharray="3"/>';
-                if (hasTrafo)
-                html +=
-                '<line x1="440" y1="185" x2="440" y2="239" stroke="#00bcd4" stroke-width="1.5" stroke-dasharray="3"/>';
-            }
-
-            // Obra Civil indicator
-            if (hasObra) {
-                html +=
-                '<text x="500" y="20" text-anchor="middle" fill="#795548" font-size="8">🏗 Obra Civil Incluída</text>';
-            }
-        }
-
-        // Parse HTML string into SVG
-        svg.innerHTML = html;
-
-        function drawBay(html, x, color, label, medX) {
-            const h = [];
-            h.push(`<line x1="${x}" y1="42" x2="${x}" y2="100" stroke="${color}" stroke-width="3"/>`);
-            h.push(
-                `<rect x="${x-35}" y="100" width="70" height="25" rx="4" fill="${color}" opacity="0.2" stroke="${color}" stroke-width="1"/>`
-                );
-            h.push(
-                `<text x="${x}" y="117" text-anchor="middle" fill="${color}" font-size="9" font-weight="bold">${label}</text>`
-                );
-            h.push(
-                `<rect x="${x-14}" y="125" width="28" height="18" rx="3" fill="none" stroke="${color}" stroke-width="1.5"/>`
-                );
-            h.push(`<line x1="${x}" y1="143" x2="${x}" y2="155" stroke="${color}" stroke-width="2"/>`);
-            if (medX) {
-                h.push(
-                    `<line x1="${x}" y1="60" x2="${medX}" y2="60" stroke="#e040fb" stroke-width="1.5" stroke-dasharray="3"/>`
-                    );
-            }
-            return h.join('');
-        }
-    }
-
-    // ============================================================
-    //  GANTT CHART
-    // ============================================================
-    function renderGantt() {
-        const container = document.getElementById('ganttChart');
-        const ganttData = [];
-        bayLibrary.forEach(bay => {
-            if (selectedBays.has(bay.id) && bay.gantt) {
-                const totalHoras = bay.servicos.reduce((s, sv) => s + sv.qtd, 0);
-                const semanas = Math.max(1, Math.ceil(totalHoras / 40));
-                ganttData.push({
-                    nome: bay.gantt.nome,
-                    semanas,
-                    inicio: bay.gantt.inicio,
-                    cor: bay.cor,
-                });
-            }
-        });
-
-        ganttData.sort((a, b) => a.inicio - b.inicio);
-
-        const totalSemanas = ganttData.length > 0 ?
-            Math.max(...ganttData.map(g => g.inicio + g.semanas), 8) :
-            8;
-
-        let html = '';
-        ganttData.forEach(g => {
-            const leftPct = (g.inicio / totalSemanas) * 100;
-            const widthPct = (g.semanas / totalSemanas) * 100;
-            html += `
-              <div class="gantt-row">
-                <div class="gantt-label">${g.nome}</div>
-                <div class="gantt-track">
-                  <div class="gantt-bar" style="
-                    left:${leftPct}%;
-                    width:${widthPct}%;
-                    background:${g.cor}dd;
-                  ">${g.semanas}s</div>
-                </div>
-              </div>`;
-        });
-
-        if (ganttData.length === 0) {
-            html =
-                '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text2);font-size:.85rem">Selecione os bays para visualizar o cronograma</div>';
-        } else {
-            html += '<div class="gantt-row" style="height:16px;margin-top:6px">';
-            html += '<div class="gantt-label" style="font-size:.55rem">Semanas</div>';
-            html += '<div class="gantt-track" style="background:transparent;height:12px">';
-            for (let w = 0; w <= totalSemanas; w++) {
-                const pct = (w / totalSemanas) * 100;
-                html +=
-                    `<span style="position:absolute;left:${pct}%;font-size:.5rem;color:var(--text2);transform:translateX(-50%)">${w}</span>`;
-            }
-            html += '</div></div>';
-        }
-
-        container.innerHTML = html;
-    }
-
-    // ============================================================
-    //  FINANCIAL SUMMARY
-    // ============================================================
-    function updateSummary() {
-        const items = getAllItems();
-        let totalEquip = 0;
-        let totalServ = 0;
-        let totalHoras = 0;
-        let subtotal = 0;
-
-        items.forEach(item => {
-            const total = item.qtd * item.valor;
-            subtotal += total;
-            if (item.tipo === 'equipamento') totalEquip += total;
-            if (item.tipo === 'serviço') {
-                totalServ += total;
-                if (item.un === 'h') totalHoras += item.qtd;
-            }
-            if (item.tipo === 'custom') totalEquip += total;
-        });
-
-        const descPct = parseFloat(document.getElementById('descPct').value) || 0;
-        const desconto = subtotal * (descPct / 100);
-        const base = subtotal - desconto;
-        const markup = base * 0.15;
-        const iss = base * 0.05;
-        const totalFinal = base + markup + iss;
-
-        const fmt = (v) => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-
-        document.getElementById('sumEquip').textContent = fmt(totalEquip);
-        document.getElementById('sumServ').textContent = fmt(totalServ);
-        document.getElementById('sumSub').textContent = fmt(subtotal);
-        document.getElementById('sumDesc').textContent = descPct > 0 ? '-' + fmt(desconto) : 'R$ 0,00';
-        document.getElementById('sumMarkup').textContent = fmt(markup);
-        document.getElementById('sumISS').textContent = fmt(iss);
-        document.getElementById('sumTotal').textContent = fmt(totalFinal);
-
-        document.getElementById('cardEquip').textContent = fmt(totalEquip);
-        document.getElementById('cardServ').textContent = fmt(totalServ);
-        document.getElementById('cardHoras').textContent = totalHoras + 'h';
-        document.getElementById('cardTotal').textContent = fmt(totalFinal);
-    }
-
-    // ============================================================
-    //  TABS
-    // ============================================================
-    function switchTab(tabId, el) {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-        el.classList.add('active');
-        const target = document.getElementById('tab-' + tabId);
-        if (target) target.classList.add('active');
-
-        // Re-render on tab switch to ensure correct sizing
-        if (tabId === 'unifilar') renderUnifilar();
-        if (tabId === 'cronograma') renderGantt();
-    }
-
-    // ============================================================
-    //  ACTIONS (PDF, WhatsApp, CSV, Save)
-    // ============================================================
-    function gerarPDF() {
-        if (selectedBays.size === 0 && customItems.length === 0) {
-            alert('Selecione pelo menos um bay ou adicione itens para gerar a proposta.');
-            return;
-        }
-        window.print();
-        showToast('📄 Proposta enviada para impressão/PDF');
-    }
-
-    function enviarWhatsApp() {
-        const items = getAllItems();
-        if (items.length === 0) {
-            alert('Adicione itens à proposta primeiro.');
-            return;
-        }
-        const clienteNome = document.getElementById('clienteNome').value || 'Cliente';
-        const propostaNum = document.getElementById('propostaNum').textContent;
-
-        let msg = `*TECNO ACRE 360 — Proposta ${propostaNum}*\n\n`;
-        msg += `*Cliente:* ${clienteNome}\n`;
-        msg += '*Data:* 22/06/2026\n\n';
-        msg += '*Itens da Subestação:*\n';
-
-        let lastBay = '';
-        items.forEach(item => {
-            if (item.bayNome !== lastBay) {
-                msg += `\n▸ *${item.bayNome}*\n`;
-                lastBay = item.bayNome;
-            }
-            const totalItem = item.qtd * item.valor;
-            msg +=
-                `  • ${item.nome} — ${item.qtd} ${item.un} x R$${item.valor.toLocaleString('pt-BR',{minimumFractionDigits:2})} = R$${totalItem.toLocaleString('pt-BR',{minimumFractionDigits:2})}\n`;
-        });
-
-        const subtotal = items.reduce((s, i) => s + i.qtd * i.valor, 0);
-        const total = subtotal * 1.20;
-        msg += `\n*TOTAL ESTIMADO: R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits:2})}*`;
-        msg += `\n\n_Proposta gerada via TECNO ACRE 360_`;
-
-        const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
-        window.open(url, '_blank');
-        showToast('📱 Abrindo WhatsApp...');
-    }
-
-    function exportarCSV() {
-        const items = getAllItems();
-        if (items.length === 0) {
-            alert('Adicione itens à proposta primeiro.');
-            return;
-        }
-
-        let csv = 'Bay;Tipo;Item;Unidade;Quantidade;Valor Unitário;Total\n';
-        items.forEach(item => {
-            const total = item.qtd * item.valor;
-            csv +=
-                `"${item.bayNome}";"${item.tipo}";"${item.nome}";"${item.un}";${item.qtd};${item.valor.toFixed(2)};${total.toFixed(2)}\n`;
-        });
-
-        const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'proposta_subestacao.csv';
-        link.click();
-        URL.revokeObjectURL(url);
-        showToast('📊 CSV exportado!');
-    }
-
-    function salvarProposta() {
-        const data = {
-            selectedBays: [...selectedBays],
-            bayLibrary: bayLibrary.map(b => ({
-                id: b.id,
-                equipamentos: b.equipamentos.map(e => ({ ...e })),
-                servicos: b.servicos.map(s => ({ ...s })),
-            })),
-            customItems: customItems.map(ci => ({ ...ci })),
-            clienteNome: document.getElementById('clienteNome').value,
-            descPct: document.getElementById('descPct').value,
-            timestamp: new Date().toISOString(),
-        };
-        localStorage.setItem('tecnocre_proposta_sub_v2', JSON.stringify(data));
-        showToast('💾 Proposta salva! (Ctrl+S)');
-    }
-
-    function carregarProposta() {
-        const saved = localStorage.getItem('tecnocre_proposta_sub_v2');
-        if (!saved) return;
-        try {
-            const data = JSON.parse(saved);
-            selectedBays = new Set(data.selectedBays);
-            data.bayLibrary.forEach(savedBay => {
-                const bay = bayLibrary.find(b => b.id === savedBay.id);
-                if (bay) {
-                    bay.equipamentos = savedBay.equipamentos;
-                    bay.servicos = savedBay.servicos;
-                }
-            });
-            customItems = data.customItems || [];
-            if (data.clienteNome) document.getElementById('clienteNome').value = data.clienteNome;
-            if (data.descPct) document.getElementById('descPct').value = data.descPct;
-            refreshAll();
-            showToast('📂 Proposta carregada!');
-        } catch (e) {
-            console.error('Erro ao carregar:', e);
-            showToast('⚠ Erro ao carregar proposta');
-        }
-    }
-
-    // ============================================================
-    //  TOAST NOTIFICATION
-    // ============================================================
-    function showToast(msg) {
-        const toast = document.getElementById('toast');
-        toast.textContent = msg;
-        toast.style.animation = 'none';
-        toast.offsetHeight;
-        toast.style.animation = 'slideIn .3s ease, fadeOut .3s ease 1.7s';
-        toast.style.opacity = '1';
-        setTimeout(() => { toast.style.opacity = '0'; }, 2000);
-    }
-
-    // ============================================================
-    //  KEYBOARD SHORTCUTS & BEFOREUNLOAD
-    // ============================================================
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && e.key === 's') {
-            e.preventDefault();
-            salvarProposta();
-        }
-        if (e.ctrlKey && e.key === 'p') {
-            e.preventDefault();
-            gerarPDF();
-        }
-    });
-
-    window.addEventListener('beforeunload', (e) => {
-        if (selectedBays.size > 0 || customItems.length > 0) {
-            e.preventDefault();
-            e.returnValue = 'Há alterações não salvas na proposta. Deseja realmente sair?';
-            return e.returnValue;
-        }
-    });
-
-    // ============================================================
-    //  INIT
-    // ============================================================
-    renderBaySelector();
-    renderItems();
-    renderUnifilar();
-    renderGantt();
-    updateSummary();
-    carregarProposta();
-
-    console.log('⚡ TECNO ACRE 360 — Configurador de Subestações v2.0');
-    console.log('📌 ' + bayLibrary.length + ' bays disponíveis');
-    console.log('💡 Selecione os bays → tabela preenchida automaticamente');
-    console.log('💾 Ctrl+S para salvar | Ctrl+P para imprimir');
-    console.log('✅ Pronto para uso!');
-</script>
+        console.log('⚡ TECNO ACRE 360 — Configurador de Subestações v3.0');
+        console.log('📌 ' + baseBayLibrary.length + ' bays disponíveis');
+        console.log('💾 Ctrl+S salvar | Ctrl+P imprimir | Ctrl+Z desfazer');
+    </script>
 </body>
 </html>
